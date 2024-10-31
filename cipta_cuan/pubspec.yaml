@@ -24,6 +24,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+<<<<<<< HEAD
   assets:
     - assets/
     - assets/images/
@@ -31,6 +32,12 @@ flutter:
     - assets/icons/email.svg
   #   - images/a_dot_ham.jpeg
 
+=======
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/
+>>>>>>> 72f6b58b3d482d7a79eaae6e3ec7656690c313e6
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 
