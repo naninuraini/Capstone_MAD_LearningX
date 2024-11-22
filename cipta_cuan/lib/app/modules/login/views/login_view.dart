@@ -97,7 +97,7 @@ class LoginView extends GetView<LoginController> {
                 ),
                 TextButton(
                   onPressed: () {
-                    //  Get.toNamed(Routes.RESET_PASSWORD);
+                    Get.toNamed(Routes.LUPA_PASSWORD);
                   },
                   child: const Text(
                     'Lupa Kata Sandi',
