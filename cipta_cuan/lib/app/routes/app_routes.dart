@@ -8,6 +8,8 @@ abstract class Routes {
   static const REGISTER = _Paths.REGISTER;
   static const LUPA_PASSWORD = _Paths.LUPA_PASSWORD;
   static const SPLASH = _Paths.SPLASH;
+  static const PROFIL = _Paths.PROFIL;
+  static const DETAIL_PENGGUNA = _Paths.DETAIL_PENGGUNA;
 }
 
 abstract class _Paths {
@@ -17,4 +19,6 @@ abstract class _Paths {
   static const REGISTER = '/register';
   static const LUPA_PASSWORD = '/lupa-password';
   static const SPLASH = '/splash';
+  static const PROFIL = '/profil';
+  static const DETAIL_PENGGUNA = '/detail-pengguna';
 }
