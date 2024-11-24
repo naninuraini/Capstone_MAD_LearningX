@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -21,9 +22,7 @@ class HomeView extends GetView<HomeController> {
             icon: const Icon(Icons.logout),
           ),
           IconButton(
-            onPressed: () {
-              Get.toNamed('/profil');
-            },
+            onPressed: () => Get.offNamed(Routes.PROFIL),
             icon: const Icon(Icons.account_circle),
           ),
         ],
