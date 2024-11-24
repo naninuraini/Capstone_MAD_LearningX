@@ -37,7 +37,7 @@ class ProfilController extends GetxController {
             const Text(
               'Jika kamu keluar maka kita sudah tidak terkoneksi. Apakah kamu yakin sekali mau keluar?',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.grey,
                 fontSize: 12,
               ),
               textAlign: TextAlign.center,

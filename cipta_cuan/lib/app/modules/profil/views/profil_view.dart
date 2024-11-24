@@ -1,3 +1,6 @@
+import 'package:cipta_cuan/app/modules/detail_pengguna/views/detail_pengguna_view.dart';
+import 'package:cipta_cuan/app/modules/lupa_password/views/lupa_password_view.dart';
+import 'package:cipta_cuan/app/modules/tentang_kami/views/tentang_kami_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -9,10 +12,9 @@ class ProfilView extends GetView<ProfilController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF12163A),
       appBar: AppBar(
         title: const Padding(
-          padding: EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(10.0),
           child: Text(
             "Profil",
             style: TextStyle(
@@ -22,8 +24,6 @@ class ProfilView extends GetView<ProfilController> {
             ),
           ),
         ),
-        backgroundColor: const Color(0xFF12163A),
-        elevation: 0,
         automaticallyImplyLeading: false,
       ),
       body: Column(
@@ -50,28 +50,36 @@ class ProfilView extends GetView<ProfilController> {
             child: Container(
               decoration: const BoxDecoration(
                 color: Color(0xFF24325F),
-                borderRadius: BorderRadius.vertical(top: Radius.circular(50)),
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(50),
+                ),
               ),
               child: ListView(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(30),
                 children: [
                   _buildMenuItem(
-                    iconPath: 'assets/icons/icon_profile.svg',
+                    iconPath: 'assets/icons/icon_detailPengguna.svg',
                     title: "Detail Pengguna",
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(() => DetailPenggunaView());
+                    },
                   ),
                   _buildMenuItem(
-                    iconPath: 'assets/icons/icon_setting.svg',
+                    iconPath: 'assets/icons/icon_ubahPassword.svg',
                     title: "Ganti Kata Sandi",
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(() => LupaPasswordView());
+                    },
                   ),
                   _buildMenuItem(
                     iconPath: 'assets/icons/icon_tentangKami.svg',
                     title: "Tentang Kami",
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(() => TentangKamiView());
+                    },
                   ),
                   _buildMenuItem(
-                    iconPath: 'assets/icons/icon_logout.svg',
+                    iconPath: 'assets/icons/icon_keluar.svg',
                     title: "Keluar",
                     onTap: controller.logoutBottomSheet,
                   ),
@@ -85,45 +93,44 @@ class ProfilView extends GetView<ProfilController> {
   }
 
   Widget _buildMenuItem({
-  required String iconPath,
-  required String title,
-  required VoidCallback onTap,
-}) {
-  return GestureDetector(
-    onTap: onTap,
-    child: Container(
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(
-        color: const Color(0xFF24325F),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Row(
-        children: [
+    required String iconPath,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        decoration: BoxDecoration(
+          color: const Color(0xFF24325F),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          children: [
             SvgPicture.asset(
-              iconPath, 
+              iconPath,
               height: 53,
               width: 57,
-          ),
-          const SizedBox(width: 13), 
-          Expanded(
-            child: Text(
-              title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
+            ),
+            const SizedBox(width: 13),
+            Expanded(
+              child: Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
-          ),
-          const Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.white,
-            size: 16,
-          ),
-        ],
+            const Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.white,
+              size: 16,
+            ),
+          ],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 }
