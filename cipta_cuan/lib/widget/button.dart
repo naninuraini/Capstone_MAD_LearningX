@@ -64,25 +64,41 @@ class SecondaryButton extends StatelessWidget {
     return Container(
       height: height,
       decoration: BoxDecoration(
-          color: Colors.white24,
+        color: Colors.white24,
         borderRadius: BorderRadius.circular(15.0),
         border: Border.all(
-          color:
-           Color(0xFF375DFB),
+          color: Color(0xFF375DFB),
           width: 1.0,
         ),
       ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white,
+          // foregroundColor: Colors.white,
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
-        child: Text(title),
         onPressed: onPressed,
+        child: ShaderMask(
+          shaderCallback: (bounds) => LinearGradient(
+            colors: [
+              Color(0xFF0DA6C2),
+              Color(0xFF0E39C6),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ).createShader(bounds),
+          child: Text(
+            title,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -11,6 +11,8 @@ abstract class Routes {
   static const ON_BOARDING = _Paths.ON_BOARDING;
   static const PROFIL = _Paths.PROFIL;
   static const DETAIL_PENGGUNA = _Paths.DETAIL_PENGGUNA;
+  static const PROFIL_AVATAR = _Paths.PROFIL_AVATAR;
+  static const TENTANG_KAMI = _Paths.TENTANG_KAMI;
 }
 
 abstract class _Paths {
@@ -23,4 +25,6 @@ abstract class _Paths {
   static const ON_BOARDING = '/on-boarding';
   static const PROFIL = '/profil';
   static const DETAIL_PENGGUNA = '/detail-pengguna';
+  static const PROFIL_AVATAR = '/profil-avatar';
+  static const TENTANG_KAMI = '/tentang-kami';
 }

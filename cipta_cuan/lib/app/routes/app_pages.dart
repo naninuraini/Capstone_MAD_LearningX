@@ -12,10 +12,14 @@ import '../modules/on_boarding/bindings/on_boarding_binding.dart';
 import '../modules/on_boarding/views/on_boarding_view.dart';
 import '../modules/profil/bindings/profil_binding.dart';
 import '../modules/profil/views/profil_view.dart';
+import '../modules/profil_avatar/bindings/profil_avatar_binding.dart';
+import '../modules/profil_avatar/views/profil_avatar_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/tentang_kami/bindings/tentang_kami_binding.dart';
+import '../modules/tentang_kami/views/tentang_kami_view.dart';
 
 part 'app_routes.dart';
 
@@ -64,6 +68,16 @@ class AppPages {
       name: _Paths.DETAIL_PENGGUNA,
       page: () => const DetailPenggunaView(),
       binding: DetailPenggunaBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFIL_AVATAR,
+      page: () => const ProfilAvatarView(),
+      binding: ProfilAvatarBinding(),
+    ),
+    GetPage(
+      name: _Paths.TENTANG_KAMI,
+      page: () => const TentangKamiView(),
+      binding: TentangKamiBinding(),
     ),
   ];
 }
