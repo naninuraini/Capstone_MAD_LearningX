@@ -35,7 +35,6 @@ class TextFieldWidget extends StatefulWidget {
 }
 
 class _TextFieldWidgetState extends State<TextFieldWidget> {
-  
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -74,19 +73,18 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         suffixIconColor: AppColors.textTF,
         suffixIcon: widget.obscurePassword == true
             ? IconButton(
-                onPressed: () {
-                  setState(() {
-                    widget.obscurePassword = !widget.obscurePassword;
-                    if (widget.obscurePassword) {
-                      widget.suffixIcon = CupertinoIcons.eye_fill;
-                    } else {
-                      widget.suffixIcon = CupertinoIcons.eye_slash_fill;
-                    }
-                  });
-                },
-                icon: Icon(widget.suffixIcon),
-              )
-            : null,
+          onPressed: () {
+            setState(() {
+              widget.obscurePassword = !widget.obscurePassword;
+              if (widget.obscurePassword) {
+                widget.suffixIcon = CupertinoIcons.eye_fill;
+              } else {
+                widget.suffixIcon = CupertinoIcons.eye_slash_fill;
+              }
+            });
+          },
+          icon: Icon(widget.suffixIcon),
+        ) : null,
       ),
     );
   }
