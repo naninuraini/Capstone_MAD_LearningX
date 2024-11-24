@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/detail_pengguna/bindings/detail_pengguna_binding.dart';
+import '../modules/detail_pengguna/views/detail_pengguna_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -8,6 +10,8 @@ import '../modules/lupa_password/bindings/lupa_password_binding.dart';
 import '../modules/lupa_password/views/lupa_password_view.dart';
 import '../modules/on_boarding/bindings/on_boarding_binding.dart';
 import '../modules/on_boarding/views/on_boarding_view.dart';
+import '../modules/profil/bindings/profil_binding.dart';
+import '../modules/profil/views/profil_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
@@ -50,6 +54,16 @@ class AppPages {
       name: _Paths.ON_BOARDING,
       page: () => const OnBoardingView(),
       binding: OnBoardingBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFIL,
+      page: () => const ProfilView(),
+      binding: ProfilBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_PENGGUNA,
+      page: () => const DetailPenggunaView(),
+      binding: DetailPenggunaBinding(),
     ),
   ];
 }

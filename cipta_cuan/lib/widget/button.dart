@@ -46,3 +46,44 @@ class ButtonWidget extends StatelessWidget {
     );
   }
 }
+
+class SecondaryButton extends StatelessWidget {
+  final VoidCallback? onPressed;
+  final String title;
+  final double height;
+
+  const SecondaryButton({
+    super.key,
+    required this.onPressed,
+    required this.title,
+    this.height = 50,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      decoration: BoxDecoration(
+          color: Colors.white24,
+        borderRadius: BorderRadius.circular(15.0),
+        border: Border.all(
+          color:
+           Color(0xFF375DFB),
+          width: 1.0,
+        ),
+      ),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+        ),
+        child: Text(title),
+        onPressed: onPressed,
+      ),
+    );
+  }
+}
