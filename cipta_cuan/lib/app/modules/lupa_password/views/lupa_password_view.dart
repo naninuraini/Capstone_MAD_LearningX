@@ -8,7 +8,9 @@ import '../../../../widget/validators.dart';
 import '../controllers/lupa_password_controller.dart';
 
 class LupaPasswordView extends GetView<LupaPasswordController> {
-  const LupaPasswordView({super.key});
+  LupaPasswordView({Key? key}) : super(key: key);
+
+  final _formKey = GlobalKey<FormState>(); // Local key
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class LupaPasswordView extends GetView<LupaPasswordController> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         body: Form(
-          key: controller.formKeyLupaPassword,
+          key: _formKey,
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: ListView(
@@ -96,7 +98,7 @@ class LupaPasswordView extends GetView<LupaPasswordController> {
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: ButtonWidget(
                       onPressed: () {
-                        if (controller.formKeyLupaPassword.currentState!.validate()) {
+                        if (_formKey.currentState!.validate()) {
                           controller.resetPassword(controller.emailController.text);
                         }
                       },

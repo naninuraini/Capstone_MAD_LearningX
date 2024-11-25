@@ -1,6 +1,7 @@
 import 'package:cipta_cuan/app/modules/detail_pengguna/views/detail_pengguna_view.dart';
 import 'package:cipta_cuan/app/modules/lupa_password/views/lupa_password_view.dart';
 import 'package:cipta_cuan/app/modules/tentang_kami/views/tentang_kami_view.dart';
+import 'package:cipta_cuan/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -68,7 +69,7 @@ class ProfilView extends GetView<ProfilController> {
                     iconPath: 'assets/icons/icon_ubahPassword.svg',
                     title: "Ganti Kata Sandi",
                     onTap: () {
-                      Get.to(() => LupaPasswordView());
+                      Get.toNamed(Routes.LUPA_PASSWORD);
                     },
                   ),
                   _buildMenuItem(

@@ -46,7 +46,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LUPA_PASSWORD,
-      page: () => const LupaPasswordView(),
+      page: () =>  LupaPasswordView(),
       binding: LupaPasswordBinding(),
     ),
     GetPage(
