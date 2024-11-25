@@ -7,7 +7,7 @@ class ProfilController extends GetxController {
     Get.bottomSheet(
       Container(
         padding: const EdgeInsets.only(
-          top: 55,
+          top: 15,
           bottom: 15,
           left: 20,
           right: 20,
@@ -22,6 +22,15 @@ class ProfilController extends GetxController {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Container(
+              width: 50,
+              height: 5,
+              margin: EdgeInsets.only(bottom: 20),
+              decoration: BoxDecoration(
+                color: Color(0xFF5266C0),
+                borderRadius: BorderRadius.circular(2.5),
+              ),
+            ),
             Image.asset("assets/images/logout.png", height: 191, width: 350),
             const SizedBox(height: 20),
             const Text(
