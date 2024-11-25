@@ -71,7 +71,8 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         hintText: widget.hintText,
         hintStyle: TextStyle(color: AppColors.textTF),
         suffixIconColor: AppColors.textTF,
-        suffixIcon: IconButton(
+        suffixIcon: widget.obscurePassword == true
+            ? IconButton(
           onPressed: () {
             setState(() {
               widget.obscurePassword = !widget.obscurePassword;
@@ -83,7 +84,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
             });
           },
           icon: Icon(widget.suffixIcon),
-        ),
+        ) : null,
       ),
     );
   }

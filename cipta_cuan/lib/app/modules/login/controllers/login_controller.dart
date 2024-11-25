@@ -12,7 +12,6 @@ class LoginController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   bool obscurePassword = true;
   IconData iconPassword = CupertinoIcons.eye_fill;
-  final formKeyLogin = GlobalKey<FormState>();
 
   Stream<User?> get streamAuthStatus =>
       FirebaseAuth.instance.authStateChanges();

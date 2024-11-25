@@ -14,9 +14,11 @@ class LoginView extends GetView<LoginController> {
   const LoginView({super.key});
   @override
   Widget build(BuildContext context) {
+    final formKeyLogin = GlobalKey<FormState>();
+
     return Scaffold(
       body: Form(
-        key: controller.formKeyLogin,
+        key: formKeyLogin,
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(10),
@@ -109,7 +111,7 @@ class LoginView extends GetView<LoginController> {
                       horizontal: 10.0, vertical: 15),
                   child: ButtonWidget(
                     onPressed: () {
-                      if (controller.formKeyLogin.currentState!.validate()) {
+                      if (formKeyLogin.currentState!.validate()) {
                         controller.login(controller.emailController.text,
                             controller.passwordController.text);
                       }

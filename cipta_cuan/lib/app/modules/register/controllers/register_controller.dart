@@ -17,7 +17,6 @@ class RegisterController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   FirebaseAuth auth = FirebaseAuth.instance;
   final usersCollection = FirebaseFirestore.instance.collection('users');
-  final formKeyRegister = GlobalKey<FormState>();
   bool obscurePassword = true;
   IconData iconPassword = CupertinoIcons.eye_fill;
 

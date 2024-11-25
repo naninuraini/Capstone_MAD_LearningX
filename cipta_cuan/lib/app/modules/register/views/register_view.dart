@@ -20,6 +20,7 @@ class RegisterView extends StatefulWidget {
 
 class _RegisterViewState extends State<RegisterView> {
   final RegisterController controller = Get.find<RegisterController>();
+  final formKeyRegister = GlobalKey<FormState>();
   bool containsUpperCase = false;
   bool containsLowerCase = false;
   bool containsNumber = false;
@@ -30,7 +31,7 @@ class _RegisterViewState extends State<RegisterView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
-        key: controller.formKeyRegister,
+        key: formKeyRegister,
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(10),
@@ -239,7 +240,7 @@ class _RegisterViewState extends State<RegisterView> {
                       horizontal: 10.0, vertical: 15),
                   child: ButtonWidget(
                     onPressed: () {
-                      if (controller.formKeyRegister.currentState!.validate()) {
+                      if (formKeyRegister.currentState!.validate()) {
                         MyUser myUser = MyUser.empty;
                         myUser = myUser.copyWith(
                           email: controller.emailController.text,
