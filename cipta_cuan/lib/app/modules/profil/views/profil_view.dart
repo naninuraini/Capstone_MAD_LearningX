@@ -62,7 +62,7 @@ class ProfilView extends GetView<ProfilController> {
                     iconPath: 'assets/icons/icon_detailPengguna.svg',
                     title: "Detail Pengguna",
                     onTap: () {
-                      Get.to(() => DetailPenggunaView());
+                      Get.toNamed(Routes.DETAIL_PENGGUNA);
                     },
                   ),
                   _buildMenuItem(
@@ -76,7 +76,7 @@ class ProfilView extends GetView<ProfilController> {
                     iconPath: 'assets/icons/icon_tentangKami.svg',
                     title: "Tentang Kami",
                     onTap: () {
-                      Get.to(() => TentangKamiView());
+                      Get.toNamed(Routes.TENTANG_KAMI);
                     },
                   ),
                   _buildMenuItem(
