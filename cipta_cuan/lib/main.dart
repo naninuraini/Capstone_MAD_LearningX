@@ -23,17 +23,18 @@ class CipCuanApps extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: "Cipta Cuan",
-            initialRoute: AppPages.INITIAL,
-            getPages: AppPages.routes,
-            theme: ThemeData(
-              appBarTheme: AppBarTheme(
-                backgroundColor: AppColors.primary,
-                titleTextStyle: TextStyle(color: AppColors.white)
-              ),
-              scaffoldBackgroundColor: AppColors.primary,
-            ),
-          );
+      debugShowCheckedModeBanner: false,
+      title: "Cipta Cuan",
+      initialRoute: AppPages.INITIAL,
+      getPages: AppPages.routes,
+      theme: ThemeData(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        appBarTheme: AppBarTheme(
+            backgroundColor: AppColors.primary,
+            titleTextStyle: TextStyle(color: AppColors.white)),
+        scaffoldBackgroundColor: AppColors.primary,
+      ),
+    );
   }
 }
