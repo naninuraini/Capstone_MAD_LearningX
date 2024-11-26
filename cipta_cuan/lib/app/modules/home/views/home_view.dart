@@ -45,6 +45,7 @@ class _HomeViewState extends State<HomeView> {
         onTap: onBarTapped,
         currentIndex: _currentIndex,
         showUnselectedLabels: true,
+        enableFeedback: false,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.transparent,
         unselectedItemColor: Color(0xFF7B78AA),
