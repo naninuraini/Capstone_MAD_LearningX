@@ -4,37 +4,39 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../models/myUser/myuser_entity.dart';
+
 import '../../../routes/app_pages.dart';
 
 class ProfilController extends GetxController {
+  FirebaseAuth auth = FirebaseAuth.instance;
   final Rx<MyUser> user = MyUser.empty.obs;
+  Stream<User?> get userStream => auth.authStateChanges();
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   void onInit() {
     super.onInit();
-    _fetchUserData();
+    // _fetchUserData();
   }
 
-  Future<void> _fetchUserData() async {
-    try {
-      final userId = FirebaseAuth.instance.currentUser?.uid ?? " ";
-      if (userId.isEmpty) {
-        Get.snackbar("Error", "ID pengguna tidak ditemukan");
-        return;
-      }
-      final doc = await _firestore.collection('users').doc(userId).get();
-      if (doc.exists) {
-        user.value = MyUser.fromEntity(MyUserEntity.fromDocument(doc.data()!));
-      } else {
-        Get.snackbar("Error", "Data pengguna tidak ditemukan");
-      }
-    } catch (e) {
-      Get.snackbar("Error", "Gagal mengambil data pengguna: $e");
-    }
-  }
+  // Future<void> _fetchUserData() async {
+  //   try {
+  //     final userId = FirebaseAuth.instance.currentUser?.uid ?? " ";
+  //     if (userId.isEmpty) {
+  //       Get.snackbar("Error", "ID pengguna tidak ditemukan");
+  //       return;
+  //     }
+  //     final doc = await _firestore.collection('users').doc(userId).get();
+  //     if (doc.exists) {
+  //       user.value = MyUser.fromEntity(MyUserEntity.fromDocument(doc.data()!));
+  //     } else {
+  //       Get.snackbar("Error", "Data pengguna tidak ditemukan");
+  //     }
+  //   } catch (e) {
+  //     Get.snackbar("Error", "Gagal mengambil data pengguna: $e");
+  //   }
+  // }
 
   void logoutBottomSheet() {
     Get.bottomSheet(

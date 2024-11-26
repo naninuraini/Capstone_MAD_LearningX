@@ -1,12 +1,17 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../models/myUser/myuser_entity.dart';
+import '../../../../models/myUser/myuser_model.dart';
 import '../../../routes/app_pages.dart';
 
 class SplashController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
-
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
   Stream<User?> get userStream => auth.authStateChanges();
 
   Future<void> checkOnboardingStatus() async {
@@ -23,6 +28,30 @@ class SplashController extends GetxController {
       });
     } else {
       Get.offAllNamed(Routes.ON_BOARDING);
+    }
+  }
+
+  Future<MyUserEntity?> getUser(String id) async {
+    try {
+      DocumentSnapshot doc = await firestore.collection('users').doc(id).get();
+      final data = doc.data() as Map<String, dynamic>?;
+      if (data != null) {
+        log("Firestore Data: $data");
+        return MyUserEntity.fromDocument(data);
+      }
+    } catch (e) {
+      rethrow;
+    }
+    return null;
+  }
+
+  var user = Rxn<MyUser>();
+
+  Future<void> fetchUser(String userId) async {
+    MyUserEntity? userEntity = await getUser(userId);
+    if (userEntity != null) {
+      user.value = MyUser.fromEntity(userEntity);
+    log("User fetched: ${user.value}");
     }
   }
 }

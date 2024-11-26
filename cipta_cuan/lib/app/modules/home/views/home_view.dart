@@ -1,4 +1,5 @@
 import 'package:cipta_cuan/app/modules/profil/controllers/profil_controller.dart';
+import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -8,7 +9,8 @@ import '../controllers/home_controller.dart';
 import '../widget/home_widget.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+  final MyUser? myUser;
+  const HomeView({super.key, required this.myUser});
 
   @override
   State<StatefulWidget> createState() => _HomeViewState();
@@ -17,19 +19,21 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   final HomeController controller = Get.find<HomeController>();
   int _currentIndex = 0;
+  MyUser? myUser;
+  late List<Widget> _children;
 
   @override
   void initState() {
     super.initState();
     Get.lazyPut(() => ProfilController());
+    myUser = widget.myUser;
+    _children = [
+      HomeWidget(myUser: myUser),
+      HomeWidget(myUser: myUser),
+      HomeWidget(myUser: myUser),
+      ProfilView(myUser),
+    ];
   }
-
-  final List<Widget> _children = [
-    const HomeWidget(),
-    const HomeWidget(),
-    const HomeWidget(),
-    const ProfilView(),
-  ];
 
   void onBarTapped(int index) {
     setState(() {

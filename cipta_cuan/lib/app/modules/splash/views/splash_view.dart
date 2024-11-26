@@ -1,10 +1,10 @@
-import 'dart:developer';
-
+import 'package:cipta_cuan/app/modules/home/bindings/home_binding.dart';
+import 'package:cipta_cuan/app/modules/home/views/home_view.dart';
 import 'package:cipta_cuan/widget/loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
+
 import '../../../routes/app_pages.dart';
 import '../controllers/splash_controller.dart';
 
@@ -16,26 +16,40 @@ class SplashView extends GetView<SplashController> {
     return Scaffold(
       body: Center(
         child: StreamBuilder<User?>(
-          stream: controller.userStream,
-          builder: (context, snapshot) {
-            log("$snapshot");
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return LoadingView();
-            } else if (snapshot.hasData && snapshot.data!.emailVerified == true) {
-              Future.microtask(() => Get.offAllNamed('/home'));
-            } else {
-              Future.microtask(() => Get.offAllNamed(Routes.ON_BOARDING));
-            }
-            return Text(
-              'CiptaCuan',
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                color: Colors.blueAccent,
-              ),
-            );
-          }
-        ),
+            stream: controller.userStream,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return LoadingView();
+              } else if (snapshot.hasData && snapshot.data != null) {
+                final user = snapshot.data;
+                if (user!.emailVerified) {
+                  controller.fetchUser(user.uid);
+                  return Obx(() {
+                    final myUser = controller.user.value;
+                    if (myUser != null) {
+                      Future.microtask(() => Get.offAll(
+                            () => HomeView(myUser: myUser),
+                            binding: HomeBinding(),
+                          ));
+                    }
+                    return CircularProgressIndicator();
+                  });
+                }
+              }
+              if (snapshot.hasError) {
+                return Text('Terjadi kesalahan: ${snapshot.error}');
+              } else {
+                Future.microtask(() => Get.offAllNamed(Routes.ON_BOARDING));
+              }
+              return Text(
+                'CiptaCuan',
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueAccent,
+                ),
+              );
+            }),
       ),
     );
   }
