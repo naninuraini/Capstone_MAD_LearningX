@@ -8,6 +8,6 @@ class HomeController extends GetxController {
 
   void logout() async {
     await auth.signOut();
-    Get.off(() => const LoginView());
+    Get.offAll(() => const LoginView());
   }
 }
