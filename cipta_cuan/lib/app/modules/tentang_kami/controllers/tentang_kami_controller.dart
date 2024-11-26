@@ -7,7 +7,7 @@ class TentangKamiController extends GetxController {
     {
       'name': 'Nani Nuraini',
       'university': 'Universitas Lampung',
-      'avatar': 'assets/images/Avatar2.png',
+      'avatar': 'assets/images/Avatar6.png',
     },
     {
       'name': 'Muhammad Dzikri Rofa',
