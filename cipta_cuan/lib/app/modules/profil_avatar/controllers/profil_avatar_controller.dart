@@ -1,23 +1,23 @@
 import 'package:get/get.dart';
 
 class ProfilAvatarController extends GetxController {
-  //TODO: Implement ProfilAvatarController
+  int selectedIndex = 0;
+  RxInt? tempSelectedIndex;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  void selectAvatar(int index) {
+    if (selectedIndex == index) {
+      selectedIndex = 0;
+    } else {
+      selectedIndex = index;
+    }
+    update();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  void saveAvatar() {
+    Get.snackbar(
+      "Sukses",
+      "Avatar berhasil dipilih!",
+      snackPosition: SnackPosition.BOTTOM,
+    );
   }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }
