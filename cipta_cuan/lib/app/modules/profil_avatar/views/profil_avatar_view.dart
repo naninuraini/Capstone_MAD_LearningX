@@ -1,7 +1,7 @@
-import 'package:cipta_cuan/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/profil_avatar_controller.dart';
+import 'package:cipta_cuan/widget/button.dart';  
 
 class ProfilAvatarView extends GetView<ProfilAvatarController> {
   const ProfilAvatarView({super.key});
@@ -41,20 +41,16 @@ class ProfilAvatarView extends GetView<ProfilAvatarController> {
                 child: GetBuilder<ProfilAvatarController>(
                   builder: (controller) {
                     return GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         crossAxisSpacing: 15,
                         mainAxisSpacing: 15,
                       ),
-                      itemCount: 8,
+                      itemCount: 8,  
                       itemBuilder: (context, index) {
                         bool isSelected = controller.selectedIndex == index;
                         return GestureDetector(
                           onTap: () {
-                            controller.selectAvatar(index);
-                          },
-                          onDoubleTap: () {
                             controller.selectAvatar(index);
                           },
                           child: Container(
@@ -89,7 +85,7 @@ class ProfilAvatarView extends GetView<ProfilAvatarController> {
                 width: double.infinity,
                 child: ButtonWidget(
                   onPressed: () {
-                    controller.saveAvatar();
+                    controller.saveAvatar();  
                   },
                   title: 'Simpan',
                 ),

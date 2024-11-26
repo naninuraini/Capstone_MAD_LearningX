@@ -1,10 +1,7 @@
-import 'package:cipta_cuan/app/modules/detail_pengguna/views/detail_pengguna_view.dart';
-import 'package:cipta_cuan/app/modules/lupa_password/views/lupa_password_view.dart';
-import 'package:cipta_cuan/app/modules/tentang_kami/views/tentang_kami_view.dart';
-import 'package:cipta_cuan/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/profil_controller.dart';
 
 class ProfilView extends GetView<ProfilController> {
@@ -14,81 +11,76 @@ class ProfilView extends GetView<ProfilController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Padding(
-          padding: EdgeInsets.all(10.0),
-          child: Text(
-            "Profil",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
+        title: const Text(
+          "Profil",
+          style: TextStyle(
+              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
         ),
         automaticallyImplyLeading: false,
       ),
-      body: Column(
-        children: [
-          const Center(
-            child: Column(
-              children: [
-                SizedBox(height: 20),
-                CircleAvatar(
-                  radius: 50,
-                  backgroundColor: Colors.white,
-                  child: Icon(Icons.person, size: 50, color: Color(0xFF6C63FF)),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "@yourUsername",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 30),
-          Expanded(
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Color(0xFF24325F),
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(50),
+      body: Obx(
+        () {
+          final currentUser = controller.user.value;
+          return Column(
+            children: [
+              const SizedBox(height: 20),
+              CircleAvatar(
+                radius: 50,
+                backgroundImage: AssetImage(currentUser.avatar),
+                backgroundColor: Colors.white,
+              ),
+              const SizedBox(height: 10),
+              Text(
+                currentUser.name.isNotEmpty
+                    ? currentUser.name
+                    : "Nama tidak ditemukan",
+                style: const TextStyle(color: Colors.white, fontSize: 16),
+              ),
+              const SizedBox(height: 30),
+              Expanded(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF24325F),
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(50),
+                    ),
+                  ),
+                  child: ListView(
+                    padding: const EdgeInsets.all(30),
+                    children: [
+                      _buildMenuItem(
+                        iconPath: 'assets/icons/icon_detailPengguna.svg',
+                        title: "Detail Pengguna",
+                        onTap: () {
+                          Get.toNamed(Routes.DETAIL_PENGGUNA);
+                        },
+                      ),
+                      _buildMenuItem(
+                        iconPath: 'assets/icons/icon_ubahPassword.svg',
+                        title: "Ganti Kata Sandi",
+                        onTap: () {
+                          Get.toNamed(Routes.LUPA_PASSWORD);
+                        },
+                      ),
+                      _buildMenuItem(
+                        iconPath: 'assets/icons/icon_tentangKami.svg',
+                        title: "Tentang Kami",
+                        onTap: () {
+                          Get.toNamed(Routes.TENTANG_KAMI);
+                        },
+                      ),
+                      _buildMenuItem(
+                        iconPath: 'assets/icons/icon_keluar.svg',
+                        title: "Keluar",
+                        onTap: controller.logoutBottomSheet,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              child: ListView(
-                padding: const EdgeInsets.all(30),
-                children: [
-                  _buildMenuItem(
-                    iconPath: 'assets/icons/icon_detailPengguna.svg',
-                    title: "Detail Pengguna",
-                    onTap: () {
-                      Get.toNamed(Routes.DETAIL_PENGGUNA);
-                    },
-                  ),
-                  _buildMenuItem(
-                    iconPath: 'assets/icons/icon_ubahPassword.svg',
-                    title: "Ganti Kata Sandi",
-                    onTap: () {
-                      Get.toNamed(Routes.LUPA_PASSWORD);
-                    },
-                  ),
-                  _buildMenuItem(
-                    iconPath: 'assets/icons/icon_tentangKami.svg',
-                    title: "Tentang Kami",
-                    onTap: () {
-                      Get.toNamed(Routes.TENTANG_KAMI);
-                    },
-                  ),
-                  _buildMenuItem(
-                    iconPath: 'assets/icons/icon_keluar.svg',
-                    title: "Keluar",
-                    onTap: controller.logoutBottomSheet,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
       ),
     );
   }
