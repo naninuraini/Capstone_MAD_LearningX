@@ -11,8 +11,11 @@ class DetailPenggunaView extends GetView<DetailPenggunaController> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Get.back(),
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Colors.white,
+          ),
         ),
         title: const Text(
           "Detail Pengguna",
