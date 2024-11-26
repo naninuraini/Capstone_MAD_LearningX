@@ -1,23 +1,9 @@
 import 'package:get/get.dart';
+import '../../profil/controllers/profil_controller.dart';
+import '../../../../models/myUser/myuser_model.dart';
 
 class DetailPenggunaController extends GetxController {
-  //TODO: Implement DetailPenggunaController
+  final ProfilController _profilController = Get.find<ProfilController>();
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
+  Rx<MyUser> get user => _profilController.user;
 }
