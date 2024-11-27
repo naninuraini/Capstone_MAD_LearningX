@@ -21,6 +21,36 @@ class SchedulingView extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: Material(
+        elevation: 10.0,
+        shape: CircleBorder(),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFF0DA6C2),
+                Color(0xFF0E39C6),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: FloatingActionButton(
+            onPressed: () {},
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+              size: 30,
+            ),
+            backgroundColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            elevation: 0.0,
+            focusElevation: 0.0,
+            highlightElevation: 0.0,
+          ),
+        ),
+      ),
       body: Column(
         children: [
           const SizedBox(height: 10),
