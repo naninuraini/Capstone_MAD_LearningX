@@ -13,6 +13,7 @@ abstract class Routes {
   static const DETAIL_PENGGUNA = _Paths.DETAIL_PENGGUNA;
   static const PROFIL_AVATAR = _Paths.PROFIL_AVATAR;
   static const TENTANG_KAMI = _Paths.TENTANG_KAMI;
+  static const CATEGORY = _Paths.CATEGORY;
   static const SCHEDULING = _Paths.SCHEDULING;
 }
 
@@ -28,5 +29,6 @@ abstract class _Paths {
   static const DETAIL_PENGGUNA = '/detail-pengguna';
   static const PROFIL_AVATAR = '/profil-avatar';
   static const TENTANG_KAMI = '/tentang-kami';
+  static const CATEGORY = '/category';
   static const SCHEDULING = '/scheduling';
 }
