@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/tentang_kami_controller.dart';
 
-class TentangKamiView extends GetView<TentangKamiController> {
+class TentangKamiView extends StatelessWidget {
   const TentangKamiView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Get.put(
-      TentangKamiController(),
-    );
-    final controller = Get.find<TentangKamiController>();
+  final controller = Get.put(TentangKamiController());
 
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Get.back(),
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Colors.white,
+          ),
         ),
         title: const Text(
           "Tentang Kami",
@@ -65,15 +65,21 @@ class TentangKamiView extends GetView<TentangKamiController> {
                 ),
               ),
               const SizedBox(height: 10),
-              Expanded(
-                child: ListView(
-                  children: controller.teamMembers.map((teamMember) {
-                    return _buildTeamMember(
-                      name: teamMember['name'] as String,
-                      university: teamMember['university'] as String,
-                      avatarColor: Color(teamMember['avatarColor'] as int),
-                    );
-                  }).toList(),
+              Obx(
+                () => Expanded(
+                  child: ListView(
+                    children: controller.teamMembers.map((teamMember) {
+                      final name = teamMember['name'] ?? '';
+                      final university = teamMember['university'] ?? '';
+                      final avatar = teamMember['avatar'] ?? '';
+
+                      return _buildTeamMember(
+                        name: name,
+                        university: university,
+                        avatar: avatar,
+                      );
+                    }).toList(),
+                  ),
                 ),
               ),
             ],
@@ -86,16 +92,16 @@ class TentangKamiView extends GetView<TentangKamiController> {
   Widget _buildTeamMember({
     required String name,
     required String university,
-    required Color avatarColor,
+    required String avatar,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: [
-          CircleAvatar(
-            radius: 30,
-            backgroundColor: avatarColor,
-            child: const Icon(Icons.person, color: Colors.white),
+          Image.asset(
+            avatar,
+            width: 60,
+            height: 60,
           ),
           const SizedBox(width: 10),
           Expanded(

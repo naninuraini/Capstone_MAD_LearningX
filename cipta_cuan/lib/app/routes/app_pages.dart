@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../../models/myUser/myuser_model.dart';
 import '../modules/detail_pengguna/bindings/detail_pengguna_binding.dart';
 import '../modules/detail_pengguna/views/detail_pengguna_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -31,7 +32,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => const HomeView(),
+      page: () => HomeView(myUser: MyUser.empty),
       binding: HomeBinding(),
     ),
     GetPage(
@@ -61,7 +62,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFIL,
-      page: () => const ProfilView(),
+      page: () => ProfilView(MyUser.empty),
       binding: ProfilBinding(),
     ),
     GetPage(

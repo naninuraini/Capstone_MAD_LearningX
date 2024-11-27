@@ -11,8 +11,11 @@ class DetailPenggunaView extends GetView<DetailPenggunaController> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Get.back(),
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Colors.white,
+          ),
         ),
         title: const Text(
           "Detail Pengguna",
@@ -23,57 +26,71 @@ class DetailPenggunaView extends GetView<DetailPenggunaController> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Center(
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                const CircleAvatar(
-                  radius: 50,
-                  backgroundColor: Colors.white,
-                  child: Icon(Icons.person, size: 50, color: Color(0xFF6C63FF)),
-                ),
-                Positioned(
-                  bottom: -5,
-                  right: -5,
-                  child: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFF1A1840),
-                      shape: BoxShape.circle,
+      body: Obx(
+        () {
+          final user = controller.user.value;
+
+          return Column(
+            children: [
+              Center(
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    CircleAvatar(
+                      radius: 50,
+                      backgroundImage: AssetImage(user.avatar),
+                      backgroundColor: Colors.white,
                     ),
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.edit,
-                        color: Color(0xFF7B78AA),
-                        size: 25,
+                    Positioned(
+                      bottom: -5,
+                      right: -5,
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: const BoxDecoration(
+                          color: Color(0xFF1A1840),
+                          shape: BoxShape.circle,
+                        ),
+                        child: IconButton(
+                          icon: const Icon(
+                            Icons.edit,
+                            color: Color(0xFF7B78AA),
+                            size: 25,
+                          ),
+                          onPressed: () {
+                            Get.toNamed(Routes.PROFIL_AVATAR);
+                          },
+                        ),
                       ),
-                      onPressed: () {Get.offNamed(Routes.PROFIL_AVATAR);},
                     ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 10),
-          const Text(
-            "@yourUsername",
-            style: TextStyle(color: Colors.white, fontSize: 16),
-          ),
-          const SizedBox(height: 30),
-          Expanded(
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Color(0xFF24325F),
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(50),
+                  ],
                 ),
               ),
-            ),
-          ),
-        ],
+              const SizedBox(height: 10),
+              Text(
+                user.name.isNotEmpty ? user.name : "Nama tidak ditemukan",
+                style: const TextStyle(color: Colors.white, fontSize: 16),
+              ),
+              const SizedBox(height: 30),
+              Expanded(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF24325F),
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(50),
+                    ),
+                  ),
+                  child: ListView(
+                    padding: const EdgeInsets.all(30),
+                    children: [
+                      // Tambahkan detail lainnya di sini jika diperlukan
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

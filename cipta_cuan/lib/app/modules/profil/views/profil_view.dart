@@ -1,50 +1,38 @@
-import 'package:cipta_cuan/app/modules/detail_pengguna/views/detail_pengguna_view.dart';
-import 'package:cipta_cuan/app/modules/lupa_password/views/lupa_password_view.dart';
-import 'package:cipta_cuan/app/modules/tentang_kami/views/tentang_kami_view.dart';
-import 'package:cipta_cuan/app/routes/app_pages.dart';
+import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
+import '../../../routes/app_pages.dart';
 import '../controllers/profil_controller.dart';
 
 class ProfilView extends GetView<ProfilController> {
-  const ProfilView({super.key});
+  final MyUser? myUser;
+  const ProfilView(this.myUser, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Padding(
-          padding: EdgeInsets.all(10.0),
-          child: Text(
-            "Profil",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
+        title: const Text(
+          "Profil",
+          style: TextStyle(
+              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
         ),
         automaticallyImplyLeading: false,
       ),
       body: Column(
         children: [
-          const Center(
-            child: Column(
-              children: [
-                SizedBox(height: 20),
-                CircleAvatar(
-                  radius: 50,
-                  backgroundColor: Colors.white,
-                  child: Icon(Icons.person, size: 50, color: Color(0xFF6C63FF)),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "@yourUsername",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                ),
-              ],
-            ),
+          const SizedBox(height: 20),
+          CircleAvatar(
+            radius: 50,
+            backgroundImage: AssetImage(myUser!.avatar),
+            backgroundColor: Colors.white,
+          ),
+          const SizedBox(height: 10),
+          Text(
+            myUser!.name,
+            style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
           const SizedBox(height: 30),
           Expanded(
@@ -62,7 +50,7 @@ class ProfilView extends GetView<ProfilController> {
                     iconPath: 'assets/icons/icon_detailPengguna.svg',
                     title: "Detail Pengguna",
                     onTap: () {
-                      Get.to(() => DetailPenggunaView());
+                      Get.toNamed(Routes.DETAIL_PENGGUNA);
                     },
                   ),
                   _buildMenuItem(
@@ -76,7 +64,7 @@ class ProfilView extends GetView<ProfilController> {
                     iconPath: 'assets/icons/icon_tentangKami.svg',
                     title: "Tentang Kami",
                     onTap: () {
-                      Get.to(() => TentangKamiView());
+                      Get.toNamed(Routes.TENTANG_KAMI);
                     },
                   ),
                   _buildMenuItem(

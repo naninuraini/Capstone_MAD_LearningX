@@ -7,22 +7,22 @@ class TentangKamiController extends GetxController {
     {
       'name': 'Nani Nuraini',
       'university': 'Universitas Lampung',
-      'avatarColor': 0xFFf67280,
+      'avatar': 'assets/images/Avatar6.png',
     },
     {
       'name': 'Muhammad Dzikri Rofa',
       'university': 'Universitas Lampung',
-      'avatarColor': 0xFFffb6b9,
+      'avatar': 'assets/images/Avatar4.png'
     },
     {
       'name': 'Andhika Ardianto',
       'university': 'Universitas Yasri',
-      'avatarColor': 0xFFa29bfe,
+      'avatar': 'assets/images/Avatar1.png'
     },
     {
       'name': 'Jeremy Eric Widjaja',
       'university': 'Institut Teknologi dan Bisnis STIKOM Bali',
-      'avatarColor': 0xFF6c5ce7,
+      'avatar': 'assets/images/Avatar5.png'
     },
   ].obs;
 }
