@@ -17,6 +17,8 @@ import '../modules/profil_avatar/bindings/profil_avatar_binding.dart';
 import '../modules/profil_avatar/views/profil_avatar_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
+import '../modules/scheduling/bindings/scheduling_binding.dart';
+import '../modules/scheduling/views/scheduling_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/tentang_kami/bindings/tentang_kami_binding.dart';
@@ -47,7 +49,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LUPA_PASSWORD,
-      page: () =>  LupaPasswordView(),
+      page: () => LupaPasswordView(),
       binding: LupaPasswordBinding(),
     ),
     GetPage(
@@ -79,6 +81,11 @@ class AppPages {
       name: _Paths.TENTANG_KAMI,
       page: () => const TentangKamiView(),
       binding: TentangKamiBinding(),
+    ),
+    GetPage(
+      name: _Paths.SCHEDULING,
+      page: () => const SchedulingView(),
+      binding: SchedulingBinding(),
     ),
   ];
 }
