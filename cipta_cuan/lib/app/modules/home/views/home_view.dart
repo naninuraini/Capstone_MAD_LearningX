@@ -32,10 +32,10 @@ class _HomeViewState extends State<HomeView> {
     Get.lazyPut(() => CategoryController());
     myUser = widget.myUser;
     _children = [
-      HomeWidget(myUser: myUser),
-      SchedulingView(),
-      CategoryView(),
-      ProfilView(myUser),
+      HomeWidget(myUser: myUser), //beranda
+      const SchedulingView(), //jadwal
+      const CategoryView(), //kategori
+      ProfilView(myUser), //profil
     ];
   }
 
