@@ -52,14 +52,16 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                 onChanged: (newMonth) {
                   if (newMonth != null) {
                     final monthIndex = DateFormat('MMMM').parse(newMonth).month;
-                    setState(() {
-                      currentMonth = DateTime(
-                        currentMonth.year,
-                        monthIndex,
-                        1,
-                      );
-                      selectedDate = null;
-                    });
+                    setState(
+                      () {
+                        currentMonth = DateTime(
+                          currentMonth.year,
+                          monthIndex,
+                          1,
+                        );
+                        selectedDate = null;
+                      },
+                    );
                   }
                 },
               ),
@@ -135,48 +137,45 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                   currentMonth.year == selectedDate!.year;
 
               return date == null
-                  ? Container() 
+                  ? Container()
                   : GestureDetector(
                       onTap: () {
-                        setState(() {
-                          if (isSelected) {
-                            selectedDate = null;
-                          } else {
-                            selectedDate = DateTime(
-                              currentMonth.year,
-                              currentMonth.month,
-                              date,
-                            );
-                          }
-                        });
+                        setState(
+                          () {
+                            if (isSelected) {
+                              selectedDate = null;
+                            } else {
+                              selectedDate = DateTime(
+                                currentMonth.year,
+                                currentMonth.month,
+                                date,
+                              );
+                            }
+                          },
+                        );
                       },
                       child: Container(
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           color: isToday
-                              ? const Color(0xFF00D7FF) 
+                              ? const Color(0xFF00D7FF)
                               : isSelected
-                                  ? Colors.grey 
+                                  ? Colors.grey
                                   : Colors.grey,
                           shape: BoxShape.circle,
-                          border: isToday
-                              ? null // Tidak ada border untuk hari ini
-                              : isSelected
-                                  ? Border.all(
-                                      color: const Color(
-                                          0xFF00D7FF), // Border untuk tanggal yang dipilih
-                                      width: 2,
-                                    )
-                                  : null, // Tidak ada border untuk tanggal lainnya
+                          border: isSelected
+                              ? Border.all(
+                                  color: const Color(0xFF429BED),
+                                  width: 2,
+                                )
+                              : null,
                         ),
                         child: Text(
                           '$date',
                           style: TextStyle(
                             color: isToday || isSelected
-                                ? Colors
-                                    .white 
-                                : Colors
-                                    .black, 
+                                ? Colors.white
+                                : Colors.black,
                             fontWeight: isToday || isSelected
                                 ? FontWeight.bold
                                 : FontWeight.normal,
@@ -191,5 +190,3 @@ class _CalendarWidgetState extends State<CalendarWidget> {
     );
   }
 }
-
-
