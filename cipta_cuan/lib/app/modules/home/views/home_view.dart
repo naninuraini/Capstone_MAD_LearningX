@@ -1,4 +1,5 @@
 import 'package:cipta_cuan/app/modules/profil/controllers/profil_controller.dart';
+import 'package:cipta_cuan/app/modules/scheduling/views/scheduling_view.dart';
 import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -29,7 +30,7 @@ class _HomeViewState extends State<HomeView> {
     myUser = widget.myUser;
     _children = [
       HomeWidget(myUser: myUser),
-      HomeWidget(myUser: myUser),
+      SchedulingView(),
       HomeWidget(myUser: myUser),
       ProfilView(myUser),
     ];
