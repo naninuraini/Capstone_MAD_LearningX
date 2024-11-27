@@ -1,3 +1,4 @@
+import 'package:cipta_cuan/app/modules/category/controllers/category_controller.dart';
 import 'package:cipta_cuan/app/modules/profil/controllers/profil_controller.dart';
 import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../profil/views/profil_view.dart';
+import '../../category/views/category_view.dart';
 import '../controllers/home_controller.dart';
 import '../widget/home_widget.dart';
 
@@ -26,12 +28,13 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     super.initState();
     Get.lazyPut(() => ProfilController());
+    Get.lazyPut(() => CategoryController());
     myUser = widget.myUser;
     _children = [
-      HomeWidget(myUser: myUser),
-      HomeWidget(myUser: myUser),
-      HomeWidget(myUser: myUser),
-      ProfilView(myUser),
+      HomeWidget(myUser: myUser),   // Beranda
+      HomeWidget(myUser: myUser),   // Jadwal
+      const CategoryView(),         // Kategori
+      ProfilView(myUser),           // Profil
     ];
   }
 
@@ -52,10 +55,10 @@ class _HomeViewState extends State<HomeView> {
         enableFeedback: false,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.transparent,
-        unselectedItemColor: Color(0xFF7B78AA),
-        selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
-        unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
-        backgroundColor: Color(0xFF141231),
+        unselectedItemColor: const Color(0xFF7B78AA),
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+        unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
+        backgroundColor: const Color(0xFF141231),
         items: [
           _buildBottomNavItem(
             'assets/icons/menu_beranda.svg',
@@ -98,7 +101,7 @@ class _HomeViewState extends State<HomeView> {
                   ? null
                   : const ColorFilter.mode(Color(0xFF7B78AA), BlendMode.srcIn),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             _currentIndex == index
                 ? _buildGradientText(label) // Label dengan gradien
                 : Text(
