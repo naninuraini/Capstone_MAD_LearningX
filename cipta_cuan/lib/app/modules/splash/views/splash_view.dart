@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cipta_cuan/app/modules/home/bindings/home_binding.dart';
 import 'package:cipta_cuan/app/modules/home/views/home_view.dart';
 import 'package:cipta_cuan/widget/loading.dart';
@@ -31,6 +33,8 @@ class SplashView extends GetView<SplashController> {
                             () => HomeView(myUser: myUser),
                             binding: HomeBinding(),
                           ));
+                    } else {
+                      log("Waiting for user data...");
                     }
                     return CircularProgressIndicator();
                   });

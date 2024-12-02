@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
 class HomeWidget extends GetView<HomeController> {
@@ -71,7 +72,7 @@ class HomeWidget extends GetView<HomeController> {
                             ),
                           ),
                           Text(
-                            "Rp7.783.000",
+                            myUser!.saldo.toString(),
                             style: TextStyle(
                               color: AppColors.white,
                               fontWeight: FontWeight.bold,
@@ -150,14 +151,15 @@ class HomeWidget extends GetView<HomeController> {
               ),
               SizedBox(height: 40),
               Expanded(
-                  child: Container(
-                decoration: const BoxDecoration(
-                  color: Color(0xFF24325F),
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(50),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF24325F),
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(50),
+                    ),
                   ),
                 ),
-              ))
+              ),
             ],
           ),
         ),
@@ -178,7 +180,9 @@ class HomeWidget extends GetView<HomeController> {
             borderRadius: BorderRadius.circular(20),
           ),
           child: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(Routes.TAMBAH_TRANSAKSI);
+            },
             child: Icon(
               Icons.add,
               color: Colors.white,

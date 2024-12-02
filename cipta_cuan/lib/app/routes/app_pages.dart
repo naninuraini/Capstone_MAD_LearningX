@@ -19,6 +19,8 @@ import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/tambah_transaksi/bindings/tambah_transaksi_binding.dart';
+import '../modules/tambah_transaksi/views/tambah_transaksi_view.dart';
 import '../modules/tentang_kami/bindings/tentang_kami_binding.dart';
 import '../modules/tentang_kami/views/tentang_kami_view.dart';
 
@@ -47,7 +49,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LUPA_PASSWORD,
-      page: () =>  LupaPasswordView(),
+      page: () => LupaPasswordView(),
       binding: LupaPasswordBinding(),
     ),
     GetPage(
@@ -79,6 +81,11 @@ class AppPages {
       name: _Paths.TENTANG_KAMI,
       page: () => const TentangKamiView(),
       binding: TentangKamiBinding(),
+    ),
+    GetPage(
+      name: _Paths.TAMBAH_TRANSAKSI,
+      page: () => const TambahTransaksiView(),
+      binding: TambahTransaksiBinding(),
     ),
   ];
 }

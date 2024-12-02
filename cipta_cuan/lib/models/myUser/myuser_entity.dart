@@ -7,6 +7,7 @@ class MyUserEntity extends Equatable {
   final String name;
   final DateTime tanggalDibuat;
   final String avatar;
+  final int saldo;
 
   const MyUserEntity({
     required this.id,
@@ -14,6 +15,7 @@ class MyUserEntity extends Equatable {
     required this.name,
     required this.tanggalDibuat,
     required this.avatar,
+    required this.saldo,
   });
 
   Map<String, Object?> toDocument() {
@@ -23,31 +25,35 @@ class MyUserEntity extends Equatable {
       'email': email,
       'tanggalDibuat': tanggalDibuat,
       'avatar': avatar,
+      'saldo': saldo,
     };
   }
 
   static MyUserEntity fromDocument(Map<String, dynamic> doc) {
     return MyUserEntity(
-      id: doc['id'] as String,
-      email: doc['email'] as String,
       name: doc['name'] as String,
+      id: doc['id'] as String,
+      avatar: doc['avatar'] as String,
+      saldo: doc['saldo'] as int,
       tanggalDibuat: doc['tanggalDibuat'] != null
         ? (doc['tanggalDibuat'] as Timestamp).toDate()
         : DateTime.now(), 
-      avatar: doc['avatar'] as String,
+      email: doc['email'] as String,
     );
   }
 
   @override
   List<Object?> get props => [id, email, name, tanggalDibuat, avatar];
 
-  // @override
-  // String toString() {
-  //   return '''UserEntity: {
-  //     id: $id
-  //     email: $email
-  //     name: $name
-  //     tanggalDibuat: $tanggalDibuat
-  //   }''';
-  // }
+  @override
+  String toString() {
+    return '''UserEntity: {
+      id: $id
+      email: $email
+      name: $name
+      tanggalDibuat: $tanggalDibuat
+      avatar: $avatar
+      saldo: $saldo
+    }''';
+  }
 }

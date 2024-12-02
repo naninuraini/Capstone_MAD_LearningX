@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cipta_cuan/app/modules/profil/controllers/profil_controller.dart';
 import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   final HomeController controller = Get.find<HomeController>();
   int _currentIndex = 0;
-  MyUser? myUser;
+  late MyUser? myUser;
   late List<Widget> _children;
 
   @override
@@ -43,6 +45,7 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    myUser = widget.myUser;
     return Scaffold(
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
