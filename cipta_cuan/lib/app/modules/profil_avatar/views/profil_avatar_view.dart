@@ -55,7 +55,7 @@ class ProfilAvatarView extends GetView<ProfilAvatarController> {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(13),
                               gradient: isSelected
                                   ? LinearGradient(
                                       colors: [
