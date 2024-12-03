@@ -88,7 +88,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.TAMBAH_TRANSAKSI,
-      page: () => const TambahTransaksiView(),
+      page: () => TambahTransaksiView(myUser: MyUser.empty),
       binding: TambahTransaksiBinding(),
     ),
     GetPage(
