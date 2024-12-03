@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "811751356205",
     "project_id": "cipta-cuan",
-    "storage_bucket": "cipta-cuan.appspot.com"
+    "storage_bucket": "cipta-cuan.firebasestorage.app"
   },
   "client": [
     {
