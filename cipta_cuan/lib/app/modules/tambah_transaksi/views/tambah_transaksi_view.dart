@@ -1,19 +1,20 @@
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
+import '../../../../models/post/post_model.dart';
 import '../../../../widget/button.dart';
-import '../../../../widget/constant.dart';
 import '../../../../widget/text_field.dart';
-import '../../../../widget/validators.dart';
 import '../controllers/tambah_transaksi_controller.dart';
 
 class TambahTransaksiView extends StatefulWidget {
-  const TambahTransaksiView({super.key});
+  final MyUser? myUser;
+  const TambahTransaksiView({super.key, required this.myUser});
   @override
   State<TambahTransaksiView> createState() => _TambahTransaksiState();
 }
@@ -22,6 +23,14 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
   final TambahTransaksiController controller =
       Get.find<TambahTransaksiController>();
   File? _selectedImage;
+  late Post post;
+
+  @override
+  void initState() {
+    post = Post.empty;
+    post.myUser = widget.myUser!;
+    super.initState();
+  }
 
   Future _pickImage() async {
     final returnedImage =
@@ -65,8 +74,7 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
               child: Form(
                 key: controller.formKeyTambahTransaksi,
                 child: Padding(
-                  padding:
-                      const EdgeInsets.fromLTRB(20.0, 50.0, 20.0, 0.0),
+                  padding: const EdgeInsets.fromLTRB(20.0, 50.0, 20.0, 0.0),
                   child: ListView(
                     shrinkWrap: true,
                     children: [
@@ -205,17 +213,19 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
                         // textSize: 15.0,
                         title: 'Upload',
                         onPressed: () {
-                          if (controller
-                              .formKeyTambahTransaksi.currentState!
+                          if (controller.formKeyTambahTransaksi.currentState!
                               .validate()) {
-                            controller.formKeyTambahTransaksi.currentState!
-                                .save();
                             setState(() {
-                              // context
-                              //     .read<CreatePostBloc>()
-                              //     .add(CreatePost(post, _selectedImage!.path, context.read<AuthenticationBloc>().state.user!.uid));
+                              post.tanggal = DateTime.parse(
+                                  controller.tanggalController.text);
+                              post.kategori =
+                                  controller.kategoriController.text;
+                              post.jumlah = controller.jumlahController.text;
+                              post.judul = controller.judulController.text;
+                              post.deskripsi =
+                                  controller.deskripsiController.text;
                             });
-                            // Navigator.pop(context);
+                            controller.addData(post, _selectedImage!.path);
                           }
                         },
                       ),
