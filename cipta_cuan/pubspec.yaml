@@ -20,6 +20,7 @@ dependencies:
   flutter_cache_manager: ^3.4.1
   image_picker: ^1.1.2
   intl: ^0.19.0
+  uuid: ^4.5.1
 
 dev_dependencies:
   flutter_test:
@@ -33,6 +34,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/category/
+    - assets/images/no_data/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
