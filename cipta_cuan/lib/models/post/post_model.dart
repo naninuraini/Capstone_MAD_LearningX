@@ -5,7 +5,7 @@ class Post {
   String postId;
   DateTime tanggal;
   String kategori;
-  String jumlah;
+  int jumlah;
   String judul;
   String deskripsi;
   String gambar;
@@ -28,7 +28,7 @@ class Post {
     postId: '',
     tanggal: DateTime.now(),
     kategori: '',
-    jumlah: '',
+    jumlah: 0,
     judul: '',
     deskripsi: '',
     gambar: '',
@@ -40,7 +40,7 @@ class Post {
     String? postId,
     DateTime? tanggal,
     String? kategori,
-    String? jumlah,
+    int? jumlah,
     String? judul,
     String? deskripsi,
     String? gambar,

@@ -1,14 +1,15 @@
 import 'package:cipta_cuan/app/modules/home/controllers/home_controller.dart';
 import 'package:cipta_cuan/models/myUser/myuser_model.dart';
-import 'package:cipta_cuan/widget/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class HarianTransaksi extends GetView<HomeController> {
+import '../../../../../widget/constant.dart';
+
+class MingguanTransaksi extends GetView<HomeController> {
   final MyUser? myUser;
-  const HarianTransaksi({super.key, required this.myUser});
+  const MingguanTransaksi({super.key, required this.myUser});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class HarianTransaksi extends GetView<HomeController> {
       if (controller.isLoading.value) {
         return const Center(child: CircularProgressIndicator());
       }
-      if (controller.dailyTransactions.isEmpty) {
+      if (controller.weeklyTransactions.isEmpty) {
         return Column(
           children: [
             Image.asset("assets/images/no_data/home.png"),
@@ -47,10 +48,10 @@ class HarianTransaksi extends GetView<HomeController> {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: ListView.builder(
-          itemCount: controller.dailyTransactions.length,
+          itemCount: controller.weeklyTransactions.length,
           shrinkWrap: true,
           itemBuilder: (context, index) {
-            final post = controller.dailyTransactions[index];
+            final post = controller.weeklyTransactions[index];
             return Padding(
               padding: const EdgeInsets.only(bottom: 20.0),
               child: Row(

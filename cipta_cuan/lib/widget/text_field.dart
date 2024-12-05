@@ -103,6 +103,8 @@ class SecondTextFieldWidget extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final VoidCallback? onPressedSuffix;
   final int? maxLines;
+  final bool readOnly;
+  final TextStyle? hintStyle;
 
   SecondTextFieldWidget({
     super.key,
@@ -113,9 +115,11 @@ class SecondTextFieldWidget extends StatefulWidget {
     required this.validator,
     required this.onPressedSuffix,
     required this.suffixIcon,
+    this.hintStyle,
     this.inputFormatters,
     this.onChanged,
     this.maxLines = 1,
+    this.readOnly = false,
   });
 
   @override
@@ -139,12 +143,13 @@ class _SecondTextFieldWidgetState extends State<SecondTextFieldWidget> {
           ),
         ),
         TextFormField(
+          readOnly: widget.readOnly,
           validator: widget.validator,
           controller: widget.controller,
           keyboardType: widget.keyboardType,
           onChanged: widget.onChanged,
           inputFormatters: widget.inputFormatters,
-          style: TextStyle(color: AppColors.white),
+          style: TextStyle(color: AppColors.black),
           maxLines: widget.maxLines,
           decoration: InputDecoration(
             filled: true,
@@ -165,7 +170,9 @@ class _SecondTextFieldWidgetState extends State<SecondTextFieldWidget> {
               borderSide: BorderSide(color: AppColors.red),
             ),
             hintText: widget.hintText,
-            hintStyle: TextStyle(color: AppColors.textTF),
+            hintStyle: widget.hintStyle != null
+                ? widget.hintStyle
+                : TextStyle(color: AppColors.textTF),
             suffixIconColor: AppColors.textTF,
             suffixIcon: IconButton(
               onPressed: widget.onPressedSuffix,

@@ -5,8 +5,8 @@ import '../myUser/myuser_model.dart';
 class PostEntity {
   String postId;
   DateTime tanggal;
-    String kategori;
-  String jumlah;
+  String kategori;
+  int jumlah;
   String judul;
   String deskripsi;
   String gambar;
@@ -55,19 +55,29 @@ class PostEntity {
 
   static PostEntity fromDocument(Map<String, dynamic> data, String myUserId) {
     return PostEntity(
-        postId: data['postId'] as String,
-        tanggal: (data['tanggal'] as Timestamp).toDate(),
-        kategori: data['kategori'] as String,
-        jumlah: data['jumlah'] as String,
-        judul: data['judul'] as String,
-        deskripsi: data['deskripsi'] as String,
-        gambar: data['gambar'] as String,
-        myUser: MyUser.fromEntity(MyUserEntity.fromDocument(data['myUser'])),
-        tanggalDitambahkan: (data['tanggalDitambahkan'] as Timestamp).toDate(),
-        );
+      postId: data['postId'] as String,
+      tanggal: (data['tanggal'] as Timestamp).toDate(),
+      kategori: data['kategori'] as String,
+      jumlah: data['jumlah'] as int,
+      judul: data['judul'] as String,
+      deskripsi: data['deskripsi'] as String,
+      gambar: data['gambar'] as String,
+      myUser: MyUser.fromEntity(MyUserEntity.fromDocument(data['myUser'])),
+      tanggalDitambahkan: (data['tanggalDitambahkan'] as Timestamp).toDate(),
+    );
   }
 
-  List<Object?> get props => [postId, tanggal, kategori, jumlah, judul, deskripsi, gambar, myUser, tanggalDitambahkan];
+  List<Object?> get props => [
+        postId,
+        tanggal,
+        kategori,
+        jumlah,
+        judul,
+        deskripsi,
+        gambar,
+        myUser,
+        tanggalDitambahkan
+      ];
 
   @override
   String toString() {

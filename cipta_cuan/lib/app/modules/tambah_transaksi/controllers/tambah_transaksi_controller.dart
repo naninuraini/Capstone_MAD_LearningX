@@ -18,6 +18,10 @@ class TambahTransaksiController extends GetxController {
   TextEditingController gambarController = TextEditingController();
   final formKeyTambahTransaksi = GlobalKey<FormState>();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  DateTime? selectedDateTime;
+  var dropdownItems = ['Option 1', 'Option 2', 'Option 3'].obs;
+  var selectedItem = ''.obs;
+  var isDropdownVisible = false.obs;
 
   void addData(Post post, String file) async {
     try {
@@ -53,6 +57,15 @@ class TambahTransaksiController extends GetxController {
       }
       rethrow;
     }
+  }
+
+  void toggleDropdown() {
+    isDropdownVisible.value = !isDropdownVisible.value;
+  }
+
+  void selectItem(String item) {
+    selectedItem.value = item;
+    isDropdownVisible.value = false;
   }
 
   @override

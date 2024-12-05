@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:cipta_cuan/app/modules/home/widget/transaksi/bulanan_transaksi.dart';
+import 'package:cipta_cuan/app/modules/home/widget/transaksi/mingguan_transaksi.dart';
 import 'package:cipta_cuan/app/modules/home/widget/transaksi/harian_transaksi.dart';
 import 'package:cipta_cuan/app/modules/home/widget/transaksi/tahunan_transaksi.dart';
 import 'package:cipta_cuan/app/modules/tambah_transaksi/bindings/tambah_transaksi_binding.dart';
@@ -213,9 +213,9 @@ class _HomeWidgetState extends State<HomeWidget>
                         child: TabBarView(
                           controller: controller.tabController,
                           children: [
-                            HarianTransaksi(),
-                            BulananTransaksi(),
-                            TahunanTransaksi(),
+                            HarianTransaksi(myUser: widget.myUser),
+                            MingguanTransaksi(myUser: widget.myUser),
+                            TahunanTransaksi(myUser: widget.myUser),
                           ],
                         ),
                       )
