@@ -21,13 +21,16 @@ class SplashController extends GetxController {
     if (hasCompletedOnboarding == true) {
       userStream.listen((user) {
         if (user == null) {
-          Get.offAllNamed(Routes.ON_BOARDING);
+          // Get.offAllNamed(Routes.ON_BOARDING);
+          log("onBoarding");
         } else {
-          Get.offAllNamed('/home');
+          // Get.offAllNamed('/home');
+          log("home");
         }
       });
     } else {
-      Get.offAllNamed(Routes.ON_BOARDING);
+      // Get.offAllNamed(Routes.ON_BOARDING);
+      log("onBoarding");
     }
   }
 
@@ -36,7 +39,6 @@ class SplashController extends GetxController {
       DocumentSnapshot doc = await firestore.collection('users').doc(id).get();
       final data = doc.data() as Map<String, dynamic>?;
       if (data != null) {
-        log("Firestore Data: $data");
         return MyUserEntity.fromDocument(data);
       }
     } catch (e) {
@@ -51,7 +53,8 @@ class SplashController extends GetxController {
     MyUserEntity? userEntity = await getUser(userId);
     if (userEntity != null) {
       user.value = MyUser.fromEntity(userEntity);
-    log("User fetched: ${user.value}");
+    } else {
+      log("No MyUserEntity found for ID: $userId");
     }
   }
 }

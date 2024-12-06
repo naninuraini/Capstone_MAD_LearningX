@@ -19,8 +19,12 @@ import '../modules/profil_avatar/bindings/profil_avatar_binding.dart';
 import '../modules/profil_avatar/views/profil_avatar_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
+import '../modules/scheduling/bindings/scheduling_binding.dart';
+import '../modules/scheduling/views/scheduling_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/tambah_transaksi/bindings/tambah_transaksi_binding.dart';
+import '../modules/tambah_transaksi/views/tambah_transaksi_view.dart';
 import '../modules/tentang_kami/bindings/tentang_kami_binding.dart';
 import '../modules/tentang_kami/views/tentang_kami_view.dart';
 
@@ -81,6 +85,16 @@ class AppPages {
       name: _Paths.TENTANG_KAMI,
       page: () => const TentangKamiView(),
       binding: TentangKamiBinding(),
+    ),
+    GetPage(
+      name: _Paths.TAMBAH_TRANSAKSI,
+      page: () => TambahTransaksiView(myUser: MyUser.empty),
+      binding: TambahTransaksiBinding(),
+    ),
+    GetPage(
+      name: _Paths.SCHEDULING,
+      page: () => const SchedulingView(),
+      binding: SchedulingBinding(),
     ),
     GetPage(
       name: _Paths.CATEGORY,

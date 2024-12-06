@@ -1,5 +1,6 @@
 import 'package:cipta_cuan/app/modules/category/controllers/category_controller.dart';
 import 'package:cipta_cuan/app/modules/profil/controllers/profil_controller.dart';
+import 'package:cipta_cuan/app/modules/scheduling/views/scheduling_view.dart';
 import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,7 +22,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   final HomeController controller = Get.find<HomeController>();
   int _currentIndex = 0;
-  MyUser? myUser;
+  late MyUser? myUser;
   late List<Widget> _children;
 
   @override
@@ -31,10 +32,10 @@ class _HomeViewState extends State<HomeView> {
     Get.lazyPut(() => CategoryController());
     myUser = widget.myUser;
     _children = [
-      HomeWidget(myUser: myUser),   // Beranda
-      HomeWidget(myUser: myUser),   // Jadwal
-      const CategoryView(),         // Kategori
-      ProfilView(myUser),           // Profil
+      HomeWidget(myUser: myUser), //beranda
+      const SchedulingView(), //jadwal
+      const CategoryView(), //kategori
+      ProfilView(myUser), //profil
     ];
   }
 
@@ -46,6 +47,7 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    myUser = widget.myUser;
     return Scaffold(
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
