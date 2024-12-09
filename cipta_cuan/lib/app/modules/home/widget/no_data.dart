@@ -1,7 +1,6 @@
 import 'package:cipta_cuan/widget/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../../models/post/post_model.dart';
 import 'card_home.dart';
