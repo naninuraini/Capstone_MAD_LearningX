@@ -7,7 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../models/myUser/myuser_entity.dart';
 import '../../../../models/myUser/myuser_model.dart';
-import '../../../routes/app_pages.dart';
 
 class SplashController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;

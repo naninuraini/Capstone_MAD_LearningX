@@ -245,6 +245,7 @@ class _RegisterViewState extends State<RegisterView> {
                         myUser = myUser.copyWith(
                           email: controller.emailController.text,
                           name: controller.nameController.text,
+                          pengeluaran: 0,
                           tanggalDibuat: DateTime.now(),
                         );
                         controller.register(

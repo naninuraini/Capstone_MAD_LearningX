@@ -19,7 +19,17 @@ class TambahTransaksiController extends GetxController {
   final formKeyTambahTransaksi = GlobalKey<FormState>();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   DateTime? selectedDateTime;
-  var dropdownItems = ['Option 1', 'Option 2', 'Option 3'].obs;
+  var dropdownItems = [
+    'Konsumsi',
+    'Transportasi',
+    'Obat-Obatan',
+    'Bahan Makanan',
+    'Sewa',
+    'Hadiah',
+    'Tabungan',
+    'Hiburan',
+    'Lainnya'
+  ].obs;
   var selectedItem = ''.obs;
   var isDropdownVisible = false.obs;
 
@@ -42,7 +52,9 @@ class TambahTransaksiController extends GetxController {
         post.myUser.id: FieldValue.arrayUnion([post.toEntity().toDocument()])
       }, SetOptions(merge: true));
 
-      Get.back();
+      updateSaldo(post.myUser.id, post.jumlah, post);
+      // Get.back();
+      Navigator.pop(Get.context!);
       Get.snackbar('Success', 'Data added successfully');
       tanggalController.clear();
       kategoriController.clear();
@@ -59,8 +71,38 @@ class TambahTransaksiController extends GetxController {
     }
   }
 
+  void updateSaldo(String documentId, int incrementValue, Post post) async {
+    try {
+      final docRef = firestore.collection('users').doc(documentId);
+      firestore.runTransaction((transaction) async {
+        final snapshot = await transaction.get(docRef);
+
+        if (snapshot.exists) {
+          final saldoValue = snapshot.get('saldo') as int? ?? 0;
+          final pengeluaranValue = snapshot.get('pengeluaran') as int? ?? 0;
+          if (post.kategori == 'Tabungan') {
+            final newSaldoValue = saldoValue + incrementValue;
+            transaction.update(docRef, {'saldo': newSaldoValue});
+          } else {
+            final newSaldoValue = saldoValue - incrementValue;
+            transaction.update(docRef, {'saldo': newSaldoValue});
+            final newPengeluaranValue = pengeluaranValue + incrementValue;
+            transaction.update(docRef, {'pengeluaran': newPengeluaranValue});
+          }
+        } else {
+          transaction.set(docRef, {'saldo': incrementValue});
+        }
+      }).catchError((error) {
+        print("Error updating Firestore value: $error");
+      });
+    } catch (e) {
+      log("$e");
+    }
+  }
+
   void toggleDropdown() {
     isDropdownVisible.value = !isDropdownVisible.value;
+    print("Dropdown visibility: ${isDropdownVisible.value}");
   }
 
   void selectItem(String item) {

@@ -1,4 +1,3 @@
-import 'package:cipta_cuan/app/modules/splash/controllers/splash_controller.dart';
 import 'package:cipta_cuan/widget/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

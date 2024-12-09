@@ -8,6 +8,7 @@ class MyUserEntity extends Equatable {
   final DateTime tanggalDibuat;
   final String avatar;
   final int saldo;
+  final int pengeluaran;
 
   const MyUserEntity({
     required this.id,
@@ -16,6 +17,7 @@ class MyUserEntity extends Equatable {
     required this.tanggalDibuat,
     required this.avatar,
     required this.saldo,
+    required this.pengeluaran,
   });
 
   Map<String, Object?> toDocument() {
@@ -26,6 +28,7 @@ class MyUserEntity extends Equatable {
       'tanggalDibuat': tanggalDibuat,
       'avatar': avatar,
       'saldo': saldo,
+      'pengeluaran': pengeluaran,
     };
   }
 
@@ -35,6 +38,7 @@ class MyUserEntity extends Equatable {
       id: doc['id'] as String,
       avatar: doc['avatar'] as String,
       saldo: doc['saldo'] as int,
+      pengeluaran: doc['pengeluaran'] as int,
       tanggalDibuat: doc['tanggalDibuat'] != null
         ? (doc['tanggalDibuat'] as Timestamp).toDate()
         : DateTime.now(), 
@@ -43,7 +47,7 @@ class MyUserEntity extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, email, name, tanggalDibuat, avatar];
+  List<Object?> get props => [id, email, name, tanggalDibuat, avatar, saldo, pengeluaran];
 
   @override
   String toString() {
@@ -54,6 +58,7 @@ class MyUserEntity extends Equatable {
       tanggalDibuat: $tanggalDibuat
       avatar: $avatar
       saldo: $saldo
+      pengeluaran: $pengeluaran
     }''';
   }
 }

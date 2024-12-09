@@ -11,6 +11,7 @@ class MyUser extends Equatable {
   final DateTime tanggalDibuat;
   final String avatar;
   final int saldo;
+  final int pengeluaran;
   
   MyUser({
     required this.id,
@@ -19,6 +20,7 @@ class MyUser extends Equatable {
     required this.tanggalDibuat,
     this.avatar = defaultAvatar,
     required this.saldo,
+    required this.pengeluaran,
   });
 
   static final empty = MyUser(
@@ -28,6 +30,7 @@ class MyUser extends Equatable {
     tanggalDibuat: DateTime.now(),
     avatar: defaultAvatar,
     saldo: 0,
+    pengeluaran: 0,
   );
 
   MyUser copyWith({
@@ -37,6 +40,7 @@ class MyUser extends Equatable {
     DateTime? tanggalDibuat,
     String? avatar,
     int? saldo,
+    int? pengeluaran,
   }) {
     return MyUser(
       id: id ?? this.id,
@@ -45,6 +49,7 @@ class MyUser extends Equatable {
       tanggalDibuat: tanggalDibuat ?? this.tanggalDibuat,
       avatar: avatar ?? this.avatar,
       saldo: saldo ?? this.saldo,
+      pengeluaran: pengeluaran ?? this.pengeluaran,
     );
   }
 
@@ -59,6 +64,7 @@ class MyUser extends Equatable {
       tanggalDibuat: tanggalDibuat,
       avatar: avatar,
       saldo: saldo,
+      pengeluaran: pengeluaran,
     );
   }
 
@@ -70,9 +76,10 @@ class MyUser extends Equatable {
       tanggalDibuat: entity.tanggalDibuat,
       avatar: entity.avatar,
       saldo: entity.saldo,
+      pengeluaran: entity.pengeluaran,
     );
   }
 
   @override
-  List<Object?> get props => [id, email, name, tanggalDibuat, avatar, saldo];
+  List<Object?> get props => [id, email, name, tanggalDibuat, avatar, saldo, pengeluaran];
 }

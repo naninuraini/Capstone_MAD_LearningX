@@ -120,7 +120,7 @@ class ProfilController extends GetxController {
       });
 
       user.value = MyUser.empty;
-      Get.offNamed(Routes.LOGIN);
+      Get.offAllNamed(Routes.LOGIN);
     } catch (e) {
       Get.snackbar("Error", "Gagal logout: $e",
           snackPosition: SnackPosition.BOTTOM);
