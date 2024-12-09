@@ -36,4 +36,5 @@ abstract class AppColors {
   static const Color textTF = Color(0xFF7B78AA);
   static const Color textPurple = Color(0xFF7B78AA);
   static const Color borderGrey = Color(0xFF7D7D7D);
+  static const Color greyPopUp = Color(0xFF4A4A4A);
 }

@@ -36,23 +36,24 @@ class RegisterController extends GetxController {
         rethrow;
       }
       Get.defaultDialog(
-        backgroundColor: Colors.white.withOpacity(0.8),
+        backgroundColor: Color(0xFFE1E1E1),
         title: 'Verifikasi Email',
-        titlePadding: const EdgeInsets.only(top: 30.0),
+        titlePadding: const EdgeInsets.only(top: 20),
         titleStyle: TextStyle(
           fontWeight: FontWeight.bold,
-          color: AppColors.white,
+          color: AppColors.greyPopUp,
         ),
-        contentPadding: const EdgeInsets.all(25.0),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         content: Column(
           children: [
             Image.asset("assets/images/verification_email.png"),
+            SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: Text(
                 'Silahkan verifikasi email Anda untuk melanjutkan. Kami telah mengirimkan tautan verifikasi.',
                 style: TextStyle(
-                  color: AppColors.white,
+                  color: AppColors.greyPopUp,
                 ),
                 textAlign: TextAlign.center,
               ),

@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 
 import '../../models/myUser/myuser_model.dart';
+import '../modules/detail_transaksi/bindings/detail_transaksi_binding.dart';
+import '../modules/detail_transaksi/views/detail_transaksi_view.dart';
 import '../modules/category/bindings/category_binding.dart';
 import '../modules/category/views/category_view.dart';
 import '../modules/detail_pengguna/bindings/detail_pengguna_binding.dart';
@@ -63,7 +65,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ON_BOARDING,
-      page: () => const OnBoardingView(),
+      page: () => OnBoardingView(),
       binding: OnBoardingBinding(),
     ),
     GetPage(
@@ -100,6 +102,11 @@ class AppPages {
       name: _Paths.CATEGORY,
       page: () => const CategoryView(),
       binding: CategoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_TRANSAKSI,
+      page: () => const DetailTransaksiView(),
+      binding: DetailTransaksiBinding(),
     ),
   ];
 }

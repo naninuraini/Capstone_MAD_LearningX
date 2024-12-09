@@ -35,6 +35,8 @@ flutter:
     - assets/icons/
     - assets/category/
     - assets/images/no_data/
+    - assets/onboarding/
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
