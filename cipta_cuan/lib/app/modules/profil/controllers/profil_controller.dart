@@ -86,7 +86,7 @@ class ProfilController extends GetxController {
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -109,6 +109,7 @@ class ProfilController extends GetxController {
         ),
       ),
       isDismissible: false,
+      isScrollControlled: true,
     );
   }
 
