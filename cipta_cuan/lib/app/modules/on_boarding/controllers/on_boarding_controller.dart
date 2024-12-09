@@ -123,7 +123,7 @@ class OnBoardingController extends GetxController {
           ),
         ),
         Positioned(
-          top: 40,
+          top: 50,
           left: 20,
           child: ShaderMask(
             shaderCallback: (bounds) => LinearGradient(
@@ -137,6 +137,28 @@ class OnBoardingController extends GetxController {
             child: Text(
               '${currentPage + 1}/3',
               style: const TextStyle(fontSize: 20, color: Colors.white),
+            ),
+          ),
+        ),
+      Positioned(
+          top: 40,
+          right: 10,
+          child: TextButton(
+            onPressed: () {
+              if (currentPage < 2) {
+                pageController.nextPage(
+                    duration: Duration(milliseconds: 300), curve: Curves.ease);
+              } else {
+                completeOnboarding();
+              }
+            },
+            child: Text(
+              "Next",
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
