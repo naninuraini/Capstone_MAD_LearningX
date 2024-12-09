@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoardingController extends GetxController {
   final PageController pageController = PageController();
-  int currentPage = 0;
+  final RxInt currentPage = 0.obs;
 
   List<Widget> buildPages() {
     return [
@@ -32,7 +32,7 @@ class OnBoardingController extends GetxController {
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(width: 5),
+                const SizedBox(width: 5),
                 ShaderMask(
                   shaderCallback: (bounds) => const LinearGradient(
                     colors: [
@@ -91,6 +91,24 @@ class OnBoardingController extends GetxController {
         ),
         description:
             'Nikmati kemudahan menabung dengan fitur pintar untuk mencapai tujuan finansial Anda.',
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ElevatedButton(
+            onPressed: () {
+              completeOnboarding();
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF0DA6C2),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            child: Text(
+              'Next',
+              style: const TextStyle(fontSize: 18, color: Colors.white),
+            ),
+          ),
+        ),
       ),
     ];
   }
@@ -99,34 +117,14 @@ class OnBoardingController extends GetxController {
     required String imagePath,
     required Widget title,
     required String description,
+    Widget? bottomNavigationBar,
   }) {
-    return Stack(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(imagePath, height: 200),
-              const SizedBox(height: 20),
-              title,
-              const SizedBox(height: 10),
-              Text(
-                description,
-                style: const TextStyle(
-                  fontSize: 15,
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        ),
-        Positioned(
-          top: 50,
-          left: 20,
+    return Scaffold(
+      appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 20.0, top: 14),
           child: ShaderMask(
-            shaderCallback: (bounds) => LinearGradient(
+            shaderCallback: (bounds) => const LinearGradient(
               colors: [
                 Color(0xFF0DA6C2),
                 Color(0xFF0E39C6),
@@ -134,35 +132,61 @@ class OnBoardingController extends GetxController {
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
             ).createShader(bounds),
-            child: Text(
-              '${currentPage + 1}/3',
-              style: const TextStyle(fontSize: 20, color: Colors.white),
-            ),
-          ),
-        ),
-      Positioned(
-          top: 40,
-          right: 10,
-          child: TextButton(
-            onPressed: () {
-              if (currentPage < 2) {
-                pageController.nextPage(
-                    duration: Duration(milliseconds: 300), curve: Curves.ease);
-              } else {
-                completeOnboarding();
-              }
-            },
-            child: Text(
-              "Next",
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+            child: Obx(
+              () => Text(
+                '${currentPage.value + 1}/3',
+                style: const TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),
           ),
         ),
-      ],
+        actions: [
+          Obx(
+            () => currentPage.value < 2
+                ? Padding(
+                    padding: const EdgeInsets.only(right: 20.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        pageController.nextPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.ease,
+                        );
+                      },
+                      child: Text(
+                        'Next',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  )
+                : Container(),
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(imagePath, height: 200),
+            const SizedBox(height: 20),
+            title,
+            const SizedBox(height: 10),
+            Text(
+              description,
+              style: const TextStyle(
+                fontSize: 15,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: bottomNavigationBar,
     );
   }
 

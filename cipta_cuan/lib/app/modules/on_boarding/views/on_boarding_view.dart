@@ -1,46 +1,47 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
 import '../controllers/on_boarding_controller.dart';
 
-class OnBoardingView extends StatefulWidget {
-  const OnBoardingView({super.key});
-  @override
-  _OnBoardingViewState createState() => _OnBoardingViewState();
-}
-
-class _OnBoardingViewState extends State<OnBoardingView> {
-  final OnBoardingController controller = Get.find<OnBoardingController>();
+class OnBoardingView extends StatelessWidget {
+  final OnBoardingController controller = Get.put(OnBoardingController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
         controller: controller.pageController,
-        onPageChanged: (index) {
-          setState(() => controller.currentPage = index);
-        },
+        onPageChanged: (index) => controller.currentPage.value = index,
         children: controller.buildPages(),
       ),
-      bottomSheet: controller.currentPage == controller.buildPages().length - 1
-          ? TextButton(
-              onPressed: controller.completeOnboarding,
-              child: Text(
-                "Get Started",
-                style: TextStyle(fontSize: 18),
-              ),
-            )
-          : TextButton(
-              onPressed: () {
-                controller.pageController.nextPage(
-                    duration: Duration(milliseconds: 300), curve: Curves.ease);
-              },
-              child: Text(
-                "Next",
-                style: TextStyle(fontSize: 18),
-              ),
-            ),
+      // bottomNavigationBar: 
+      // controller.currentPage.value < 2
+      //     ? Obx(() {
+      //         final isLastPage = controller.currentPage.value ==
+      //             controller.buildPages().length - 1;
+
+              // return Padding(
+              //   padding: const EdgeInsets.all(16.0),
+              //   child: ElevatedButton(
+              //     onPressed: () {
+              //       controller.pageController.nextPage(
+              //         duration: const Duration(milliseconds: 300),
+              //         curve: Curves.ease,
+              //       );
+              //     },
+              //     style: ElevatedButton.styleFrom(
+              //       backgroundColor: const Color(0xFF0DA6C2),
+              //       shape: RoundedRectangleBorder(
+              //         borderRadius: BorderRadius.circular(12),
+              //       ),
+              //     ),
+              //     child: Text(
+              //       'Next',
+              //       style: const TextStyle(fontSize: 18, color: Colors.white),
+              //     ),
+              //   ),
+              // );
+    //         })
+    //       : Container(),
     );
   }
 }
