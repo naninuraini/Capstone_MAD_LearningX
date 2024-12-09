@@ -65,7 +65,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ON_BOARDING,
-      page: () => const OnBoardingView(),
+      page: () => OnBoardingView(),
       binding: OnBoardingBinding(),
     ),
     GetPage(
