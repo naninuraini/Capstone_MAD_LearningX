@@ -34,8 +34,7 @@ class CategoryView extends GetView<CategoryController> {
             final category = controller.categories[index];
             return GestureDetector(
               onTap: () {
-                // Navigasi ke halaman detail (nanti diimplementasikan)
-                print("Tapped on ${category['label']}");
+                controller.filterPostsByCategory(category['label']!);
               },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -45,7 +44,7 @@ class CategoryView extends GetView<CategoryController> {
                     height: 64,
                     decoration: BoxDecoration(
                       color: Colors.blue.shade300,
-                      borderRadius: BorderRadius.circular(12), 
+                      borderRadius: BorderRadius.circular(12),
                     ),
                     child: Center(
                       child: Image.asset(
@@ -61,6 +60,7 @@ class CategoryView extends GetView<CategoryController> {
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
+                      fontSize: 14,
                     ),
                     textAlign: TextAlign.center,
                   ),
