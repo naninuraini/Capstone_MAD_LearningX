@@ -1,12 +1,14 @@
 import 'package:get/get.dart';
 
 import '../../models/myUser/myuser_model.dart';
-import '../modules/detail_transaksi/bindings/detail_transaksi_binding.dart';
-import '../modules/detail_transaksi/views/detail_transaksi_view.dart';
 import '../modules/category/bindings/category_binding.dart';
 import '../modules/category/views/category_view.dart';
+import '../modules/category_list/bindings/category_list_binding.dart';
+import '../modules/category_list/views/category_list_view.dart';
 import '../modules/detail_pengguna/bindings/detail_pengguna_binding.dart';
 import '../modules/detail_pengguna/views/detail_pengguna_view.dart';
+import '../modules/detail_transaksi/bindings/detail_transaksi_binding.dart';
+import '../modules/detail_transaksi/views/detail_transaksi_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -100,13 +102,18 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CATEGORY,
-      page: () => const CategoryView(),
+      page: () =>  CategoryView(),
       binding: CategoryBinding(),
     ),
     GetPage(
       name: _Paths.DETAIL_TRANSAKSI,
       page: () => const DetailTransaksiView(),
       binding: DetailTransaksiBinding(),
+    ),
+    GetPage(
+      name: _Paths.CATEGORY_LIST,
+      page: () =>  CategoryListView(),
+      binding: CategoryListBinding(),
     ),
   ];
 }
