@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import '../../../../models/post/post_model.dart';
 import '../../../../widget/button.dart';
 import '../../../../widget/text_field.dart';
+import '../../../../widget/validators.dart';
 import '../controllers/tambah_transaksi_controller.dart';
 
 class TambahTransaksiView extends StatefulWidget {
@@ -46,7 +47,7 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2000),
-      lastDate: DateTime(2100),
+      lastDate: DateTime(2026),
     );
     if (pickedDate != null) {
       setState(() {
@@ -111,121 +112,39 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
                             controller: controller.tanggalController,
                             keyboardType: TextInputType.datetime,
                             validator: (val) {
-                              // if (val!.isEmpty) {
-                              //   return 'Nama Tidak Boleh Kosong';
-                              // } else if (val.length > 30) {
-                              //   return 'Nama Terlalu Panjang';
-                              // }
-                              // return null;
+                              if (controller.selectedDateTime == null) {
+                                return 'Tanggal tidak boleh kosong';
+                              }
+                              val = DateFormat("d MMMM yyyy", "id_ID")
+                                  .format(controller.selectedDateTime!);
+                              if (!dateRegExp.hasMatch(val)) {
+                                return 'tanggal tidak valid';
+                              }
+                              return null;
                             },
                           ),
                           SizedBox(height: 20),
                           Obx(
-                            () => 
-                            // Stack(
-                            //   children: [
-                                SecondTextFieldWidget(
-                                  hintText:
-                                      controller.selectedItem.value.isNotEmpty
-                                          ? controller.selectedItem.value
-                                          : 'Pilih Kategori',
-                                  headerText: "Kategori",
-                                  suffixIcon:
-                                      "assets/icons/textfield_kategori.svg",
-                                  onPressedSuffix: controller.toggleDropdown,
-                                  readOnly: true,
-                                  controller: controller.kategoriController,
-                                  keyboardType: TextInputType.text,
-                                  validator: (val) {
-                                    // Validator
-                                  },
-                                ),
-                                // if (controller.isDropdownVisible.value)
-                                //   Positioned(
-                                //     left: 0,
-                                //     right: 0,
-                                //     top: 60, // Sesuaikan posisi dropdown
-                                //     child: Material(
-                                //       elevation: 4,
-                                //       child: Container(
-                                //         color: Colors.white,
-                                //         child: Column(
-                                //           mainAxisSize: MainAxisSize.min,
-                                //           children: controller.dropdownItems
-                                //               .map(
-                                //                 (item) => ListTile(
-                                //                   title: Text(item),
-                                //                   onTap: () {
-                                //                     controller.selectItem(item);
-                                //                     controller.kategoriController
-                                //                         .text = item;
-                                //                     controller
-                                //                         .toggleDropdown(); // Tutup dropdown
-                                //                   },
-                                //                 ),
-                                //               )
-                                //               .toList(),
-                                //         ),
-                                //       ),
-                                //     ),
-                                //   ),
-                            //   ],
-                            // ),
+                            () => SecondTextFieldWidget(
+                              hintText: controller.selectedItem.value.isNotEmpty
+                                  ? controller.selectedItem.value
+                                  : 'Pilih Kategori',
+                              headerText: "Kategori",
+                              suffixIcon: "assets/icons/textfield_kategori.svg",
+                              onPressedSuffix: controller.toggleDropdown,
+                              readOnly: true,
+                              controller: controller.kategoriController,
+                              keyboardType: TextInputType.text,
+                              validator: (val) {
+                                if (val == null || val.isEmpty) {
+                                  return 'Kategori tidak boleh kosong';
+                                } else if (!kategoriRegExp.hasMatch(val)) {
+                                  return 'Kategori tidak valid';
+                                }
+                                return null;
+                              },
+                            ),
                           ),
-                          // Obx(
-                          //   () => Column(
-                          //     children: [
-                          //       Stack(
-                          //         children: [
-                          //           SecondTextFieldWidget(
-                          //             hintText:
-                          //                 controller.selectedItem.value != ""
-                          //                     ? controller.selectedItem.value
-                          //                     : 'Pilih Kategori',
-                          //             headerText: "Kategori",
-                          //             suffixIcon:
-                          //                 "assets/icons/textfield_kategori.svg",
-                          //             onPressedSuffix: controller.toggleDropdown,
-                          //             readOnly: true,
-                          //             controller: controller.kategoriController,
-                          //             keyboardType: TextInputType.text,
-                          //             validator: (val) {
-                          //               // if (val!.isEmpty) {
-                          //               //   return 'Nama Tidak Boleh Kosong';
-                          //               // } else if (val.length > 30) {
-                          //               //   return 'Nama Terlalu Panjang';
-                          //               // }
-                          //               // return null;
-                          //             },
-                          //           ),
-                          //           if (controller.isDropdownVisible.value)
-                          //             Positioned(
-                          //               left: 0,
-                          //               right: 0,
-                          //               top: 60,
-                          //               child: Card(
-                          //                 elevation: 4,
-                          //                 child: Column(
-                          //                   children: controller.dropdownItems
-                          //                       .map(
-                          //                         (item) => ListTile(
-                          //                           title: Text(item),
-                          //                           onTap: () {
-                          //                             controller.selectItem(item);
-                          //                             controller.kategoriController
-                          //                                 .text = item;
-                          //                           },
-                          //                         ),
-                          //                       )
-                          //                       .toList(),
-                          //                 ),
-                          //               ),
-                          //             ),
-                          //         ],
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
                           SizedBox(height: 20),
                           SecondTextFieldWidget(
                             hintText: 'Masukkan Jumlah',
@@ -235,12 +154,14 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
                             controller: controller.jumlahController,
                             keyboardType: TextInputType.number,
                             validator: (val) {
-                              // if (val!.isEmpty) {
-                              //   return 'Nama Tidak Boleh Kosong';
-                              // } else if (val.length > 30) {
-                              //   return 'Nama Terlalu Panjang';
-                              // }
-                              // return null;
+                              if (val == null || val.isEmpty) {
+                                return 'Jumlah tidak boleh kosong';
+                              } else if (!numberRegExp.hasMatch(val)) {
+                                return 'Jumlah tidak valid';
+                              } else if (int.parse(val) < 1) {
+                                return 'Jumlah harus di atas 1';
+                              }
+                              return null;
                             },
                           ),
                           SizedBox(height: 20),
@@ -252,12 +173,10 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
                             controller: controller.judulController,
                             keyboardType: TextInputType.text,
                             validator: (val) {
-                              // if (val!.isEmpty) {
-                              //   return 'Nama Tidak Boleh Kosong';
-                              // } else if (val.length > 30) {
-                              //   return 'Nama Terlalu Panjang';
-                              // }
-                              // return null;
+                              if (val!.isEmpty) {
+                                return 'Judul Tidak Boleh Kosong';
+                              }
+                              return null;
                             },
                           ),
                           SizedBox(height: 20),
@@ -270,12 +189,10 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
                             keyboardType: TextInputType.text,
                             maxLines: 3,
                             validator: (val) {
-                              // if (val!.isEmpty) {
-                              //   return 'Nama Tidak Boleh Kosong';
-                              // } else if (val.length > 30) {
-                              //   return 'Nama Terlalu Panjang';
-                              // }
-                              // return null;
+                              if (val!.isEmpty) {
+                                return 'Deskripsi Tidak Boleh Kosong';
+                              }
+                              return null;
                             },
                           ),
                           SizedBox(height: 20),
@@ -354,33 +271,40 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
               ),
             ],
           ),
-          if (controller.isDropdownVisible.value)
-            Positioned(
-              left: 0,
-              right: 0,
-              top: MediaQuery.of(context).size.height / 4 + 24,
-              child: Material(
-                elevation: 4,
-                child: Container(
-                  color: Colors.white,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: controller.dropdownItems
-                        .map(
-                          (item) => ListTile(
-                            title: Text(item),
-                            onTap: () {
-                              controller.selectItem(item);
-                              controller.kategoriController.text = item;
-                              controller.toggleDropdown();
-                            },
-                          ),
-                        )
-                        .toList(),
+          Obx(() {
+            if (controller.isDropdownVisible.value)
+              return Positioned(
+                left: 20,
+                right: 20,
+                top: MediaQuery.of(context).size.height / 4 + 15,
+                child: Material(
+                  elevation: 4,
+                  borderRadius: BorderRadius.circular(8),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 8),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: controller.dropdownItems
+                          .map(
+                            (item) => ListTile(
+                              title: Text(item),
+                              onTap: () {
+                                controller.selectItem(item);
+                                controller.kategoriController.text = item;
+                              },
+                            ),
+                          )
+                          .toList(),
+                    ),
                   ),
                 ),
-              ),
-            ),
+              );
+            return SizedBox.shrink();
+          }),
         ],
       ),
     );

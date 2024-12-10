@@ -4,20 +4,19 @@ import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
-class HarianTransaksi extends GetView<HomeController> {
+class BulananTransaksi extends GetView<HomeController> {
   final MyUser? myUser;
-  const HarianTransaksi({super.key, required this.myUser});
+  const BulananTransaksi({super.key, required this.myUser});
 
   @override
   Widget build(BuildContext context) {
     controller.getPosts(myUser!.id);
       return NoDataWidget(
         isLoading: controller.isLoading,
-        transaction: controller.dailyTransactions,
-        judul: "Tidak Ada Data Hari Ini",
+        transaction: controller.monthlyTransactions,
+        judul: "Tidak Ada Data Bulan Ini",
         deskripsi:
-            "Datanya dihari ini gak ada, Mungkin\nkamu belum menambahkan data dihari ini",
+            "Datanya dibulan ini gak ada, Mungkin\nkamu belum menambahkan data dibulan ini",
         assetsString: "assets/images/no_data/home.png",
       );
   }
