@@ -26,7 +26,7 @@ class ProfilView extends GetView<ProfilController> {
           const SizedBox(height: 20),
           CircleAvatar(
             radius: 50,
-            backgroundImage: AssetImage(myUser!.avatar),
+            backgroundImage: AssetImage('assets/images/Avatar${myUser!.avatar}.png'),
             backgroundColor: Colors.white,
           ),
           const SizedBox(height: 10),
@@ -50,7 +50,7 @@ class ProfilView extends GetView<ProfilController> {
                     iconPath: 'assets/icons/icon_detailPengguna.svg',
                     title: "Detail Pengguna",
                     onTap: () {
-                      Get.toNamed(Routes.DETAIL_PENGGUNA);
+                      Get.toNamed(Routes.DETAIL_PENGGUNA, arguments: myUser);
                     },
                   ),
                   _buildMenuItem(

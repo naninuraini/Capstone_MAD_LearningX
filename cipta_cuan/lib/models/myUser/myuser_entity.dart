@@ -6,7 +6,7 @@ class MyUserEntity extends Equatable {
   final String email;
   final String name;
   final DateTime tanggalDibuat;
-  final String avatar;
+  final int avatar;
   final int saldo;
   final int pengeluaran;
 
@@ -36,7 +36,7 @@ class MyUserEntity extends Equatable {
     return MyUserEntity(
       name: doc['name'] as String,
       id: doc['id'] as String,
-      avatar: doc['avatar'] as String,
+      avatar: doc['avatar'] as int,
       saldo: doc['saldo'] as int,
       pengeluaran: doc['pengeluaran'] as int,
       tanggalDibuat: doc['tanggalDibuat'] != null
