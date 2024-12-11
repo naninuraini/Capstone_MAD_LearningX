@@ -6,6 +6,7 @@ import 'package:cipta_cuan/app/modules/home/widget/transaksi/mingguan_transaksi.
 import 'package:cipta_cuan/app/modules/tambah_transaksi/bindings/tambah_transaksi_binding.dart';
 import 'package:cipta_cuan/app/modules/tambah_transaksi/views/tambah_transaksi_view.dart';
 import 'package:cipta_cuan/widget/constant.dart';
+import 'package:cipta_cuan/widget/getuser_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,6 +22,7 @@ class HomeWidget extends StatefulWidget {
 class _HomeWidgetState extends State<HomeWidget>
     with SingleTickerProviderStateMixin {
   final HomeController controller = Get.find<HomeController>();
+  final GetUserController getUserController = Get.find<GetUserController>();
 
   @override
   void initState() {
@@ -45,15 +47,15 @@ class _HomeWidgetState extends State<HomeWidget>
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: controller.userStream,
+      stream: getUserController.userStream,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
         } else if (snapshot.hasData && snapshot.data != null) {
           final user = snapshot.data!;
-          controller.fetchUser(user.uid);
+          getUserController.fetchUser(user.uid);
           return Obx(() {
-            final myUser = controller.user.value;
+            final myUser = getUserController.user.value;
             if (myUser != null) {
               return Scaffold(
                 key: _pageKey,
@@ -167,37 +169,37 @@ class _HomeWidgetState extends State<HomeWidget>
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 20.0),
-                            child: Stack(
-                              children: [
-                                LinearProgressIndicator(
-                                  value: controller.calculateExpensePercentage(
-                                      myUser.saldo, myUser.pengeluaran),
-                                  backgroundColor: AppColors.white,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                      Colors.blue),
-                                  borderRadius: BorderRadius.circular(20),
-                                  minHeight: 25,
-                                ),
-                                Positioned(
-                                  left: (controller.calculateExpensePercentage(
-                                              myUser.saldo,
-                                              myUser.pengeluaran)) *
-                                          MediaQuery.of(context)
-                                              .size
-                                              .width //tadinya 300
-                                      -
-                                      28,
-                                  top: 5,
-                                  child: Text(
-                                    '${(controller.calculateExpensePercentage(myUser.saldo, myUser.pengeluaran) * 100).toStringAsFixed(0)}%',
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white, // Text color
+                            child: LayoutBuilder(
+                              builder: (context, constraints) {
+                                final maxWidth = constraints.maxWidth;
+                                final progress = controller.calculateExpensePercentage(myUser.saldo, myUser.pengeluaran);
+                                final textWidth = 55.0;
+                                return Stack(
+                                children: [
+                                  LinearProgressIndicator(
+                                    value: controller.calculateExpensePercentage(
+                                        myUser.saldo, myUser.pengeluaran),
+                                    backgroundColor: AppColors.white,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Colors.blue),
+                                    borderRadius: BorderRadius.circular(20),
+                                    minHeight: 25,
+                                  ),
+                                  Positioned(
+                                    left: (progress * maxWidth - textWidth / 2).clamp(0.0, maxWidth - textWidth),
+                                    top: 5,
+                                    child: Text(
+                                      '${(controller.calculateExpensePercentage(myUser.saldo, myUser.pengeluaran) * 100).toStringAsFixed(0)}%',
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              );
+                              },
                             ),
                           ),
                           SizedBox(height: 10),

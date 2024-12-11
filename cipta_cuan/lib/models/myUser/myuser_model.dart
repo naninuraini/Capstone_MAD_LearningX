@@ -1,15 +1,14 @@
 import 'package:cipta_cuan/models/myUser/myuser_entity.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 // ignore: must_be_immutable
 class MyUser extends Equatable {
-  static const String defaultAvatar = 'assets/images/Avatar1.png';
-
   final String id;
   final String email;
   final String name;
   final DateTime tanggalDibuat;
-  final String avatar;
+  final int avatar;
   final int saldo;
   final int pengeluaran;
   
@@ -18,7 +17,7 @@ class MyUser extends Equatable {
     required this.email,
     required this.name,
     required this.tanggalDibuat,
-    this.avatar = defaultAvatar,
+    this.avatar = 1,
     required this.saldo,
     required this.pengeluaran,
   });
@@ -28,7 +27,7 @@ class MyUser extends Equatable {
     email: '',
     name: '',
     tanggalDibuat: DateTime.now(),
-    avatar: defaultAvatar,
+    avatar: 1,
     saldo: 0,
     pengeluaran: 0,
   );
@@ -38,7 +37,7 @@ class MyUser extends Equatable {
     String? email,
     String? name,
     DateTime? tanggalDibuat,
-    String? avatar,
+    int? avatar,
     int? saldo,
     int? pengeluaran,
   }) {
@@ -77,6 +76,18 @@ class MyUser extends Equatable {
       avatar: entity.avatar,
       saldo: entity.saldo,
       pengeluaran: entity.pengeluaran,
+    );
+  }
+
+  factory MyUser.fromDocument(Map<String, dynamic> data) {
+    return MyUser(
+      id: data['id'] ?? '',  
+      email: data['email'] ?? '',
+      name: data['name'] ?? 'Nama tidak ditemukan',
+      tanggalDibuat: (data['tanggalDibuat'] as Timestamp).toDate(),
+      avatar: data['avatar'] ?? 1,  
+      saldo: data['saldo'] ?? 0,  
+      pengeluaran: data['pengeluaran'] ?? 0,  
     );
   }
 

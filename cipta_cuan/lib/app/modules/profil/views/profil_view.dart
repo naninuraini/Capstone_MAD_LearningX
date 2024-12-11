@@ -1,10 +1,9 @@
+import 'package:cipta_cuan/app/modules/profil/controllers/profil_controller.dart';
+import 'package:cipta_cuan/app/routes/app_pages.dart';
 import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
-import '../../../routes/app_pages.dart';
-import '../controllers/profil_controller.dart';
 
 class ProfilView extends GetView<ProfilController> {
   final MyUser? myUser;
@@ -26,7 +25,8 @@ class ProfilView extends GetView<ProfilController> {
           const SizedBox(height: 20),
           CircleAvatar(
             radius: 50,
-            backgroundImage: AssetImage(myUser!.avatar),
+            backgroundImage:
+                AssetImage('assets/images/Avatar${myUser!.avatar}.png'),
             backgroundColor: Colors.white,
           ),
           const SizedBox(height: 10),
@@ -50,7 +50,7 @@ class ProfilView extends GetView<ProfilController> {
                     iconPath: 'assets/icons/icon_detailPengguna.svg',
                     title: "Detail Pengguna",
                     onTap: () {
-                      Get.toNamed(Routes.DETAIL_PENGGUNA);
+                      Get.toNamed(Routes.DETAIL_PENGGUNA, arguments: myUser);
                     },
                   ),
                   _buildMenuItem(
@@ -75,7 +75,7 @@ class ProfilView extends GetView<ProfilController> {
                 ],
               ),
             ),
-          ),
+          )
         ],
       ),
     );
