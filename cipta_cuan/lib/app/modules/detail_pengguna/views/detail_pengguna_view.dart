@@ -91,3 +91,45 @@ class DetailPenggunaView extends GetView<DetailPenggunaController> {
     );
   }
 }
+
+Widget _buildDetailItem(String title, String value) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        title,
+        style: const TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: Color(0xFF7B78AA),
+        ),
+      ),
+      const SizedBox(height: 8),
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          color: const Color(0xFFF5F5F5), 
+          borderRadius: BorderRadius.circular(10), 
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                value,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xFF7B78AA), 
+                ),
+                overflow: TextOverflow.ellipsis, 
+              ),
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
+
+
