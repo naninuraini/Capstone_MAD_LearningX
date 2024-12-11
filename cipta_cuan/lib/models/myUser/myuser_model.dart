@@ -1,4 +1,5 @@
 import 'package:cipta_cuan/models/myUser/myuser_entity.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 // ignore: must_be_immutable
@@ -77,6 +78,18 @@ class MyUser extends Equatable {
       avatar: entity.avatar,
       saldo: entity.saldo,
       pengeluaran: entity.pengeluaran,
+    );
+  }
+
+  factory MyUser.fromDocument(Map<String, dynamic> data) {
+    return MyUser(
+      id: data['id'] ?? '',  
+      email: data['email'] ?? '',
+      name: data['name'] ?? 'Nama tidak ditemukan',
+      tanggalDibuat: (data['tanggalDibuat'] as Timestamp).toDate(),
+      avatar: data['avatar'] ?? defaultAvatar,  
+      saldo: data['saldo'] ?? 0,  
+      pengeluaran: data['pengeluaran'] ?? 0,  
     );
   }
 
