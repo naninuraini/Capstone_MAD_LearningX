@@ -30,6 +30,15 @@ class DetailPenggunaView extends GetView<DetailPenggunaController> {
         () {
           final user = controller.user.value;
 
+          if (user.name.isEmpty) {
+            return Center(
+              child: Text(
+                "Data pengguna tidak ditemukan",
+                style: const TextStyle(color: Colors.white),
+              ),
+            );
+          }
+
           return Column(
             children: [
               Center(
@@ -38,7 +47,9 @@ class DetailPenggunaView extends GetView<DetailPenggunaController> {
                   children: [
                     CircleAvatar(
                       radius: 50,
-                      backgroundImage: AssetImage(user.avatar),
+                      backgroundImage: user.avatar.isNotEmpty
+                          ? AssetImage(user.avatar)
+                          : AssetImage('assets/default_avatar.png'),
                       backgroundColor: Colors.white,
                     ),
                     Positioned(
@@ -68,7 +79,7 @@ class DetailPenggunaView extends GetView<DetailPenggunaController> {
               ),
               const SizedBox(height: 10),
               Text(
-                user.name.isNotEmpty ? user.name : "Nama tidak ditemukan",
+                user.name,
                 style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
               const SizedBox(height: 30),
@@ -83,7 +94,12 @@ class DetailPenggunaView extends GetView<DetailPenggunaController> {
                   child: ListView(
                     padding: const EdgeInsets.all(30),
                     children: [
-                      // Tambahkan detail lainnya di sini jika diperlukan
+                      const SizedBox(height: 20),
+                      _buildDetailItem("Nama Pengguna", user.name),
+                      const SizedBox(height: 20),
+                      _buildDetailItem("Email", user.email),
+                      const SizedBox(height: 20),
+                      _buildDetailItem("Saldo", "Rp7.783.000"),
                     ],
                   ),
                 ),
@@ -95,3 +111,45 @@ class DetailPenggunaView extends GetView<DetailPenggunaController> {
     );
   }
 }
+
+Widget _buildDetailItem(String title, String value) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        title,
+        style: const TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: Color(0xFF7B78AA),
+        ),
+      ),
+      const SizedBox(height: 8),
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          color: const Color(0xFFF5F5F5), 
+          borderRadius: BorderRadius.circular(10), 
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                value,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xFF7B78AA), 
+                ),
+                overflow: TextOverflow.ellipsis, 
+              ),
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
+
+
