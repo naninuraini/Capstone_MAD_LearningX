@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "811751356205",
+    "project_id": "cipta-cuan",
+    "storage_bucket": "cipta-cuan.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:811751356205:android:45f1ee15e1a00d946305a4",
+        "android_client_info": {
+          "package_name": "com.example.cipta_cuan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvedpTfxBDPUecPxZ3B6AvFUht3uKvA04"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
