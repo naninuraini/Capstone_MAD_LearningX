@@ -24,7 +24,7 @@ class DetailTransaksiController extends GetxController {
   }
 
   String get formattedAmount {
-    return post.kategori == 'pemasukan'
+    return post.kategori == 'Tabungan'
         ? "+ " + NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ').format(post.jumlah)
         : "- " + NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ').format(post.jumlah);
   }

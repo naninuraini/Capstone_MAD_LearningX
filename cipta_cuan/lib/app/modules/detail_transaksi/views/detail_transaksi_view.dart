@@ -7,7 +7,7 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
 
   @override
   Widget build(BuildContext context) {
-    //untuk kategorinya
+    // untuk kategorinya
     var category = controller.categories.firstWhere(
       (category) => category['label'] == controller.post.kategori,
       orElse: () => {"icon": "assets/category/lainnya.png", "label": "Lainnya"},
@@ -58,7 +58,11 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
               const SizedBox(height: 10),
               Text(
                 category['label']!,
-                style: const TextStyle(color: Colors.red, fontSize: 22, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  color: category['label'] == 'Tabungan' ? Colors.green : Colors.red,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 5),
               Text(
@@ -70,10 +74,10 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
           const SizedBox(height: 20),
           // Bagian bawah: Detail Transaksi
           Expanded(
-            child: SingleChildScrollView( 
+            child: SingleChildScrollView(
               child: Container(
                 decoration: const BoxDecoration(
-                  color: Color(0xFF1B2656), 
+                  color: Color(0xFF1B2656),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20),
@@ -94,7 +98,7 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
                     buildDetailRow("Deskripsi", controller.post.deskripsi),
                     buildDetailRow("Tanggal", controller.formattedDate),
                     buildDetailRow("Judul", controller.post.judul),
-                    const Divider(color: Colors.black), 
+                    const Divider(color: Colors.black),
                     buildDetailRow("Jumlah", controller.formattedAmount),
                     const SizedBox(height: 20),
                     Center(
@@ -112,8 +116,8 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
                                       child: Center(
                                         child: Image.network(
                                           controller.post.gambar,
-                                          width: double.infinity, 
-                                          height: double.infinity, 
+                                          width: double.infinity,
+                                          height: double.infinity,
                                           fit: BoxFit.contain,
                                         ),
                                       ),
@@ -124,16 +128,16 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
                             },
                             child: Container(
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12), 
+                                borderRadius: BorderRadius.circular(12),
                                 border: Border.all(color: Colors.grey),
                               ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(12),
                                 child: Image.network(
                                   controller.post.gambar,
-                                  width: double.infinity, 
-                                  height: 200, 
-                                  fit: BoxFit.contain, 
+                                  width: double.infinity,
+                                  height: 200,
+                                  fit: BoxFit.contain,
                                 ),
                               ),
                             ),
@@ -142,9 +146,8 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
                       ),
                     ),
                     const SizedBox(height: 20),
-
                     SizedBox(
-                      width: double.infinity, 
+                      width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.white,
@@ -153,15 +156,13 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
-                        ).copyWith(
-                          elevation: WidgetStateProperty.all(0), 
                         ),
                         onPressed: () {
-                          // belum
+                          // Action for Edit button
                         },
                         child: Ink(
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                               colors: [
                                 Color(0xFF0DA6C2),
                                 Color(0xFF0E39C6),
@@ -171,7 +172,7 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
                             ),
                             borderRadius: BorderRadius.circular(15.0),
                             border: Border.all(
-                              color: Color(0xFF375DFB),
+                              color: const Color(0xFF375DFB),
                               width: 1.0,
                             ),
                           ),
