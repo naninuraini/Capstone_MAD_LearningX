@@ -31,8 +31,7 @@ class _RegisterViewState extends State<RegisterView> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        FocusScope.of(context)
-            .unfocus();
+        FocusScope.of(context).unfocus();
       },
       child: Scaffold(
         body: Form(
@@ -110,69 +109,74 @@ class _RegisterViewState extends State<RegisterView> {
                             },
                           ),
                           SizedBox(height: 20),
-                          TextFieldWidget(
-                            prefixIcon: "assets/icons/kata_sandi.svg",
-                            hintText: 'kata sandi',
-                            obscurePassword: controller.obscurePassword,
-                            controller: controller.passwordController,
-                            suffixIcon: controller.iconPassword,
-                            keyboardType: TextInputType.visiblePassword,
-                            validator: (val) {
-                              if (val!.isEmpty) {
-                                return 'Kata Sandi Tidak Boleh Kosong';
-                              } else if (!passRexExp.hasMatch(val)) {
-                                return 'Kata Sandi Tidak Valid';
-                              }
-                              return null;
-                            },
-                            onChanged: (val) {
-                              if (val!.contains(RegExp(r'[A-Z]'))) {
-                                setState(() {
-                                  containsUpperCase = true;
-                                });
-                              } else {
-                                setState(() {
-                                  containsUpperCase = false;
-                                });
-                              }
-                              if (val.contains(RegExp(r'[a-z]'))) {
-                                setState(() {
-                                  containsLowerCase = true;
-                                });
-                              } else {
-                                setState(() {
-                                  containsLowerCase = false;
-                                });
-                              }
-                              if (val.contains(RegExp(r'[0-9]'))) {
-                                setState(() {
-                                  containsNumber = true;
-                                });
-                              } else {
-                                setState(() {
-                                  containsNumber = false;
-                                });
-                              }
-                              if (val.contains(specialCharRexExp)) {
-                                setState(() {
-                                  containsSpecialChar = true;
-                                });
-                              } else {
-                                setState(() {
-                                  containsSpecialChar = false;
-                                });
-                              }
-                              if (val.length >= 8) {
-                                setState(() {
-                                  contains8Length = true;
-                                });
-                              } else {
-                                setState(() {
-                                  contains8Length = false;
-                                });
-                              }
-                              return null;
-                            },
+                          Obx(
+                            () => TextFieldWidget(
+                              prefixIcon: "assets/icons/kata_sandi.svg",
+                              hintText: 'kata sandi',
+                              obscurePassword: controller.obscurePassword.value,
+                              controller: controller.passwordController,
+                              suffixIcon: IconButton(
+                                icon: Icon(controller.iconPassword.value),
+                                onPressed: controller.togglePasswordVisibility,
+                              ),
+                              keyboardType: TextInputType.visiblePassword,
+                              validator: (val) {
+                                if (val!.isEmpty) {
+                                  return 'Kata Sandi Tidak Boleh Kosong';
+                                } else if (!passRexExp.hasMatch(val)) {
+                                  return 'Kata Sandi Tidak Valid';
+                                }
+                                return null;
+                              },
+                              onChanged: (val) {
+                                if (val!.contains(RegExp(r'[A-Z]'))) {
+                                  setState(() {
+                                    containsUpperCase = true;
+                                  });
+                                } else {
+                                  setState(() {
+                                    containsUpperCase = false;
+                                  });
+                                }
+                                if (val.contains(RegExp(r'[a-z]'))) {
+                                  setState(() {
+                                    containsLowerCase = true;
+                                  });
+                                } else {
+                                  setState(() {
+                                    containsLowerCase = false;
+                                  });
+                                }
+                                if (val.contains(RegExp(r'[0-9]'))) {
+                                  setState(() {
+                                    containsNumber = true;
+                                  });
+                                } else {
+                                  setState(() {
+                                    containsNumber = false;
+                                  });
+                                }
+                                if (val.contains(specialCharRexExp)) {
+                                  setState(() {
+                                    containsSpecialChar = true;
+                                  });
+                                } else {
+                                  setState(() {
+                                    containsSpecialChar = false;
+                                  });
+                                }
+                                if (val.length >= 8) {
+                                  setState(() {
+                                    contains8Length = true;
+                                  });
+                                } else {
+                                  setState(() {
+                                    contains8Length = false;
+                                  });
+                                }
+                                return null;
+                              },
+                            ),
                           ),
                           SizedBox(height: 15),
                           Row(

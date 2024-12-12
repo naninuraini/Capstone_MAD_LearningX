@@ -76,23 +76,28 @@ class LoginView extends GetView<LoginController> {
                           },
                         ),
                         SizedBox(height: 20),
-                        TextFieldWidget(
-                          prefixIcon: "assets/icons/kata_sandi.svg",
-                          hintText: 'kata sandi',
-                          obscurePassword: controller.obscurePassword,
-                          controller: controller.passwordController,
-                          suffixIcon: controller.iconPassword,
-                          keyboardType: TextInputType.visiblePassword,
-                          validator: (val) {
-                            if (val!.isEmpty) {
-                              return 'Password Tidak Boleh Kosong';
-                            } else if (!passRexExp.hasMatch(val)) {
-                              return 'Password Tidak Valid';
-                            } else {
-                              return null;
-                            }
-                          },
-                        )
+                        Obx(
+                          () => TextFieldWidget(
+                            prefixIcon: "assets/icons/kata_sandi.svg",
+                            hintText: 'kata sandi',
+                            obscurePassword: controller.obscurePassword.value,
+                            controller: controller.passwordController,
+                            suffixIcon: IconButton(
+                              icon: Icon(controller.iconPassword.value),
+                              onPressed: controller.togglePasswordVisibility,
+                            ),
+                            keyboardType: TextInputType.visiblePassword,
+                            validator: (val) {
+                              if (val!.isEmpty) {
+                                return 'Password Tidak Boleh Kosong';
+                              } else if (!passRexExp.hasMatch(val)) {
+                                return 'Password Tidak Valid';
+                              } else {
+                                return null;
+                              }
+                            },
+                          ),
+                        ),
                       ],
                     ),
                   ),

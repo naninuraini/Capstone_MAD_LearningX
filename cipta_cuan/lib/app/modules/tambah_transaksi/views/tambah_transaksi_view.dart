@@ -149,7 +149,6 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
                           SecondTextFieldWidget(
                             hintText: 'Masukkan Jumlah',
                             headerText: "Jumlah",
-                            suffixIcon: "",
                             onPressedSuffix: () {},
                             controller: controller.jumlahController,
                             keyboardType: TextInputType.number,
@@ -168,7 +167,6 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
                           SecondTextFieldWidget(
                             hintText: 'Masukkan Judul Transaksi',
                             headerText: "Judul",
-                            suffixIcon: "",
                             onPressedSuffix: () {},
                             controller: controller.judulController,
                             keyboardType: TextInputType.text,
@@ -183,7 +181,6 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
                           SecondTextFieldWidget(
                             hintText: 'Masukkan Deskripsi',
                             headerText: "Deskripsi",
-                            suffixIcon: "",
                             onPressedSuffix: () {},
                             controller: controller.deskripsiController,
                             keyboardType: TextInputType.text,
