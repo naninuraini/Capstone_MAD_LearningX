@@ -28,7 +28,7 @@ class LupaPasswordView extends GetView<LupaPasswordController> {
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () => Get.back(),
+                      onPressed: () => Navigator.pop(Get.context!),
                       icon: const Icon(
                         Icons.arrow_back_ios_new_rounded,
                         color: Colors.white,

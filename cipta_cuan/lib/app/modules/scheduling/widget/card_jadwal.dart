@@ -1,15 +1,20 @@
+import 'dart:developer';
+
 import 'package:cipta_cuan/app/modules/scheduling/controllers/scheduling_controller.dart';
 import 'package:cipta_cuan/models/jadwal/jadwal_model.dart';
 import 'package:cipta_cuan/widget/constant.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class CardJadwal extends GetView<SchedulingController> {
   final Jadwal jadwal;
+  final RxBool wantDelete;
   const CardJadwal({
     super.key,
     required this.jadwal,
+    required this.wantDelete,
   });
 
   @override
@@ -19,6 +24,18 @@ class CardJadwal extends GetView<SchedulingController> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Obx(() {
+            if (wantDelete.value) {
+              return Checkbox(
+                value: controller.selectedForDeletion.contains(jadwal),
+                onChanged: (value) {
+                  controller.toggleSelection(jadwal);
+              log("message: ${controller.selectedForDeletion}");
+                },
+              );
+            }
+            return SizedBox.shrink();
+          }),
           Container(
             padding: const EdgeInsets.all(12.0),
             decoration: BoxDecoration(

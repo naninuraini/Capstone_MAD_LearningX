@@ -60,7 +60,7 @@ class _TambahJadwalState extends State<TambahJadwalView> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () => Get.back(),
+          onPressed: () => Navigator.pop(Get.context!),
           icon: const Icon(
             Icons.arrow_back_ios_new_rounded,
             color: Colors.white,
@@ -182,7 +182,7 @@ class _TambahJadwalState extends State<TambahJadwalView> {
                         ),
                         readOnly: true,
                         headerText: "Waktu", 
-                        suffixIcon: "",
+                        suffixIcon: "clock",
                         onPressedSuffix: () => _selectTime(context),
                         controller: controller.waktuController,
                         keyboardType: TextInputType.datetime,

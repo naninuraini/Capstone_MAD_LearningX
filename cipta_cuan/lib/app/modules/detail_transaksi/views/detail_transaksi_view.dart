@@ -21,7 +21,7 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
             Icons.arrow_back_ios_new_rounded,
             color: Colors.white,
           ),
-          onPressed: () => Get.back(),
+          onPressed: () => Navigator.pop(Get.context!),
         ),
         title: Text(
           controller.post.judul,

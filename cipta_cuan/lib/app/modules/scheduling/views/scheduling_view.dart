@@ -85,75 +85,96 @@ class _SchedulingViewState extends State<SchedulingView> {
       body: Column(
         children: [
           const SizedBox(height: 10),
-          CalendarWidget(
-            myUser: widget.myUser,
-          ),
+          CalendarWidget(myUser: widget.myUser),
           const SizedBox(height: 30),
           Expanded(
             child: Container(
-                decoration: const BoxDecoration(
-                  color: Color(0xFF24325F),
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(50),
+              decoration: const BoxDecoration(
+                color: Color(0xFF24325F),
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(50),
+                ),
+              ),
+              child: ListView(
+                padding: const EdgeInsets.all(30),
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Jadwal Tagihan",
+                        style: TextStyle(
+                          color: AppColors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Container(
+                        width: 35,
+                        height: 35,
+                        decoration: BoxDecoration(
+                            color: Color(0xFFE1E1E1),
+                            borderRadius: BorderRadius.circular(20)),
+                        child: IconButton(
+                            onPressed: () {
+                              controller.wantDelete.value =
+                                  !controller.wantDelete.value;
+                              if (!controller.wantDelete.value) {
+                                controller.selectedForDeletion.clear();
+                              }
+                            },
+                            icon: SvgPicture.asset("assets/icons/trash.svg")),
+                      ),
+                    ],
                   ),
-                ),
-                child: ListView(
-                  padding: const EdgeInsets.all(30),
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Jadwal Tagihan",
-                          style: TextStyle(
-                            color: AppColors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
-                        ),
-                        Container(
-                          width: 35,
-                          height: 35,
-                          decoration: BoxDecoration(
-                              color: Color(0xFFE1E1E1),
-                              borderRadius: BorderRadius.circular(20)),
-                          child: IconButton(
-                              onPressed: () {},
-                              icon: SvgPicture.asset("assets/icons/trash.svg")),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child: Obx(() {
-                        if (controller.selectedJadwal.isEmpty) {
-                          return NoDataWidget(
-                              judul: "Ga Ada tagihan di hari ini!",
-                              deskripsi: "Karena kamu belum ada tagihan\nKamu tidak perlu mengeluarkan tagihan apapun",
-                              assetsString: "assets/images/no_data/schedule.png");
-                          // return Text(
-                          //   'Tidak ada jadwal untuk tanggal ini',
-                          //   style: TextStyle(color: Colors.white, fontSize: 16),
-                          // );
-                        }
-                        return ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: controller.selectedJadwal.length,
-                            itemBuilder: (context, index) {
-                              final jadwal = controller.selectedJadwal[index];
-                              return CardJadwal(
-                                jadwal: jadwal,
-                              );
-                            });
-                      }),
-                    ),
-                  ],
-                )
-                // ],
-                // ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Obx(() {
+                      if (controller.selectedJadwal.isEmpty) {
+                        return NoDataWidget(
+                            judul: "Ga Ada tagihan di hari ini!",
+                            deskripsi:
+                                "Karena kamu belum ada tagihan\nKamu tidak perlu mengeluarkan tagihan apapun",
+                            assetsString: "assets/images/no_data/schedule.png");
+                      }
+                      return Obx(
+                        () {
+                          return Column(
+                            children: [
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: controller.selectedJadwal.length,
+                                itemBuilder: (context, index) {
+                                  final jadwal =
+                                      controller.selectedJadwal[index];
+                                  return CardJadwal(
+                                    jadwal: jadwal,
+                                    wantDelete: controller.wantDelete,
+                                  );
+                                },
+                              ),
+                              if (controller.wantDelete.value)
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ElevatedButton(
+                                    onPressed: controller.deleteSelected,
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.red,
+                                    ),
+                                    child: const Text("Hapus Data Terpilih"),
+                                  ),
+                                ),
+                            ],
+                          );
+                        },
+                      );
+                    }),
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),
