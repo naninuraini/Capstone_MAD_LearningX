@@ -1,4 +1,4 @@
-import 'package:cipta_cuan/app/routes/app_pages.dart';  
+import 'package:cipta_cuan/app/routes/app_pages.dart';
 import 'package:cipta_cuan/widget/button.dart';
 import 'package:cipta_cuan/widget/constant.dart';
 import 'package:cipta_cuan/widget/text_field.dart';
@@ -30,7 +30,7 @@ class LupaPasswordView extends GetView<LupaPasswordController> {
                     IconButton(
                       onPressed: () => Navigator.pop(Get.context!),
                       icon: const Icon(
-                        Icons.arrow_back_ios_new_rounded, 
+                        Icons.arrow_back_ios_new_rounded,
                         color: Colors.white,
                       ),
                     ),
@@ -52,14 +52,15 @@ class LupaPasswordView extends GetView<LupaPasswordController> {
                     'Masukkan Email Anda',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20, 
-                      fontWeight: FontWeight.bold, 
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
                 const SizedBox(height: 20),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10).copyWith(left: 15), 
+                  padding: const EdgeInsets.symmetric(vertical: 10)
+                      .copyWith(left: 15),
                   child: const Text(
                     'Email',
                     style: TextStyle(
@@ -73,7 +74,7 @@ class LupaPasswordView extends GetView<LupaPasswordController> {
                   child: Align(
                     alignment: Alignment.center,
                     child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.85, 
+                      width: MediaQuery.of(context).size.width * 0.85,
                       child: TextFieldWidget(
                         prefixIcon: "assets/icons/email.svg",
                         hintText: 'Masukkan Email',
@@ -94,16 +95,14 @@ class LupaPasswordView extends GetView<LupaPasswordController> {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: ButtonWidget(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          controller.resetPassword(controller.emailController.text);
-                        }
-                      },
-                      title: "Kirim",
-                    ),
+                  child: ButtonWidget(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        controller
+                            .resetPassword(controller.emailController.text);
+                      }
+                    },
+                    title: "Kirim",
                   ),
                 ),
                 Row(
