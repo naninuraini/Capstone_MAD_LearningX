@@ -7,11 +7,9 @@ import 'package:intl/intl.dart';
 
 class CardJadwal extends GetView<SchedulingController> {
   final Jadwal jadwal;
-  final DateTime? selectedDate;
   const CardJadwal({
     super.key,
     required this.jadwal,
-    required this.selectedDate,
   });
 
   @override
