@@ -247,7 +247,7 @@ class _HomeWidgetState extends State<HomeWidget>
                                           color: controller.selectedColor),
                                       labelColor: Colors.white,
                                       unselectedLabelColor: Colors.black,
-                                      dividerColor: Colors.transparent,
+                                      dividerColor: Colors.transparent, 
                                       tabs: controller.tabs,
                                     ),
                                   ),

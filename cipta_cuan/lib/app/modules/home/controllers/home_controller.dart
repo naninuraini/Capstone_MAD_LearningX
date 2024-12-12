@@ -32,7 +32,7 @@ class HomeController extends GetxController {
       if (snapshot.data() != null) {
         final data = snapshot.data()![myUserId] as List<dynamic>;
         for (var postData in data) {
-          PostEntity entity = PostEntity.fromDocument(postData, myUserId);
+          PostEntity entity = PostEntity.fromDocument(postData);
           fetchedPosts.add(Post.fromEntity(entity));
         }
       }
