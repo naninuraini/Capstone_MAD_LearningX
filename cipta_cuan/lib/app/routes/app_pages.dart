@@ -104,7 +104,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CATEGORY,
-      page: () => CategoryView(),
+      page: () => CategoryView(myUser: MyUser.empty),
       binding: CategoryBinding(),
     ),
     GetPage(

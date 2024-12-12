@@ -1,9 +1,11 @@
+import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/category_controller.dart';
 
 class CategoryView extends GetView<CategoryController> {
-  const CategoryView({Key? key}) : super(key: key);
+  final MyUser? myUser;
+  const CategoryView({Key? key, required this.myUser}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,7 @@ class CategoryView extends GetView<CategoryController> {
             final category = controller.categories[index];
             return GestureDetector(
               onTap: () {
-                controller.filterPostsByCategory(category['label']!);
+                controller.filterPostsByCategory(category['label']!, myUser!);
               },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
