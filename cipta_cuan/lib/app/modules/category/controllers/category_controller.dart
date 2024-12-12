@@ -27,7 +27,7 @@ class CategoryController extends GetxController {
       final querySnapshot = await firestore.collection('transaksi').get();
       final posts = querySnapshot.docs.map((doc) {
         final data = doc.data() as Map<String, dynamic>;
-        return Post.fromEntity(PostEntity.fromDocument(data, 'userId'));
+        return Post.fromEntity(PostEntity.fromDocument(data));
       }).toList();
 
       allPosts.value = posts;

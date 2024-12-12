@@ -2,38 +2,32 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../myUser/myuser_entity.dart';
 import '../myUser/myuser_model.dart';
 
-class PostEntity {
-  String postId;
-  DateTime tanggal;
-  String kategori;
+class JadwalEntity {
+  String jadwalId;
+  DateTime tanggalDanWaktu;
   int jumlah;
   String judul;
   String deskripsi;
-  String gambar;
   MyUser myUser;
   DateTime tanggalDitambahkan;
 
-  PostEntity({
-    required this.postId,
-    required this.tanggal,
-    required this.kategori,
+  JadwalEntity({
+    required this.jadwalId,
+    required this.tanggalDanWaktu,
     required this.jumlah,
     required this.judul,
     required this.deskripsi,
-    required this.gambar,
     required this.myUser,
     required this.tanggalDitambahkan,
   });
 
   Map<String, Object?> toDocument() {
     return {
-      'postId': postId,
-      'tanggal': tanggal,
-      'kategori': kategori,
+      'jadwalId': jadwalId,
+      'tanggalDanWaktu': tanggalDanWaktu,
       'jumlah': jumlah,
       'judul': judul,
       'deskripsi': deskripsi,
-      'gambar': gambar,
       'myUser': myUser.toEntity().toDocument(),
       'tanggalDitambahkan': tanggalDitambahkan,
     };
@@ -41,40 +35,34 @@ class PostEntity {
 
   Map<String, Object?> toEditDocument(String newName, String newNpm) {
     return {
-      'postId': postId,
-      'tanggal': tanggal,
-      'kategori': kategori,
+      'jadwalId': jadwalId,
+      'tanggalDanWaktu': tanggalDanWaktu,
       'jumlah': jumlah,
       'judul': judul,
       'deskripsi': deskripsi,
-      'gambar': gambar,
       'myUser': myUser.toEntity().toDocument(),
       'tanggalDitambahkan': tanggalDitambahkan,
     };
   }
 
-  static PostEntity fromDocument(Map<String, dynamic> data) {
-    return PostEntity(
-      postId: data['postId'] as String,
-      tanggal: (data['tanggal'] as Timestamp).toDate(),
-      kategori: data['kategori'] as String,
+  static JadwalEntity fromDocument(Map<String, dynamic> data) {
+    return JadwalEntity(
+      jadwalId: data['jadwalId'] as String,
+      tanggalDanWaktu: (data['tanggalDanWaktu'] as Timestamp).toDate(),
       jumlah: data['jumlah'] as int,
       judul: data['judul'] as String,
       deskripsi: data['deskripsi'] as String,
-      gambar: data['gambar'] as String,
       myUser: MyUser.fromEntity(MyUserEntity.fromDocument(data['myUser'])),
       tanggalDitambahkan: (data['tanggalDitambahkan'] as Timestamp).toDate(),
     );
   }
 
   List<Object?> get props => [
-        postId,
-        tanggal,
-        kategori,
+        jadwalId,
+        tanggalDanWaktu,
         jumlah,
         judul,
         deskripsi,
-        gambar,
         myUser,
         tanggalDitambahkan
       ];
@@ -82,13 +70,11 @@ class PostEntity {
   @override
   String toString() {
     return '''PostEntity: {
-      postId: $postId
-      tanggal: $tanggal
-      kategori: $kategori
+      jadwalId: $jadwalId
+      tanggalDanWaktu: $tanggalDanWaktu
       jumlah: $jumlah
       judul: $judul
       deskripsi: $deskripsi
-      gambar: $gambar
       myUser: $myUser
       tanggalDitambahkan: $tanggalDitambahkan
     }''';

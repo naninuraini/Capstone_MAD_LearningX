@@ -27,6 +27,8 @@ import '../modules/scheduling/bindings/scheduling_binding.dart';
 import '../modules/scheduling/views/scheduling_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/tambah_jadwal/bindings/tambah_jadwal_binding.dart';
+import '../modules/tambah_jadwal/views/tambah_jadwal_view.dart';
 import '../modules/tambah_transaksi/bindings/tambah_transaksi_binding.dart';
 import '../modules/tambah_transaksi/views/tambah_transaksi_view.dart';
 import '../modules/tentang_kami/bindings/tentang_kami_binding.dart';
@@ -72,7 +74,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFIL,
-      page: () => ProfilView(MyUser.empty),
+      page: () => ProfilView(),
       binding: ProfilBinding(),
     ),
     GetPage(
@@ -97,12 +99,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SCHEDULING,
-      page: () => const SchedulingView(),
+      page: () => SchedulingView(myUser: MyUser.empty),
       binding: SchedulingBinding(),
     ),
     GetPage(
       name: _Paths.CATEGORY,
-      page: () =>  CategoryView(),
+      page: () => CategoryView(),
       binding: CategoryBinding(),
     ),
     GetPage(
@@ -112,8 +114,13 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CATEGORY_LIST,
-      page: () =>  CategoryListView(),
+      page: () => CategoryListView(),
       binding: CategoryListBinding(),
+    ),
+    GetPage(
+      name: _Paths.TAMBAH_JADWAL,
+      page: () => TambahJadwalView(myUser: MyUser.empty),
+      binding: TambahJadwalBinding(),
     ),
   ];
 }
