@@ -35,6 +35,7 @@ class DetailPenggunaView extends GetView<DetailPenggunaController> {
       ),
       body: Column(
         children: [
+          SizedBox(height: 20.0),
           Center(
             child: Stack(
               clipBehavior: Clip.none,
