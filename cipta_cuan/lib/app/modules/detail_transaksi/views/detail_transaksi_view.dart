@@ -1,3 +1,4 @@
+import 'package:cipta_cuan/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cipta_cuan/app/modules/detail_transaksi/controllers/detail_transaksi_controller.dart';
@@ -59,7 +60,9 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
               Text(
                 category['label']!,
                 style: TextStyle(
-                  color: category['label'] == 'Tabungan' ? Colors.green : Colors.red,
+                  color: category['label'] == 'Tabungan'
+                      ? Colors.green
+                      : Colors.red,
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
@@ -78,19 +81,23 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
               child: Container(
                 decoration: const BoxDecoration(
                   color: Color(0xFF1B2656),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(50),
+                    // topLeft: Radius.circular(20),
+                    // topRight: Radius.circular(20),
                   ),
                 ),
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 40),
                     const Text(
                       "Detail Transaksi",
-                      style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 10),
                     const Divider(color: Colors.white),
@@ -146,51 +153,61 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: Colors.transparent,
-                          shadowColor: Colors.transparent,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                        ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: ButtonWidget(
                         onPressed: () {
                           // Action for Edit button
                         },
-                        child: Ink(
-                          decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              colors: [
-                                Color(0xFF0DA6C2),
-                                Color(0xFF0E39C6),
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                            ),
-                            borderRadius: BorderRadius.circular(15.0),
-                            border: Border.all(
-                              color: const Color(0xFF375DFB),
-                              width: 1.0,
-                            ),
-                          ),
-                          child: Container(
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            child: const Text(
-                              'Edit',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
+                        title: "Edit",
                       ),
                     ),
+
+                    // SizedBox(
+                    //   // width: double.infinity,
+                    //   child: ElevatedButton(
+                    //     style: ElevatedButton.styleFrom(
+                    //       foregroundColor: Colors.white,
+                    //       backgroundColor: Colors.transparent,
+                    //       shadowColor: Colors.transparent,
+                    //       shape: RoundedRectangleBorder(
+                    //         borderRadius: BorderRadius.circular(15.0),
+                    //       ),
+                    //     ),
+                    //     onPressed: () {
+                    //       // Action for Edit button
+                    //     },
+                    //     child: Ink(
+                    //       decoration: BoxDecoration(
+                    //         gradient: const LinearGradient(
+                    //           colors: [
+                    //             Color(0xFF0DA6C2),
+                    //             Color(0xFF0E39C6),
+                    //           ],
+                    //           begin: Alignment.topLeft,
+                    //           end: Alignment.bottomRight,
+                    //         ),
+                    //         borderRadius: BorderRadius.circular(15.0),
+                    //         border: Border.all(
+                    //           color: const Color(0xFF375DFB),
+                    //           width: 1.0,
+                    //         ),
+                    //       ),
+                    //       child: Container(
+                    //         alignment: Alignment.center,
+                    //         padding: const EdgeInsets.symmetric(vertical: 16),
+                    //         child: const Text(
+                    //           'Edit',
+                    //           style: TextStyle(
+                    //             fontSize: 16,
+                    //             fontWeight: FontWeight.bold,
+                    //             color: Colors.white,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
