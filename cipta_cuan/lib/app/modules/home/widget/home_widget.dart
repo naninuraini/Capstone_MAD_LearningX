@@ -66,183 +66,196 @@ class _HomeWidgetState extends State<HomeWidget>
                     physics: AlwaysScrollableScrollPhysics(),
                     child: Padding(
                       padding: const EdgeInsets.only(top: 15.0),
-                      child: Column(mainAxisSize: MainAxisSize.min, children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: SafeArea(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Halo, Selamat Datang!",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    Text(
-                                      myUser.name,
-                                      style: TextStyle(
-                                        color: AppColors.textPurple,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20))),
-                                  child: Icon(
-                                    Icons.notifications_none,
-                                    size: 25,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 30),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: IntrinsicHeight(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Total Saldo",
-                                      style: TextStyle(
-                                        color: AppColors.textPurple,
-                                      ),
-                                    ),
-                                    Text(
-                                      controller.formatRupiah(
-                                          myUser.saldo, 'Rp'),
-                                      style: TextStyle(
-                                        color: AppColors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 24,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                VerticalDivider(
-                                  color: AppColors.white,
-                                  thickness: 1.0,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Total Pengeluaran",
-                                      style: TextStyle(
-                                        color: AppColors.textPurple,
-                                      ),
-                                    ),
-                                    Text(
-                                      controller.formatRupiah(
-                                          myUser.pengeluaran, '-'),
-                                      style: TextStyle(
-                                        color: AppColors.red,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 24,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 25),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: LayoutBuilder(
-                            builder: (context, constraints) {
-                              final maxWidth = constraints.maxWidth;
-                              final progress =
-                                  controller.calculateExpensePercentage(
-                                      myUser.saldo, myUser.pengeluaran);
-                              final textWidth = 55.0;
-                              return Stack(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: SafeArea(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Container(
-                                    height: 25,
-                                    decoration: BoxDecoration(
-                                      color: AppColors.white,
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                  ),
-                                  LayoutBuilder(
-                                    builder: (context, constraints) {
-                                      final progress =
-                                          controller.calculateExpensePercentage(
-                                              myUser.saldo, myUser.pengeluaran);
-                                      final progressWidth =
-                                          constraints.maxWidth * progress;
-
-                                      return Container(
-                                        height: 25,
-                                        width: progressWidth,
-                                        decoration: BoxDecoration(
-                                          gradient: const LinearGradient(
-                                            colors: [
-                                              Color(0xFF0DA6C2),
-                                              Color(0xFF0E39C6)
-                                            ],
-                                            begin: Alignment.centerLeft,
-                                            end: Alignment.centerRight,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(20),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Halo, Selamat Datang!",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
                                         ),
-                                      );
-                                    },
-                                  ),
-                                  Positioned(
-                                    left: (progress * maxWidth - textWidth / 2)
-                                        .clamp(0.0, maxWidth - textWidth),
-                                    top: 5,
-                                    child: Text(
-                                      '${(controller.calculateExpensePercentage(myUser.saldo, myUser.pengeluaran) * 100).toStringAsFixed(0)}%',
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
                                       ),
+                                      Text(
+                                        myUser.name,
+                                        style: TextStyle(
+                                          color: AppColors.textPurple,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20))),
+                                    child: Icon(
+                                      Icons.notifications_none,
+                                      size: 25,
                                     ),
                                   ),
                                 ],
-                              );
-                            },
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                          child: Row(
-                            children: [
-                              Text(
-                                "Pengeluaran Anda ${(controller.calculateExpensePercentage(myUser.saldo, myUser.pengeluaran) * 100).toStringAsFixed(0)}% Dari Total Saldo",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 11,
-                                ),
                               ),
-                            ],
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 40),
-                        Flexible(
-                          fit: FlexFit.loose,
-                          child: Container(
+                          const SizedBox(height: 30),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: IntrinsicHeight(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Total Saldo",
+                                        style: TextStyle(
+                                          color: AppColors.textPurple,
+                                        ),
+                                      ),
+                                      Text(
+                                        controller.formatRupiah(
+                                            myUser.saldo, 'Rp'),
+                                        style: TextStyle(
+                                          color: AppColors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 24,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  VerticalDivider(
+                                    color: AppColors.white,
+                                    thickness: 1.0,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Total Pengeluaran",
+                                        style: TextStyle(
+                                          color: AppColors.textPurple,
+                                        ),
+                                      ),
+                                      Text(
+                                        controller.formatRupiah(
+                                            myUser.pengeluaran, '-'),
+                                        style: TextStyle(
+                                          color: AppColors.red,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 24,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 25),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: LayoutBuilder(
+                              builder: (context, constraints) {
+                                final maxWidth = constraints.maxWidth;
+                                final progress =
+                                    controller.calculateExpensePercentage(
+                                        myUser.saldo, myUser.pengeluaran);
+                                final textWidth = 55.0;
+                                return Stack(
+                                  children: [
+                                    Container(
+                                      height: 25,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.white,
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                    ),
+                                    LayoutBuilder(
+                                      builder: (context, constraints) {
+                                        final progress = controller
+                                            .calculateExpensePercentage(
+                                                myUser.saldo,
+                                                myUser.pengeluaran);
+                                        final progressWidth =
+                                            constraints.maxWidth * progress;
+
+                                        return Container(
+                                          height: 25,
+                                          width: progressWidth,
+                                          decoration: BoxDecoration(
+                                            gradient: const LinearGradient(
+                                              colors: [
+                                                Color(0xFF0DA6C2),
+                                                Color(0xFF0E39C6)
+                                              ],
+                                              begin: Alignment.centerLeft,
+                                              end: Alignment.centerRight,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    Positioned(
+                                      left:
+                                          (progress * maxWidth - textWidth / 2)
+                                              .clamp(0.0, maxWidth - textWidth),
+                                      top: 5,
+                                      child: Text(
+                                        '${(controller.calculateExpensePercentage(myUser.saldo, myUser.pengeluaran) * 100).toStringAsFixed(0)}%',
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 30.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Pengeluaran Anda ${(controller.calculateExpensePercentage(myUser.saldo, myUser.pengeluaran) * 100).toStringAsFixed(0)}% Dari Total Saldo",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 11,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 40),
+                          // Flexible(
+                          //   fit: FlexFit.loose,
+                          Container(
                             decoration: const BoxDecoration(
                               color: Color(0xFF24325F),
                               borderRadius: BorderRadius.vertical(
@@ -253,8 +266,8 @@ class _HomeWidgetState extends State<HomeWidget>
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 40.0, horizontal: 20.0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(20, 40, 20, 0),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(15.0),
                                     child: BackdropFilter(
@@ -314,8 +327,8 @@ class _HomeWidgetState extends State<HomeWidget>
                               ],
                             ),
                           ),
-                        )
-                      ]),
+                        ],
+                      ),
                     ),
                   ),
                 ),
