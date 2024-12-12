@@ -185,7 +185,7 @@ class OnBoardingController extends GetxController {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(imagePath, height: 200),
+            Image.asset(imagePath, height: 250),
             const SizedBox(height: 20),
             title,
             const SizedBox(height: 10),
