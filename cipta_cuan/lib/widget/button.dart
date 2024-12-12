@@ -4,18 +4,21 @@ class ButtonWidget extends StatelessWidget {
   final VoidCallback? onPressed;
   final String title;
   final double height;
+  final double width;
 
   const ButtonWidget({
     super.key,
     required this.onPressed,
     required this.title,
     this.height = 50,
+    this.width = 100,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: height,
+      width: width,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -54,18 +57,23 @@ class SecondaryButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final String title;
   final double height;
+  final double width;
+  final Color colorTitle;
 
   const SecondaryButton({
     super.key,
     required this.onPressed,
     required this.title,
     this.height = 50,
+    this.width = 100,
+    this.colorTitle = Colors.white,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: height,
+      width: width,
       decoration: BoxDecoration(
         color: Colors.white24,
         borderRadius: BorderRadius.circular(15.0),
@@ -84,21 +92,12 @@ class SecondaryButton extends StatelessWidget {
           ),
         ),
         onPressed: onPressed,
-        // child: ShaderMask(
-        //   shaderCallback: (bounds) => LinearGradient(
-        //     colors: [
-        //       Color(0xFF0DA6C2),
-        //       Color(0xFF0E39C6),
-        //     ],
-        //     begin: Alignment.topLeft,
-        //     end: Alignment.bottomRight,
-        //   ).createShader(bounds),
         child: Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: colorTitle,
           ),
         ),
       ),

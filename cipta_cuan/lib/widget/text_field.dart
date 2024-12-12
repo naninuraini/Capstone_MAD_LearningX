@@ -83,7 +83,7 @@ class SecondTextFieldWidget extends StatefulWidget {
   final String hintText;
   final String headerText;
   final TextInputType keyboardType;
-  final String? suffixIcon;
+  final String suffixIcon;
   final String? Function(String?)? validator;
   final String? Function(String?)? onChanged;
   final List<TextInputFormatter>? inputFormatters;
@@ -100,7 +100,7 @@ class SecondTextFieldWidget extends StatefulWidget {
     required this.keyboardType,
     required this.validator,
     required this.onPressedSuffix,
-    this.suffixIcon,
+    required this.suffixIcon,
     this.hintStyle,
     this.inputFormatters,
     this.onChanged,
@@ -163,7 +163,7 @@ class _SecondTextFieldWidgetState extends State<SecondTextFieldWidget> {
             suffixIcon: IconButton(
               onPressed: widget.onPressedSuffix,
               icon: widget.suffixIcon != 'clock'
-                  ? SvgPicture.asset(widget.suffixIcon!)
+                  ? SvgPicture.asset(widget.suffixIcon)
                   : Icon(Icons.alarm),
             ),
           ),

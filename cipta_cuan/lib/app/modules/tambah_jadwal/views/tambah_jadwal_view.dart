@@ -93,12 +93,12 @@ class _TambahJadwalState extends State<TambahJadwalView> {
                     shrinkWrap: true,
                     children: [
                       SecondTextFieldWidget(
-                        hintText: controller.selectedDateTime != null
+                        hintText: controller.selectedDate != null
                             ? DateFormat("d MMMM yyyy", "id_ID")
-                                .format(controller.selectedDateTime!)
+                                .format(controller.selectedDate!)
                             : 'Pilih Tanggal',
                         hintStyle: TextStyle(
-                          color: controller.selectedDateTime != null
+                          color: controller.selectedDate != null
                               ? AppColors.black
                               : AppColors.textTF,
                         ),
@@ -109,11 +109,11 @@ class _TambahJadwalState extends State<TambahJadwalView> {
                         controller: controller.tanggalController,
                         keyboardType: TextInputType.datetime,
                         validator: (val) {
-                          if (controller.selectedDateTime == null) {
+                          if (controller.selectedDate == null) {
                             return 'Tanggal tidak boleh kosong';
                           }
                           val = DateFormat("d MMMM yyyy", "id_ID")
-                              .format(controller.selectedDateTime!);
+                              .format(controller.selectedDate!);
                           if (!dateRegExp.hasMatch(val)) {
                             return 'tanggal tidak valid';
                           }
@@ -125,6 +125,7 @@ class _TambahJadwalState extends State<TambahJadwalView> {
                         hintText: 'Masukkan Jumlah',
                         headerText: "Jumlah",
                         onPressedSuffix: () {},
+                        suffixIcon: "",
                         controller: controller.jumlahController,
                         keyboardType: TextInputType.number,
                         validator: (val) {
@@ -143,6 +144,7 @@ class _TambahJadwalState extends State<TambahJadwalView> {
                         hintText: 'Masukkan Judul Transaksi',
                         headerText: "Judul",
                         onPressedSuffix: () {},
+                        suffixIcon: "",
                         controller: controller.judulController,
                         keyboardType: TextInputType.text,
                         validator: (val) {
@@ -157,6 +159,7 @@ class _TambahJadwalState extends State<TambahJadwalView> {
                         hintText: 'Masukkan Deskripsi',
                         headerText: "Deskripsi",
                         onPressedSuffix: () {},
+                        suffixIcon: "",
                         controller: controller.deskripsiController,
                         keyboardType: TextInputType.text,
                         maxLines: 3,

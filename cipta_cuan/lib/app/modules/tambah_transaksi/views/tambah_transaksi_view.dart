@@ -150,6 +150,7 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
                             hintText: 'Masukkan Jumlah',
                             headerText: "Jumlah",
                             onPressedSuffix: () {},
+                            suffixIcon: "",
                             controller: controller.jumlahController,
                             keyboardType: TextInputType.number,
                             validator: (val) {
@@ -168,6 +169,7 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
                             hintText: 'Masukkan Judul Transaksi',
                             headerText: "Judul",
                             onPressedSuffix: () {},
+                            suffixIcon: "",
                             controller: controller.judulController,
                             keyboardType: TextInputType.text,
                             validator: (val) {
@@ -182,6 +184,7 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
                             hintText: 'Masukkan Deskripsi',
                             headerText: "Deskripsi",
                             onPressedSuffix: () {},
+                            suffixIcon: "",
                             controller: controller.deskripsiController,
                             keyboardType: TextInputType.text,
                             maxLines: 3,

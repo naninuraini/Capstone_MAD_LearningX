@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cipta_cuan/app/modules/scheduling/controllers/scheduling_controller.dart';
 import 'package:cipta_cuan/models/jadwal/jadwal_model.dart';
 import 'package:cipta_cuan/widget/constant.dart';
@@ -26,10 +24,15 @@ class CardJadwal extends GetView<SchedulingController> {
           Obx(() {
             if (wantDelete.value) {
               return Checkbox(
+                activeColor: Colors.white,
+                checkColor: Colors.blue,
+                side: BorderSide(color: Colors.white, width: 2),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
                 value: controller.selectedForDeletion.contains(jadwal),
                 onChanged: (value) {
                   controller.toggleSelection(jadwal);
-              log("message: ${controller.selectedForDeletion}");
                 },
               );
             }

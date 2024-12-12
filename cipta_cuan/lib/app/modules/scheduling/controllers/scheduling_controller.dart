@@ -13,6 +13,7 @@ class SchedulingController extends GetxController {
   var wantDelete = false.obs;
   RxSet<Jadwal> selectedForDeletion = <Jadwal>{}.obs;
   var selectedJadwal = <Jadwal>[].obs;
+  var allJadwal = <Jadwal>[].obs;
 
   Future<void> getJadwal(String userId, DateTime select) async {
     try {
@@ -25,6 +26,7 @@ class SchedulingController extends GetxController {
           fetchedPosts.add(Jadwal.fromEntity(entity));
         }
       }
+      allJadwal.value = fetchedPosts;
       selectedJadwal.value = fetchedPosts
           .where(
             (jadwal) =>
@@ -49,10 +51,16 @@ class SchedulingController extends GetxController {
   void deleteSelected() async {
     try {
       for (var jadwal in selectedForDeletion) {
-        await _firestore.collection('jadwal').doc(jadwal.myUser.id).update({
+        var data = _firestore.collection('jadwal').doc(jadwal.myUser.id);
+        if (allJadwal.length == 1) {
+          await data.delete();
+        } else {
+        await data.update({
           jadwal.myUser.id:
               FieldValue.arrayRemove([jadwal.toEntity().toDocument()])
         });
+
+        }
       }
       selectedJadwal
           .removeWhere((jadwal) => selectedForDeletion.contains(jadwal));

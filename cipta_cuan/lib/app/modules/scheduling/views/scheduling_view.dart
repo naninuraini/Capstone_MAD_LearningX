@@ -2,6 +2,7 @@ import 'package:cipta_cuan/app/modules/scheduling/widget/calender.dart';
 import 'package:cipta_cuan/app/modules/scheduling/widget/card_jadwal.dart';
 import 'package:cipta_cuan/app/modules/scheduling/widget/no_data.dart';
 import 'package:cipta_cuan/models/myUser/myuser_model.dart';
+import 'package:cipta_cuan/widget/button.dart';
 import 'package:cipta_cuan/widget/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -158,13 +159,14 @@ class _SchedulingViewState extends State<SchedulingView> {
                               if (controller.wantDelete.value)
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: ElevatedButton(
-                                    onPressed: controller.deleteSelected,
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.red,
-                                    ),
-                                    child: const Text("Hapus Data Terpilih"),
-                                  ),
+                                  child: ButtonWidget(onPressed: controller.deleteSelected, title: "Hapus")
+                                  // ElevatedButton(
+                                  //   onPressed: controller.deleteSelected,
+                                  //   style: ElevatedButton.styleFrom(
+                                  //     backgroundColor: Colors.red,
+                                  //   ),
+                                  //   child: const Text("Hapus Data Terpilih"),
+                                  // ),
                                 ),
                             ],
                           );
