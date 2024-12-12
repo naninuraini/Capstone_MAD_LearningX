@@ -84,7 +84,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFIL_AVATAR,
-      page: () => const ProfilAvatarView(),
+      page: () => ProfilAvatarView(),
       binding: ProfilAvatarBinding(),
     ),
     GetPage(

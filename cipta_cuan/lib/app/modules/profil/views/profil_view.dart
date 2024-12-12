@@ -66,7 +66,11 @@ class ProfilView extends GetView<ProfilController> {
                               title: "Detail Pengguna",
                               onTap: () {
                                 Get.toNamed(Routes.DETAIL_PENGGUNA,
-                                    arguments: myUser);
+                                    arguments: myUser)?.then((result) {
+                                      if (result == true) {
+                                        getUserController.fetchUser(user.uid);
+                                      }
+                                    });
                               },
                             ),
                             _buildMenuItem(

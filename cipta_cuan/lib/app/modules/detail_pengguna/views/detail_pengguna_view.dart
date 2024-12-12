@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:cipta_cuan/widget/button.dart';
 import 'package:cipta_cuan/widget/popup.dart';
@@ -5,20 +7,29 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../widget/getuser_controller.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/detail_pengguna_controller.dart';
 
-class DetailPenggunaView extends GetView<DetailPenggunaController> {
+class DetailPenggunaView extends StatefulWidget {
   const DetailPenggunaView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final myUser = Get.arguments as MyUser;
+  State<DetailPenggunaView> createState() => _DetailPenggunaViewState();
+}
 
+class _DetailPenggunaViewState extends State<DetailPenggunaView> {
+  final DetailPenggunaController controller =
+      Get.find<DetailPenggunaController>();
+  final GetUserController getUserController = Get.find<GetUserController>();
+  final myUser = Get.arguments as MyUser;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () => Navigator.pop(Get.context!),
+          onPressed: () => Navigator.pop(Get.context!, true),
           icon: const Icon(
             Icons.arrow_back_ios_new_rounded,
             color: Colors.white,
@@ -33,134 +44,150 @@ class DetailPenggunaView extends GetView<DetailPenggunaController> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          SizedBox(height: 20.0),
-          Center(
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                CircleAvatar(
-                  radius: 50,
-                  backgroundImage:
-                      AssetImage('assets/images/Avatar${myUser.avatar}.png'),
-                  backgroundColor: Colors.white,
-                ),
-                Positioned(
-                  bottom: -5,
-                  right: -5,
-                  child: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFF1A1840),
-                      shape: BoxShape.circle,
-                    ),
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.edit,
-                        color: Color(0xFF7B78AA),
-                        size: 25,
-                      ),
-                      onPressed: () {
-                        Get.toNamed(Routes.PROFIL_AVATAR);
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            myUser.name.isNotEmpty ? myUser.name : "Nama tidak ditemukan",
-            style: const TextStyle(color: Colors.white, fontSize: 16),
-          ),
-          const SizedBox(height: 40),
-          Expanded(
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Color(0xFF24325F),
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(50),
-                ),
-              ),
-              child: FutureBuilder<Map<String, String>>(
-                future: _fetchUserData(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-
-                  if (snapshot.hasError || snapshot.data == null) {
-                    return const Center(
-                      child: Text(
-                        "Data pengguna tidak ditemukan",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    );
-                  }
-
-                  final userData = snapshot.data!;
-
-                  return ListView(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 40, horizontal: 30),
+      body: StreamBuilder(
+        stream: getUserController.userStream,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasData && snapshot.data != null) {
+            final user = snapshot.data!;
+            getUserController.fetchUser(user.uid);
+            return Obx(
+              () {
+                final myUser = getUserController.user.value;
+                if (myUser != null) {
+                  return Column(
                     children: [
-                      _buildDetailItem("Nama Pengguna",
-                          userData['name'] ?? "Nama tidak ditemukan"),
-                      const SizedBox(height: 20),
-                      _buildDetailItem("Email",
-                          userData['email'] ?? "Email tidak ditemukan"),
-                      const SizedBox(height: 20),
-                      _buildDetailItem("Saldo",
-                          userData['saldo'] ?? "Saldo tidak ditemukan"),
-                      const SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20.0),
-                        child: ButtonWidget(
-                          onPressed: () => _deleteAccount(context),
-                          title: "Hapus Akun",
+                      SizedBox(height: 20.0),
+                      Center(
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            CircleAvatar(
+                              radius: 50,
+                              backgroundImage: AssetImage(
+                                  'assets/images/Avatar${myUser.avatar}.png'),
+                              backgroundColor: Colors.white,
+                            ),
+                            Positioned(
+                              bottom: -5,
+                              right: -5,
+                              child: Container(
+                                width: 40,
+                                height: 40,
+                                decoration: const BoxDecoration(
+                                  color: Color(0xFF1A1840),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: IconButton(
+                                  icon: const Icon(
+                                    Icons.edit,
+                                    color: Color(0xFF7B78AA),
+                                    size: 25,
+                                  ),
+                                  onPressed: () {
+                                    Get.toNamed(Routes.PROFIL_AVATAR, arguments: myUser)
+                                        ?.then((result) {
+                                      if (result == true) {
+                                        getUserController.fetchUser(user.uid);
+                                      }
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        myUser.name.isNotEmpty
+                            ? myUser.name
+                            : "Nama tidak ditemukan",
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                      const SizedBox(height: 40),
+                      Expanded(
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            color: Color(0xFF24325F),
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(50),
+                            ),
+                          ),
+                          child: ListView(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 40, horizontal: 30),
+                            children: [
+                              _buildDetailItem("Nama Pengguna", myUser.name),
+                              const SizedBox(height: 20),
+                              _buildDetailItem("Email", myUser.email),
+                              const SizedBox(height: 20),
+                              _buildDetailItem("Saldo",
+                                  controller.formatRupiah(myUser.saldo, 'Rp')),
+                              const SizedBox(height: 20),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 20.0),
+                                child: ButtonWidget(
+                                  onPressed: () => _deleteAccount(context),
+                                  title: "Hapus Akun",
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
                   );
-                },
-              ),
-            ),
-          ),
-        ],
+                } else {
+                  log("Waiting for user data...");
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Terjadi kesalahan: ${snapshot.error}'),
+            );
+          } else {
+            return Center(
+              child: Text('Tidak ada data pengguna.'),
+            );
+          }
+        },
       ),
     );
   }
 
-  Future<Map<String, String>> _fetchUserData() async {
-    try {
-      final uid = FirebaseAuth.instance.currentUser?.uid;
-      if (uid == null) {
-        throw Exception("Pengguna tidak ditemukan");
-      }
+  // Future<Map<String, String>> _fetchUserData() async {
+  //   try {
+  //     final uid = FirebaseAuth.instance.currentUser?.uid;
+  //     if (uid == null) {
+  //       throw Exception("Pengguna tidak ditemukan");
+  //     }
 
-      final doc =
-          await FirebaseFirestore.instance.collection('users').doc(uid).get();
-      if (!doc.exists) {
-        throw Exception("Data pengguna tidak ditemukan");
-      }
+  //     final doc =
+  //         await FirebaseFirestore.instance.collection('users').doc(uid).get();
+  //     if (!doc.exists) {
+  //       throw Exception("Data pengguna tidak ditemukan");
+  //     }
 
-      final data = doc.data() as Map<String, dynamic>;
-      return {
-        'name': data['name'] ?? "Nama tidak ditemukan",
-        'email': data['email'] ?? "Email tidak ditemukan",
-        'saldo': data['saldo'] != null
-            ? "Rp${data['saldo'].toString()}"
-            : "Saldo tidak ditemukan",
-      };
-    } catch (e) {
-      return Future.error(e);
-    }
-  }
+  //     final data = doc.data() as Map<String, dynamic>;
+  //     return {
+  //       'name': data['name'] ?? "Nama tidak ditemukan",
+  //       'email': data['email'] ?? "Email tidak ditemukan",
+  //       'saldo': data['saldo'] != null
+  //           ? controller.formatRupiah(data['saldo'], 'Rp')
+  //           : "Saldo tidak ditemukan",
+  //     };
+  //   } catch (e) {
+  //     return Future.error(e);
+  //   }
+  // }
 
   Future<void> _deleteAccount(BuildContext context) async {
     ConfirmationPopup.show(
