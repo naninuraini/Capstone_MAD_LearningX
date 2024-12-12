@@ -176,7 +176,9 @@ class _SecondTextFieldWidgetState extends State<SecondTextFieldWidget> {
             suffixIconColor: AppColors.textTF,
             suffixIcon: IconButton(
               onPressed: widget.onPressedSuffix,
-              icon: SvgPicture.asset(widget.suffixIcon),
+              icon: widget.suffixIcon != 'clock'
+                  ? SvgPicture.asset(widget.suffixIcon)
+                  : Icon(Icons.alarm),
             ),
           ),
         ),

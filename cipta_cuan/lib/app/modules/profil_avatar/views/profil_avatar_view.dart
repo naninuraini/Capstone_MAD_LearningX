@@ -15,7 +15,7 @@ class ProfilAvatarView extends GetView<ProfilAvatarController> {
             Icons.arrow_back_ios_new_rounded,
             color: Colors.white,
           ),
-          onPressed: () => Get.back(),
+          onPressed: () => Navigator.pop(Get.context!),
         ),
         title: const Text(
           "Pilih Avatar Kamu",

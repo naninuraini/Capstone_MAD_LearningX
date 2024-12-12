@@ -10,8 +10,8 @@ import '../../../../models/jadwal/jadwal_model.dart';
 class SchedulingController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   DateTime selectedTanggal = DateTime.now().toLocal();
-
-  var jadwalList = <Jadwal>[].obs;
+  var wantDelete = false.obs;
+  RxSet<Jadwal> selectedForDeletion = <Jadwal>{}.obs;
   var selectedJadwal = <Jadwal>[].obs;
 
   Future<void> getJadwal(String userId, DateTime select) async {
@@ -25,7 +25,6 @@ class SchedulingController extends GetxController {
           fetchedPosts.add(Jadwal.fromEntity(entity));
         }
       }
-      jadwalList.value = fetchedPosts;
       selectedJadwal.value = fetchedPosts
           .where(
             (jadwal) =>
@@ -36,6 +35,33 @@ class SchedulingController extends GetxController {
           .toList();
     } catch (e) {
       log("Error fetching schedules: $e");
+    }
+  }
+
+  void toggleSelection(Jadwal jadwal) {
+    if (selectedForDeletion.contains(jadwal)) {
+      selectedForDeletion.remove(jadwal);
+    } else {
+      selectedForDeletion.add(jadwal);
+    }
+  }
+
+  void deleteSelected() async {
+    try {
+      for (var jadwal in selectedForDeletion) {
+        await _firestore.collection('jadwal').doc(jadwal.myUser.id).update({
+          jadwal.myUser.id:
+              FieldValue.arrayRemove([jadwal.toEntity().toDocument()])
+        });
+      }
+      selectedJadwal
+          .removeWhere((jadwal) => selectedForDeletion.contains(jadwal));
+      selectedForDeletion.clear();
+      wantDelete.value = false;
+
+      log("Selected schedules deleted successfully.");
+    } catch (e) {
+      log("Error deleting selected schedules: $e");
     }
   }
 
