@@ -1,11 +1,12 @@
-import 'package:cipta_cuan/app/modules/scheduling/widget/card_jadwal.dart';
-import 'package:cipta_cuan/models/jadwal/jadwal_model.dart';
-import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:cipta_cuan/app/modules/scheduling/widget/calender.dart';
+import 'package:cipta_cuan/app/modules/scheduling/widget/card_jadwal.dart';
+import 'package:cipta_cuan/app/modules/scheduling/widget/no_data.dart';
+import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:cipta_cuan/widget/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
 import '../../tambah_jadwal/bindings/tambah_jadwal_binding.dart';
 import '../../tambah_jadwal/views/tambah_jadwal_view.dart';
 import '../controllers/scheduling_controller.dart';
@@ -20,7 +21,18 @@ class SchedulingView extends StatefulWidget {
 
 class _SchedulingViewState extends State<SchedulingView> {
   final SchedulingController controller = Get.put(SchedulingController());
-  DateTime? selectedDate;
+
+  @override
+  void initState() {
+    super.initState();
+    controller.getJadwal(widget.myUser!.id, controller.selectedTanggal);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.selectedJadwal.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,38 +86,18 @@ class _SchedulingViewState extends State<SchedulingView> {
         children: [
           const SizedBox(height: 10),
           CalendarWidget(
-            onDateSelected: (date) {
-              setState(() {
-                selectedDate = date;
-              });
-              controller.fetchJadwalByDate(date);
-            },
+            myUser: widget.myUser,
           ),
           const SizedBox(height: 30),
           Expanded(
             child: Container(
-              decoration: const BoxDecoration(
-                color: Color(0xFF24325F),
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(50),
+                decoration: const BoxDecoration(
+                  color: Color(0xFF24325F),
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(50),
+                  ),
                 ),
-              ),
-              child: Obx(() {
-                final jadwalList = controller.jadwalList;
-
-                if (jadwalList.isEmpty) {
-                  return Center(
-                    child: Text(
-                      "Tidak ada jadwal untuk tanggal ini.",
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontSize: 16,
-                      ),
-                    ),
-                  );
-                }
-
-                return ListView(
+                child: ListView(
                   padding: const EdgeInsets.all(30),
                   children: [
                     Row(
@@ -130,19 +122,38 @@ class _SchedulingViewState extends State<SchedulingView> {
                               onPressed: () {},
                               icon: SvgPicture.asset("assets/icons/trash.svg")),
                         ),
-                        ListView.builder(itemBuilder: (context, index) {
-                          return CardJadwal(
-                          jadwal: jadwalList[index] as Jadwal,
-                          selectedDate: selectedDate,
-                        );
-                        })
-                        
                       ],
-                    )
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Obx(() {
+                        if (controller.selectedJadwal.isEmpty) {
+                          return NoDataWidget(
+                              judul: "Ga Ada tagihan di hari ini!",
+                              deskripsi: "Karena kamu belum ada tagihan\nKamu tidak perlu mengeluarkan tagihan apapun",
+                              assetsString: "assets/images/no_data/schedule.png");
+                          // return Text(
+                          //   'Tidak ada jadwal untuk tanggal ini',
+                          //   style: TextStyle(color: Colors.white, fontSize: 16),
+                          // );
+                        }
+                        return ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: controller.selectedJadwal.length,
+                            itemBuilder: (context, index) {
+                              final jadwal = controller.selectedJadwal[index];
+                              return CardJadwal(
+                                jadwal: jadwal,
+                              );
+                            });
+                      }),
+                    ),
                   ],
-                );
-              }),
-            ),
+                )
+                // ],
+                // ),
+                ),
           ),
         ],
       ),

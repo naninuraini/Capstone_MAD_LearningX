@@ -4,23 +4,30 @@ import '../../../../models/post/post_entity.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CategoryListController extends GetxController {
-  final RxList<Post> categoryPosts = <Post>[].obs;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  var isLoading = false.obs;
+  var posts = <Post>[].obs;
 
-  void getCategoryPosts(String categoryLabel) async {
+  void getCategoryPosts(String myUserId, String categoryLabel) async {
     try {
-      final querySnapshot = await firestore
-          .collection('transaksi')
-          .where('kategori', isEqualTo: categoryLabel)
-          .get();
+      isLoading.value = true;
+      List<Post> fetchedPosts = [];
+      var snapshot =
+          await firestore.collection('transaksi').doc(myUserId).get();
 
-      final posts = querySnapshot.docs.map((doc) {
-        final data = doc.data() as Map<String, dynamic>;
-        return Post.fromEntity(PostEntity.fromDocument(data));
-      }).toList();
+      if (snapshot.data() != null) {
+        final data = snapshot.data()![myUserId] as List<dynamic>;
+        for (var postData in data) {
+          PostEntity entity = PostEntity.fromDocument(postData);
+          fetchedPosts.add(Post.fromEntity(entity));
+        }
+      }
 
-      categoryPosts.value = posts;
-      print('Posts for category "$categoryLabel" loaded: ${categoryPosts.length}');
+      posts.value =
+          fetchedPosts.where((post) => post.kategori == categoryLabel).toList();
+
+      print(
+          'Posts for category "$categoryLabel" loaded: ${posts.length}');
     } catch (e) {
       print('Error fetching posts for category "$categoryLabel": $e');
       Get.snackbar('Error', 'Failed to load category posts.');
@@ -30,6 +37,6 @@ class CategoryListController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    categoryPosts.clear();
+    posts.clear();
   }
 }
