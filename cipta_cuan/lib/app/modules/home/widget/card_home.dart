@@ -33,7 +33,7 @@ class CardHome extends GetView<HomeController> {
               );
             },
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 20.0),
+              padding: const EdgeInsets.only(bottom: 20.0, top: 0.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -68,19 +68,27 @@ class CardHome extends GetView<HomeController> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              post.judul,
-                              style: TextStyle(
-                                color: AppColors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 3 + 10 ,
+                              child: Text(
+                                post.judul,
+                                style: TextStyle(
+                                  color: AppColors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  overflow: TextOverflow.ellipsis
+                                ),
                               ),
                             ),
-                            Text(
-                              post.deskripsi,
-                              style: TextStyle(
-                                color: AppColors.textPurple,
-                                fontSize: 13,
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 3,
+                              child: Text(
+                                post.deskripsi,
+                                style: TextStyle(
+                                  color: AppColors.textPurple,
+                                  fontSize: 13,
+                                  overflow: TextOverflow.ellipsis
+                                ),
                               ),
                             ),
                           ],
