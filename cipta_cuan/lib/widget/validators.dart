@@ -9,6 +9,9 @@ RegExp specialCharRexExp =
 RegExp dateRegExp = RegExp(
     r'^([1-9]|[12]\d|3[01]) (Januari|Februari|Maret|April|Mei|Juni|Juli|Agustus|September|Oktober|November|Desember) \d{4}$');
 
+RegExp timeRegExp24Hour = RegExp(
+  r'^([01]?\d|2[0-3]):([0-5]\d)$');
+
 RegExp kategoriRegExp = RegExp(
     r'^(Konsumsi|Transportasi|Obat-Obatan|Bahan Makanan|Sewa|Hadiah|Tabungan|Hiburan|Lainnya)$');
 

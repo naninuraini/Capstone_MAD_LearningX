@@ -1,13 +1,18 @@
+import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/profil_avatar_controller.dart';
-import 'package:cipta_cuan/widget/button.dart';  
+import 'package:cipta_cuan/widget/button.dart';
 
 class ProfilAvatarView extends GetView<ProfilAvatarController> {
-  const ProfilAvatarView({super.key});
+  const ProfilAvatarView({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final myUser = Get.arguments as MyUser;
+    controller.selectedIndex = myUser.avatar - 1;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -15,7 +20,7 @@ class ProfilAvatarView extends GetView<ProfilAvatarController> {
             Icons.arrow_back_ios_new_rounded,
             color: Colors.white,
           ),
-          onPressed: () => Get.back(),
+          onPressed: () => Navigator.pop(Get.context!),
         ),
         title: const Text(
           "Pilih Avatar Kamu",
@@ -41,12 +46,13 @@ class ProfilAvatarView extends GetView<ProfilAvatarController> {
                 child: GetBuilder<ProfilAvatarController>(
                   builder: (controller) {
                     return GridView.builder(
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         crossAxisSpacing: 15,
                         mainAxisSpacing: 15,
                       ),
-                      itemCount: 8,  
+                      itemCount: 8,
                       itemBuilder: (context, index) {
                         bool isSelected = controller.selectedIndex == index;
                         return GestureDetector(
@@ -85,7 +91,7 @@ class ProfilAvatarView extends GetView<ProfilAvatarController> {
                 width: double.infinity,
                 child: ButtonWidget(
                   onPressed: () {
-                    controller.saveAvatar();  
+                    controller.saveAvatar();
                   },
                   title: 'Simpan',
                 ),

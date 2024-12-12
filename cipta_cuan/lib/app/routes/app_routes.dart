@@ -18,6 +18,7 @@ abstract class Routes {
   static const SCHEDULING = _Paths.SCHEDULING;
   static const DETAIL_TRANSAKSI = _Paths.DETAIL_TRANSAKSI;
   static const CATEGORY_LIST = _Paths.CATEGORY_LIST;
+  static const TAMBAH_JADWAL = _Paths.TAMBAH_JADWAL;
 }
 
 abstract class _Paths {
@@ -37,4 +38,5 @@ abstract class _Paths {
   static const SCHEDULING = '/scheduling';
   static const DETAIL_TRANSAKSI = '/detail-transaksi';
   static const CATEGORY_LIST = '/category-list';
+  static const TAMBAH_JADWAL = '/tambah-jadwal';
 }

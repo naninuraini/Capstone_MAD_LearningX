@@ -1,31 +1,34 @@
+import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/category_list_controller.dart';
 
 class CategoryListView extends StatelessWidget {
-  final CategoryListController controller = Get.put(CategoryListController());
+  CategoryListView({Key? key});
 
   @override
   Widget build(BuildContext context) {
+    final CategoryListController controller = Get.put(CategoryListController());
     final arguments = Get.arguments as Map<String, dynamic>;
     final categoryLabel = arguments['category'] as String;
+    final myUserLabel = arguments['myUser'] as MyUser;
 
-    controller.getCategoryPosts(categoryLabel);
-
+    controller.getCategoryPosts(myUserLabel.id, categoryLabel);
     return Scaffold(
       appBar: AppBar(
         title: Text('Kategori: $categoryLabel'),
         centerTitle: true,
       ),
       body: Obx(() {
-        if (controller.categoryPosts.isEmpty) {
-          return const Center(child: Text('Tidak ada transaksi untuk kategori ini.'));
+        if (controller.posts.isEmpty) {
+          return const Center(
+              child: Text('Tidak ada transaksi untuk kategori ini.'));
         }
         return ListView.builder(
-          itemCount: controller.categoryPosts.length,
+          itemCount: controller.posts.length,
           itemBuilder: (context, index) {
-            final post = controller.categoryPosts[index];
+            final post = controller.posts[index];
             return Card(
               margin: const EdgeInsets.all(8.0),
               child: ListTile(
@@ -46,7 +49,7 @@ class CategoryListView extends StatelessWidget {
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 onTap: () {
-                  // 
+                  //
                 },
               ),
             );

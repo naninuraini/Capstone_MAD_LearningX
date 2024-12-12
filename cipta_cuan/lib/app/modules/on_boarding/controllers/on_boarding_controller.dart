@@ -93,19 +93,33 @@ class OnBoardingController extends GetxController {
             'Nikmati kemudahan menabung dengan fitur pintar untuk mencapai tujuan finansial Anda.',
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: ElevatedButton(
-            onPressed: () {
-              completeOnboarding();
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF0DA6C2),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [
+                  Color(0xFF0DA6C2),
+                  Color(0xFF0E39C6),
+                ],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
               ),
+              borderRadius: BorderRadius.circular(12),
             ),
-            child: Text(
-              'Next',
-              style: const TextStyle(fontSize: 18, color: Colors.white),
+            child: ElevatedButton(
+              onPressed: () {
+                completeOnboarding();
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                shadowColor: Colors.transparent,
+              ),
+              child: Text(
+                'Mulai',
+                style: const TextStyle(fontSize: 18, color: Colors.white),
+              ),
             ),
           ),
         ),
@@ -171,7 +185,7 @@ class OnBoardingController extends GetxController {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(imagePath, height: 200),
+            Image.asset(imagePath, height: 250),
             const SizedBox(height: 20),
             title,
             const SizedBox(height: 10),

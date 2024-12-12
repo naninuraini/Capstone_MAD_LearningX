@@ -27,30 +27,33 @@ class NoDataWidget extends StatelessWidget {
         return const Center(child: CircularProgressIndicator());
       }
       if (transaction.isEmpty) {
-        return Column(
-          children: [
-            Image.asset(assetsString),
-            Padding(
-              padding: const EdgeInsets.only(top: 0.0, bottom: 10),
-              child: Text(
-                judul,
-                style: TextStyle(
-                  color: AppColors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
+          child: Column(
+            children: [
+              Image.asset(assetsString),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10, top: 20),
+                child: Text(
+                  judul,
+                  style: TextStyle(
+                    color: AppColors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
                 ),
               ),
-            ),
-            Text(
-              deskripsi,
-              style: TextStyle(
-                color: AppColors.white,
-                fontWeight: FontWeight.w200,
-                fontSize: 13,
-              ),
-              textAlign: TextAlign.center,
-            )
-          ],
+              Text(
+                deskripsi,
+                style: TextStyle(
+                  color: AppColors.white,
+                  fontWeight: FontWeight.w200,
+                  fontSize: 13,
+                ),
+                textAlign: TextAlign.center,
+              )
+            ],
+          ),
         );
       }
       return CardHome(transaction: transaction);

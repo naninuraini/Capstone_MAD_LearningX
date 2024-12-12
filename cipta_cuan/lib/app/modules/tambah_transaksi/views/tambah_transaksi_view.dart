@@ -61,7 +61,7 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () => Get.back(),
+          onPressed: () => Navigator.pop(Get.context!),
           icon: const Icon(
             Icons.arrow_back_ios_new_rounded,
             color: Colors.white,
@@ -149,8 +149,8 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
                           SecondTextFieldWidget(
                             hintText: 'Masukkan Jumlah',
                             headerText: "Jumlah",
-                            suffixIcon: "",
                             onPressedSuffix: () {},
+                            suffixIcon: "",
                             controller: controller.jumlahController,
                             keyboardType: TextInputType.number,
                             validator: (val) {
@@ -168,8 +168,8 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
                           SecondTextFieldWidget(
                             hintText: 'Masukkan Judul Transaksi',
                             headerText: "Judul",
-                            suffixIcon: "",
                             onPressedSuffix: () {},
+                            suffixIcon: "",
                             controller: controller.judulController,
                             keyboardType: TextInputType.text,
                             validator: (val) {
@@ -183,8 +183,8 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
                           SecondTextFieldWidget(
                             hintText: 'Masukkan Deskripsi',
                             headerText: "Deskripsi",
-                            suffixIcon: "",
                             onPressedSuffix: () {},
+                            suffixIcon: "",
                             controller: controller.deskripsiController,
                             keyboardType: TextInputType.text,
                             maxLines: 3,

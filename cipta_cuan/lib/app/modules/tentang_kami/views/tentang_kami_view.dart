@@ -12,7 +12,7 @@ class TentangKamiView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () => Get.back(),
+          onPressed: () => Navigator.pop(Get.context!),
           icon: Icon(
             Icons.arrow_back_ios_new_rounded,
             color: Colors.white,

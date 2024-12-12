@@ -1,14 +1,20 @@
+import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../controllers/scheduling_controller.dart';
+
 class CalendarWidget extends StatefulWidget {
-  const CalendarWidget({super.key});
+  final MyUser? myUser;
+  const CalendarWidget({super.key, required this.myUser});
 
   @override
   _CalendarWidgetState createState() => _CalendarWidgetState();
 }
 
 class _CalendarWidgetState extends State<CalendarWidget> {
+  final SchedulingController controller = Get.put(SchedulingController());
   DateTime? selectedDate;
   DateTime currentMonth = DateTime.now();
 
@@ -124,7 +130,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
             itemBuilder: (context, index) {
               final date = dates[index];
               final today =
-                  DateTime.now().toLocal(); // Tanggal saat ini sesuai WIB
+                  DateTime.now().toLocal();
               final isToday = date != null &&
                   date == today.day &&
                   currentMonth.month == today.month &&
@@ -150,6 +156,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                                 currentMonth.month,
                                 date,
                               );
+                              controller.getJadwal(widget.myUser!.id, selectedDate!);
                             }
                           },
                         );
@@ -160,7 +167,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                           color: isToday
                               ? const Color(0xFF00D7FF)
                               : isSelected
-                                  ? Colors.grey
+                                  ? const Color(0xFF429BED)
                                   : Colors.grey,
                           shape: BoxShape.circle,
                           border: isSelected

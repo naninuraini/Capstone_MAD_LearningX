@@ -17,8 +17,15 @@ class RegisterController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   FirebaseAuth auth = FirebaseAuth.instance;
   final usersCollection = FirebaseFirestore.instance.collection('users');
-  bool obscurePassword = true;
-  IconData iconPassword = CupertinoIcons.eye_fill;
+  RxBool obscurePassword = true.obs;
+  Rx<IconData> iconPassword = CupertinoIcons.eye_fill.obs;
+
+  void togglePasswordVisibility() {
+    obscurePassword.value = !obscurePassword.value;
+    iconPassword.value = obscurePassword.value
+        ? CupertinoIcons.eye_fill
+        : CupertinoIcons.eye_slash_fill;
+  }
 
   void register(MyUser myUser, String password) async {
     try {

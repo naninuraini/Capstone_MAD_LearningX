@@ -33,9 +33,9 @@ class _HomeViewState extends State<HomeView> {
     myUser = widget.myUser;
     _children = [
       HomeWidget(), 
-      const SchedulingView(), 
-       CategoryView(), 
-      ProfilView(myUser), 
+      SchedulingView(myUser: myUser), 
+      CategoryView(myUser: myUser), 
+      ProfilView(), 
     ];
   }
 

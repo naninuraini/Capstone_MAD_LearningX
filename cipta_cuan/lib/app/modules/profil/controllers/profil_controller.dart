@@ -116,11 +116,7 @@ class ProfilController extends GetxController {
 
   Future<void> _logout() async {
     try {
-      final userId = FirebaseAuth.instance.currentUser?.uid ?? " ";
-      await _firestore.collection('users').doc(userId).update({
-        'avatar': 'assets/images/Avatar1.png', 
-      });
-
+      await auth.signOut();
       user.value = MyUser.empty; 
       Get.offAllNamed(Routes.LOGIN); 
     } catch (e) {

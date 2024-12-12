@@ -1,9 +1,11 @@
+import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/category_controller.dart';
 
 class CategoryView extends GetView<CategoryController> {
-  const CategoryView({Key? key}) : super(key: key);
+  final MyUser? myUser;
+  const CategoryView({Key? key, required this.myUser}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class CategoryView extends GetView<CategoryController> {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(15.0),
         child: GridView.builder(
           itemCount: controller.categories.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -34,35 +36,38 @@ class CategoryView extends GetView<CategoryController> {
             final category = controller.categories[index];
             return GestureDetector(
               onTap: () {
-                controller.filterPostsByCategory(category['label']!);
+                controller.filterPostsByCategory(category['label']!, myUser!);
               },
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
-                    width: 64,
-                    height: 64,
+                    width: 70,
+                    height: 70,
                     decoration: BoxDecoration(
                       color: Colors.blue.shade300,
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(15),
                     ),
                     child: Center(
                       child: Image.asset(
                         category['icon']!,
-                        width: 32,
-                        height: 32,
+                        width: 30,
+                        height: 35,
                       ),
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Text(
-                    category['label']!,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
+                  Flexible(
+                    child: Text(
+                      category['label']!,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
                   ),
                 ],
               ),

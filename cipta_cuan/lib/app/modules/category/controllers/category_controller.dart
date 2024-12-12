@@ -1,7 +1,8 @@
-import 'package:get/get.dart';
-import '../../../../models/post/post_model.dart';
-import '../../../../models/post/post_entity.dart';
+import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
+
+import '../../../../models/post/post_model.dart';
 
 class CategoryController extends GetxController {
   // Daftar kategori
@@ -22,31 +23,34 @@ class CategoryController extends GetxController {
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  void getPosts() async {
-    try {
-      final querySnapshot = await firestore.collection('transaksi').get();
-      final posts = querySnapshot.docs.map((doc) {
-        final data = doc.data() as Map<String, dynamic>;
-        return Post.fromEntity(PostEntity.fromDocument(data, 'userId'));
-      }).toList();
+  // void getPosts() async {
+  //   try {
+  //     final querySnapshot = await firestore.collection('transaksi').get();
+  //     final posts = querySnapshot.docs.map((doc) {
+  //       final data = doc.data() as Map<String, dynamic>;
+  //       return Post.fromEntity(PostEntity.fromDocument(data));
+  //     }).toList();
 
-      allPosts.value = posts;
-      print('All posts loaded: ${allPosts.length}');
-    } catch (e) {
-      print('Error fetching posts: $e');
-      Get.snackbar('Error', 'Failed to load posts.');
-    }
-  }
+  //     allPosts.value = posts;
+  //     print('All posts loaded: ${allPosts.length}');
+  //   } catch (e) {
+  //     print('Error fetching posts: $e');
+  //     Get.snackbar('Error', 'Failed to load posts.');
+  //   }
+  // }
 
-  void filterPostsByCategory(String categoryLabel) {
-    filteredPosts.value = allPosts.where((post) => post.kategori == categoryLabel).toList();
-    print('Filtered posts: ${filteredPosts.map((post) => post.judul).toList()}');
-    Get.toNamed('/category-list', arguments: {'category': categoryLabel});
+  void filterPostsByCategory(String categoryLabel, MyUser myUser) {
+    filteredPosts.value =
+        allPosts.where((post) => post.kategori == categoryLabel).toList();
+    Get.toNamed('/category-list', arguments: {
+      'category': categoryLabel,
+      'myUser': myUser,
+    });
   }
 
   @override
   void onInit() {
     super.onInit();
-    getPosts();
+    // getPosts();
   }
 }
