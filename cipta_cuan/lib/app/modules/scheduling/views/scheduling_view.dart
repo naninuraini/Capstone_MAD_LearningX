@@ -1,5 +1,6 @@
 import 'package:cipta_cuan/app/modules/scheduling/widget/calender.dart';
 import 'package:cipta_cuan/app/modules/scheduling/widget/card_jadwal.dart';
+import 'package:cipta_cuan/app/modules/scheduling/widget/no_data.dart';
 import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:cipta_cuan/widget/constant.dart';
 import 'package:flutter/material.dart';
@@ -86,12 +87,6 @@ class _SchedulingViewState extends State<SchedulingView> {
           const SizedBox(height: 10),
           CalendarWidget(
             myUser: widget.myUser,
-            // onDateSelected: (date) {
-            //   setState(() {
-            //     selectedDate = date;
-            //   });
-            //   controller.fetchJadwalByDate(date);
-            // },
           ),
           const SizedBox(height: 30),
           Expanded(
@@ -129,27 +124,31 @@ class _SchedulingViewState extends State<SchedulingView> {
                         ),
                       ],
                     ),
-                    Obx(() {
-                      if (controller.selectedJadwal.isEmpty) {
-                        return Text(
-                          'Tidak ada jadwal untuk tanggal ini',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        );
-                      }
-                      return ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: controller.selectedJadwal.length,
-                          itemBuilder: (context, index) {
-                            final jadwal = controller.selectedJadwal[index];
-                            return Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
-                              child: CardJadwal(
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Obx(() {
+                        if (controller.selectedJadwal.isEmpty) {
+                          return NoDataWidget(
+                              judul: "Ga Ada tagihan di hari ini!",
+                              deskripsi: "Karena kamu belum ada tagihan\nKamu tidak perlu mengeluarkan tagihan apapun",
+                              assetsString: "assets/images/no_data/schedule.png");
+                          // return Text(
+                          //   'Tidak ada jadwal untuk tanggal ini',
+                          //   style: TextStyle(color: Colors.white, fontSize: 16),
+                          // );
+                        }
+                        return ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: controller.selectedJadwal.length,
+                            itemBuilder: (context, index) {
+                              final jadwal = controller.selectedJadwal[index];
+                              return CardJadwal(
                                 jadwal: jadwal,
-                              ),
-                            );
-                          });
-                    }),
+                              );
+                            });
+                      }),
+                    ),
                   ],
                 )
                 // ],

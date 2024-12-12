@@ -33,7 +33,7 @@ class NoDataWidget extends StatelessWidget {
             children: [
               Image.asset(assetsString),
               Padding(
-                padding: const EdgeInsets.only(bottom: 10, top: 10),
+                padding: const EdgeInsets.only(bottom: 10, top: 20),
                 child: Text(
                   judul,
                   style: TextStyle(
