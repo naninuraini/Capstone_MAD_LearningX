@@ -9,6 +9,8 @@ import '../modules/detail_pengguna/bindings/detail_pengguna_binding.dart';
 import '../modules/detail_pengguna/views/detail_pengguna_view.dart';
 import '../modules/detail_transaksi/bindings/detail_transaksi_binding.dart';
 import '../modules/detail_transaksi/views/detail_transaksi_view.dart';
+import '../modules/edit_transaksi/bindings/edit_transaksi_binding.dart';
+import '../modules/edit_transaksi/views/edit_transaksi_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -122,5 +124,10 @@ class AppPages {
       page: () => TambahJadwalView(myUser: MyUser.empty),
       binding: TambahJadwalBinding(),
     ),
+    GetPage(
+      name: _Paths.EDIT_TRANSAKSI,
+      page: () => EditTransaksiView(post: Get.arguments['post']),
+      binding: EditTransaksiBinding(),
+      ),
   ];
 }
