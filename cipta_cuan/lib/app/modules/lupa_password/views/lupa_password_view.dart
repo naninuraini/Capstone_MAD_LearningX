@@ -20,7 +20,7 @@ class LupaPasswordView extends GetView<LupaPasswordController> {
         body: Form(
           key: _formKey,
           child: Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(20),
             child: ListView(
               physics: const AlwaysScrollableScrollPhysics(),
               shrinkWrap: true,
