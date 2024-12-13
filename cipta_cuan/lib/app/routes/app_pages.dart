@@ -103,12 +103,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SCHEDULING,
-      page: () => SchedulingView(myUser: MyUser.empty),
+      page: () => SchedulingView(),
       binding: SchedulingBinding(),
     ),
     GetPage(
       name: _Paths.CATEGORY,
-      page: () => CategoryView(myUser: MyUser.empty),
+      page: () => CategoryView(),
       binding: CategoryBinding(),
     ),
     GetPage(
@@ -133,7 +133,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.NOTIFICATION,
-      page: () => NotificationView(userId: '',),
+      page: () => NotificationView(myUser: MyUser.empty),
       binding: NotificationBinding(),
     ),
   ];

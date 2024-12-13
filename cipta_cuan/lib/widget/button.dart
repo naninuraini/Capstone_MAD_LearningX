@@ -59,6 +59,8 @@ class SecondaryButton extends StatelessWidget {
   final double height;
   final double width;
   final Color colorTitle;
+  final double fontSize;
+  final FontWeight fontWeight;
 
   const SecondaryButton({
     super.key,
@@ -67,6 +69,8 @@ class SecondaryButton extends StatelessWidget {
     this.height = 50,
     this.width = 100,
     this.colorTitle = Colors.white,
+    this.fontSize = 16,
+    this.fontWeight = FontWeight.bold,
   });
 
   @override
@@ -95,8 +99,8 @@ class SecondaryButton extends StatelessWidget {
         child: Text(
           title,
           style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
+            fontSize: fontSize,
+            fontWeight: fontWeight,
             color: colorTitle,
           ),
         ),

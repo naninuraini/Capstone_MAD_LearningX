@@ -1,65 +1,69 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:developer';
+
+import 'package:cipta_cuan/app/modules/notification/controllers/notification_controller.dart';
+import 'package:cipta_cuan/app/modules/notification/widget/card_notif.dart';
+import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 
-class NotificationView extends StatelessWidget {
-  final String userId;
+import '../../../../widget/button.dart';
 
-  NotificationView({required this.userId});
+class NotificationView extends GetView<NotificationController> {
+  final MyUser? myUser;
 
+  NotificationView({required this.myUser});
   @override
   Widget build(BuildContext context) {
-    // Validasi userId tidak kosong
-    if (userId.isEmpty) {
-      return Scaffold(
-        appBar: AppBar(title: Text('Daftar Notifikasi')),
-        body: Center(child: Text('User ID tidak valid')),
-      );
-    }
-
+    controller.getJadwal(myUser!.id);
     return Scaffold(
-      appBar: AppBar(title: Text('Daftar Notifikasi')),
-      body: StreamBuilder<DocumentSnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection('jadwal')
-            .doc(userId)
-            .snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          }
-
-          if (!snapshot.hasData || snapshot.data?.data() == null) {
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Colors.white,
+          ),
+          onPressed: () => Navigator.pop(Get.context!),
+        ),
+        title: const Text(
+          "Daftar Notifikasi",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+      ),
+      body: Obx(
+        () {
+          if (controller.allJadwal.isEmpty) {
+            log("Tidak ada notifikasi empty");
             return Center(child: Text('Tidak ada notifikasi'));
           }
 
-          final data = snapshot.data!.data() as Map<String, dynamic>;
-          final jadwalList = data['jadwal'] as List<dynamic>? ?? [];
-
-          if (jadwalList.isEmpty) {
-            return Center(child: Text('Tidak ada notifikasi'));
-          }
-
-          return ListView.builder(
-            itemCount: jadwalList.length,
-            itemBuilder: (context, index) {
-              final jadwal = jadwalList[index] as Map<String, dynamic>;
-              final judul = jadwal['judul'] ?? 'Judul tidak tersedia';
-              final deskripsi = jadwal['deskripsi'] ?? 'Deskripsi tidak tersedia';
-              final tanggalDanWaktu = jadwal['tanggalDanWaktu'] != null
-                  ? DateFormat('dd MMM yyyy, HH:mm').format(
-                      (jadwal['tanggalDanWaktu'] as Timestamp).toDate(),
-                    )
-                  : 'Tanggal tidak tersedia';
-
-              return ListTile(
-                title: Text(judul),
-                subtitle: Text(deskripsi),
-                trailing: Text(tanggalDanWaktu),
-              );
-            },
+          return ListView(
+            shrinkWrap: false,
+            physics: AlwaysScrollableScrollPhysics(),
+            children: [
+              CardNotif(jadwal: controller.allJadwal),
+            ],
           );
         },
+      ),
+      bottomNavigationBar: Obx(
+        () => Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: controller.selectedForDeletion.length == 0
+              ? SecondaryButton(
+                  onPressed: () {},
+                  title: "Hapus",
+                  fontWeight: FontWeight.normal,
+                  fontSize: 14,
+                )
+              : ButtonWidget(
+                  onPressed: controller.deleteSelected,
+                  title: "Hapus",
+                ),
+        ),
       ),
     );
   }

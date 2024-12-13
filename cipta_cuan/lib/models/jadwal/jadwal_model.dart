@@ -80,7 +80,7 @@ class Jadwal {
 
   @override
   String toString() {
-    return '''Post: {
+    return '''Jadwal: {
       jadwalId: $jadwalId
       tanggalDanWaktu: $tanggalDanWaktu
       jumlah: $jumlah

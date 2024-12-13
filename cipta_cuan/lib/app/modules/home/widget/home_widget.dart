@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:cipta_cuan/app/modules/home/widget/transaksi/bulanan_transaksi.dart';
 import 'package:cipta_cuan/app/modules/home/widget/transaksi/harian_transaksi.dart';
 import 'package:cipta_cuan/app/modules/home/widget/transaksi/mingguan_transaksi.dart';
+import 'package:cipta_cuan/app/modules/notification/bindings/notification_binding.dart';
 import 'package:cipta_cuan/app/modules/tambah_transaksi/bindings/tambah_transaksi_binding.dart';
 import 'package:cipta_cuan/app/modules/tambah_transaksi/views/tambah_transaksi_view.dart';
 import 'package:cipta_cuan/widget/constant.dart';
@@ -11,6 +12,7 @@ import 'package:cipta_cuan/widget/getuser_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../notification/views/notification_view.dart';
 import '../controllers/home_controller.dart';
 
 class HomeWidget extends StatefulWidget {
@@ -104,10 +106,12 @@ class _HomeWidgetState extends State<HomeWidget>
                                           BorderRadius.all(Radius.circular(20)),
                                     ),
                                     child: GestureDetector(
-                                      onTap: () {
-                                        // Navigate to the NotifikasiView using the route name
-                                        Get.toNamed('/notification');
-                                      },
+                                      onTap: () => Get.to(
+                                        () => NotificationView(
+                                          myUser: myUser,
+                                        ),
+                                        binding: NotificationBinding(),
+                                      ),
                                       child: Icon(
                                         Icons.notifications_none,
                                         size: 25,
