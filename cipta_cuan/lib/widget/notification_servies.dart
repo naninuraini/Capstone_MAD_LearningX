@@ -14,7 +14,7 @@ class NotificationService {
   Future<void> initialize() async {
     tzData.initializeTimeZones(); // Initialize timezones
     const AndroidInitializationSettings androidSettings =
-        AndroidInitializationSettings("assets/notif_ciptacuan.png");
+        AndroidInitializationSettings("@mipmap/launcher_icon");
     const InitializationSettings initSettings =
         InitializationSettings(android: androidSettings);
     await _flutterLocalNotificationsPlugin.initialize(initSettings);
