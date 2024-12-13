@@ -9,7 +9,6 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
 
   @override
   Widget build(BuildContext context) {
-    // untuk kategorinya
     var category = controller.categories.firstWhere(
       (category) => category['label'] == controller.post.kategori,
       orElse: () => {"icon": "assets/category/lainnya.png", "label": "Lainnya"},
@@ -38,7 +37,6 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
       backgroundColor: const Color(0xFF19173D),
       body: Column(
         children: [
-          // Bagian atas: Icon dan Kategori
           const SizedBox(height: 20),
           Column(
             children: [
@@ -76,7 +74,6 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
             ],
           ),
           const SizedBox(height: 20),
-          // Bagian bawah: Detail Transaksi
           Expanded(
             child: SingleChildScrollView(
               child: Container(
@@ -84,8 +81,6 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
                   color: Color(0xFF1B2656),
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(50),
-                    // topLeft: Radius.circular(20),
-                    // topRight: Radius.circular(20),
                   ),
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -153,62 +148,22 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 5),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20.0),
-                      child: ButtonWidget(
-                        onPressed: () {
-                          Get.to(() => EditTransaksiView(post: controller.post));
-                        },
-                        title: "Edit",
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: ButtonWidget(
+                              onPressed: () {
+                                Get.to(() => EditTransaksiView(post: controller.post));
+                              },
+                              title: "Edit Transaksi",
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-
-                    // SizedBox(
-                    //   // width: double.infinity,
-                    //   child: ElevatedButton(
-                    //     style: ElevatedButton.styleFrom(
-                    //       foregroundColor: Colors.white,
-                    //       backgroundColor: Colors.transparent,
-                    //       shadowColor: Colors.transparent,
-                    //       shape: RoundedRectangleBorder(
-                    //         borderRadius: BorderRadius.circular(15.0),
-                    //       ),
-                    //     ),
-                    //     onPressed: () {
-                    //       // Action for Edit button
-                    //     },
-                    //     child: Ink(
-                    //       decoration: BoxDecoration(
-                    //         gradient: const LinearGradient(
-                    //           colors: [
-                    //             Color(0xFF0DA6C2),
-                    //             Color(0xFF0E39C6),
-                    //           ],
-                    //           begin: Alignment.topLeft,
-                    //           end: Alignment.bottomRight,
-                    //         ),
-                    //         borderRadius: BorderRadius.circular(15.0),
-                    //         border: Border.all(
-                    //           color: const Color(0xFF375DFB),
-                    //           width: 1.0,
-                    //         ),
-                    //       ),
-                    //       child: Container(
-                    //         alignment: Alignment.center,
-                    //         padding: const EdgeInsets.symmetric(vertical: 16),
-                    //         child: const Text(
-                    //           'Edit',
-                    //           style: TextStyle(
-                    //             fontSize: 16,
-                    //             fontWeight: FontWeight.bold,
-                    //             color: Colors.white,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),
