@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+
 import '../../models/myUser/myuser_model.dart';
 import '../modules/category/bindings/category_binding.dart';
 import '../modules/category/views/category_view.dart';
@@ -16,6 +17,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/lupa_password/bindings/lupa_password_binding.dart';
 import '../modules/lupa_password/views/lupa_password_view.dart';
+import '../modules/notification/bindings/notification_binding.dart';
+import '../modules/notification/views/notification_view.dart';
 import '../modules/on_boarding/bindings/on_boarding_binding.dart';
 import '../modules/on_boarding/views/on_boarding_view.dart';
 import '../modules/profil/bindings/profil_binding.dart';
@@ -127,6 +130,11 @@ class AppPages {
       name: _Paths.EDIT_TRANSAKSI,
       page: () => EditTransaksiView(post: Get.arguments['post']),
       binding: EditTransaksiBinding(),
+    ),
+    GetPage(
+      name: _Paths.NOTIFICATION,
+      page: () => NotificationView(userId: '',),
+      binding: NotificationBinding(),
     ),
   ];
 }

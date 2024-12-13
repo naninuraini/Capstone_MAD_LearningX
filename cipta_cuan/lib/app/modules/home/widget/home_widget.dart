@@ -106,7 +106,7 @@ class _HomeWidgetState extends State<HomeWidget>
                                     child: GestureDetector(
                                       onTap: () {
                                         // Navigate to the NotifikasiView using the route name
-                                        Get.toNamed('/notifikasi');
+                                        Get.toNamed('/notification');
                                       },
                                       child: Icon(
                                         Icons.notifications_none,
