@@ -32,10 +32,10 @@ class _HomeViewState extends State<HomeView> {
     Get.lazyPut(() => CategoryController());
     myUser = widget.myUser;
     _children = [
-      HomeWidget(), 
-      SchedulingView(myUser: myUser), 
-      CategoryView(myUser: myUser), 
-      ProfilView(), 
+      HomeWidget(),
+      SchedulingView(myUser: myUser),
+      CategoryView(myUser: myUser),
+      ProfilView(),
     ];
   }
 
@@ -134,7 +134,7 @@ class _HomeViewState extends State<HomeView> {
         text,
         style: const TextStyle(
           fontWeight: FontWeight.bold,
-          color: Colors.white, 
+          color: Colors.white,
         ),
       ),
     );
