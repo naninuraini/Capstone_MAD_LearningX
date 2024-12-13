@@ -50,7 +50,8 @@ class RegisterController extends GetxController {
           fontWeight: FontWeight.bold,
           color: AppColors.greyPopUp,
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         content: Column(
           children: [
             Image.asset("assets/images/verification_email.png"),
@@ -65,48 +66,36 @@ class RegisterController extends GetxController {
                 textAlign: TextAlign.center,
               ),
             ),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: SecondaryButton(
+                    onPressed: () {
+                      userCredential.user!.sendEmailVerification();
+                      Get.snackbar('Success', 'Email verification link sent');
+                    },
+                    title: "Batal",
+                    colorTitle: AppColors.borderGrey,
+                    width: double.infinity,
+                    height: 46,
+                  ),
+                ),
+                SizedBox(width: 15.0),
+                Expanded(
+                  child: ButtonWidget(
+                    onPressed: () {
+                      Get.offAllNamed(Routes.LOGIN);
+                    },
+                    title: "Konfirmasi",
+                    width: double.infinity,
+                    height: 46,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
-        cancel: ElevatedButton(
-          onPressed: () {
-            userCredential.user!.sendEmailVerification();
-            Get.snackbar('Success', 'Email verification link sent');
-          },
-          style: ElevatedButton.styleFrom(
-            elevation: 5,
-            side: BorderSide(
-              width: 1.0,
-              color: AppColors.borderGrey,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                17.0,
-              ),
-            ),
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
-          ),
-          child: Text(
-            "Batal",
-            style: TextStyle(
-              color: AppColors.white,
-            ),
-          ),
-        ),
-        confirm: Padding(
-          padding: const EdgeInsets.only(
-            left: 10.0,
-            top: 5.5,
-          ),
-          child: ButtonWidget(
-            height: 40,
-            onPressed: () {
-              Get.offAllNamed(Routes.LOGIN);
-            },
-            title: "Konfirmasi",
-          ),
-        ),
-        confirmTextColor: Colors.white,
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

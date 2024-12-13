@@ -12,84 +12,58 @@ class ConfirmationPopup {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return AlertDialog(
+        return Dialog(
+          backgroundColor: const Color(0xFFE1E1E1),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.0),
           ),
-          contentPadding: EdgeInsets.all(16.0),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(
-                imagePath,
-                height: 120,
-              ),
-              SizedBox(height: 16.0),
-              Text(
-                title,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  imagePath,
+                  height: 200,
                 ),
-              ),
-              SizedBox(height: 24.0),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // Tombol Batal
-                  SecondaryButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    title: 'Batal',
-                    colorTitle: Color(0xFF375DFB),
-                    width: 130,
-                    height: 46,
+                const SizedBox(height: 10),
+                Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF6C757D), 
+                    fontSize: 16.0,
                   ),
-                  // Tombol Konfirmasi
-                  ButtonWidget(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      onConfirm();
-                    },
-                    title: 'Konfirmasi',
-                    width: 130,
-                    height: 46,
-                  ),
-                  // ElevatedButton(
-                  //   onPressed: () {
-                  //     Navigator.of(context).pop();
-                  //     onConfirm();
-                  //   },
-                  //   style: ElevatedButton.styleFrom(
-                  //     backgroundColor: Colors.transparent,
-                  //     elevation: 0,
-                  //   ),
-                  //   child: Container(
-                  //     padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
-                  //     decoration: BoxDecoration(
-                  //       gradient: LinearGradient(
-                  //         colors: [
-                  //           Color(0xFF0DA6C2),
-                  //           Color(0xFF0E39C6),
-                  //         ],
-                  //         begin: Alignment.topLeft,
-                  //         end: Alignment.bottomRight,
-                  //       ),
-                  //       borderRadius: BorderRadius.circular(16.0),
-                  //     ),
-                  //     child: Text(
-                  //       'Konfirmasi',
-                  //       style: TextStyle(
-                  //         color: Colors.white,
-                  //         fontWeight: FontWeight.bold,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                ],
-              ),
-            ],
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    Expanded(
+                      child: SecondaryButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        title: 'Batal',
+                        colorTitle: const Color(0xFF6C757D), 
+                        width: double.infinity,
+                        height: 46,
+                      ),
+                    ),
+                    const SizedBox(width: 15.0),
+                    Expanded(
+                      child: ButtonWidget(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          onConfirm();
+                        },
+                        title: 'Konfirmasi',
+                        width: double.infinity,
+                        height: 46,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },
