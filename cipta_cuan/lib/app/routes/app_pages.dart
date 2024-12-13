@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import '../../models/myUser/myuser_model.dart';
 import '../modules/category/bindings/category_binding.dart';
 import '../modules/category/views/category_view.dart';
@@ -17,8 +16,6 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/lupa_password/bindings/lupa_password_binding.dart';
 import '../modules/lupa_password/views/lupa_password_view.dart';
-import '../modules/notifikasi/bindings/notifikasi_binding.dart';
-import '../modules/notifikasi/views/notifikasi_view.dart';
 import '../modules/on_boarding/bindings/on_boarding_binding.dart';
 import '../modules/on_boarding/views/on_boarding_view.dart';
 import '../modules/profil/bindings/profil_binding.dart';
@@ -127,14 +124,9 @@ class AppPages {
       binding: TambahJadwalBinding(),
     ),
     GetPage(
-      name: _Paths.NOTIFIKASI,
-      page: () => NotificationView(),
-      binding: NotifikasiBinding(),
-    ),
-    GetPage(
       name: _Paths.EDIT_TRANSAKSI,
       page: () => EditTransaksiView(post: Get.arguments['post']),
       binding: EditTransaksiBinding(),
-      ),
+    ),
   ];
 }
