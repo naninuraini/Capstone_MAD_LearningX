@@ -1,3 +1,4 @@
+import 'package:cipta_cuan/app/modules/edit_transaksi/views/edit_transaksi_view.dart';
 import 'package:cipta_cuan/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +9,6 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
 
   @override
   Widget build(BuildContext context) {
-    // untuk kategorinya
     var category = controller.categories.firstWhere(
       (category) => category['label'] == controller.post.kategori,
       orElse: () => {"icon": "assets/category/lainnya.png", "label": "Lainnya"},
@@ -37,7 +37,6 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
       backgroundColor: const Color(0xFF19173D),
       body: Column(
         children: [
-          // Bagian atas: Icon dan Kategori
           const SizedBox(height: 20),
           Column(
             children: [
@@ -75,7 +74,6 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
             ],
           ),
           const SizedBox(height: 20),
-          // Bagian bawah: Detail Transaksi
           Expanded(
             child: SingleChildScrollView(
               child: Container(
@@ -83,8 +81,6 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
                   color: Color(0xFF1B2656),
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(50),
-                    // topLeft: Radius.circular(20),
-                    // topRight: Radius.circular(20),
                   ),
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -152,15 +148,20 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 5),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20.0),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: ButtonWidget(
-                          onPressed: () {},
-                          title: "Edit",
-                        ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: ButtonWidget(
+                              onPressed: () {
+                                Get.to(() => EditTransaksiView(post: controller.post));
+                              },
+                              title: "Edit Transaksi",
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
