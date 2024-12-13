@@ -99,12 +99,19 @@ class _HomeWidgetState extends State<HomeWidget>
                                   Container(
                                     padding: const EdgeInsets.all(5),
                                     decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20))),
-                                    child: Icon(
-                                      Icons.notifications_none,
-                                      size: 25,
+                                      color: Colors.white,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(20)),
+                                    ),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        // Navigate to the NotifikasiView using the route name
+                                        Get.toNamed('/notifikasi');
+                                      },
+                                      child: Icon(
+                                        Icons.notifications_none,
+                                        size: 25,
+                                      ),
                                     ),
                                   ),
                                 ],
