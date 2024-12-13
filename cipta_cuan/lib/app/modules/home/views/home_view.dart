@@ -134,7 +134,7 @@ class _HomeViewState extends State<HomeView> {
         text,
         style: const TextStyle(
           fontWeight: FontWeight.bold,
-          color: Colors.white, 
+          color: Colors.white,
         ),
       ),
     );

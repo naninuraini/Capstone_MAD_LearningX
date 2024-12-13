@@ -48,17 +48,18 @@ class NotificationService {
       body,
       tzScheduledDate, // Use TZDateTime here
       notificationDetails,
-      // androidAllowWhileIdle: true,
       androidScheduleMode: AndroidScheduleMode.exact, // Add this line
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
     );
   }
 
+  /// Cancel a specific notification by its ID
   Future<void> cancelNotification(int id) async {
     await _flutterLocalNotificationsPlugin.cancel(id);
   }
 
+  /// Cancel all scheduled notifications
   Future<void> cancelAllNotifications() async {
     await _flutterLocalNotificationsPlugin.cancelAll();
   }

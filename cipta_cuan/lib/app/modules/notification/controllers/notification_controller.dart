@@ -3,6 +3,8 @@ import 'dart:developer';
 // import 'package:cipta_cuan/widget/notification_servies.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:developer';
 
 import '../../../../models/jadwal/jadwal_entity.dart';
 import '../../../../models/jadwal/jadwal_model.dart';
@@ -66,31 +68,4 @@ class NotificationController extends GetxController {
     super.onClose();
     selectedForDeletion.clear();
   }
-
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //   _notificationService.initialize(); // Inisialisasi notifikasi
-  // }
-
-
-  // void addNotification(int id, String title, String body, DateTime date) {
-  //   _notificationService.scheduleNotification(
-  //     id: id,
-  //     title: title,
-  //     body: body,
-  //     scheduledDate: date,
-  //   );
-  //   notifications.add({'id': id, 'title': title, 'body': body, 'date': date});
-  // }
-
-  // void removeNotification(int id) {
-  //   _notificationService.cancelNotification(id);
-  //   notifications.removeWhere((notif) => notif['id'] == id);
-  // }
-
-  // void removeAllNotifications() {
-  //   _notificationService.cancelAllNotifications();
-  //   notifications.clear();
-  // }
 }
