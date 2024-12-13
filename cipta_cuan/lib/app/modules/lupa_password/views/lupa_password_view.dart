@@ -59,8 +59,8 @@ class LupaPasswordView extends GetView<LupaPasswordController> {
                 ),
                 const SizedBox(height: 20),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10)
-                      .copyWith(left: 15),
+                  padding: const EdgeInsets.symmetric(vertical: 5.0)
+                      .copyWith(left: 10),
                   child: const Text(
                     'Email',
                     style: TextStyle(
@@ -70,7 +70,7 @@ class LupaPasswordView extends GetView<LupaPasswordController> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  padding: const EdgeInsets.symmetric(vertical: 5.0),
                   child: Align(
                     alignment: Alignment.center,
                     child: SizedBox(
