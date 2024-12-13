@@ -193,7 +193,7 @@ class _DetailPenggunaViewState extends State<DetailPenggunaView> {
     ConfirmationPopup.show(
       context,
       title: "Apakah Anda yakin ingin menghapus akun ini?",
-      imagePath: 'assets/images/delete_account.png',
+      imagePath: "assets/images/logout.png", 
       onConfirm: () async {
         try {
           final auth = FirebaseAuth.instance;

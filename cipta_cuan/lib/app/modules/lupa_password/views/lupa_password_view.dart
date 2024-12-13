@@ -10,13 +10,30 @@ import '../controllers/lupa_password_controller.dart';
 class LupaPasswordView extends GetView<LupaPasswordController> {
   LupaPasswordView({Key? key}) : super(key: key);
 
-  final _formKey = GlobalKey<FormState>(); // Local key
+  final _formKey = GlobalKey<FormState>(); 
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () => Navigator.pop(Get.context!),
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Colors.white,
+            ),
+          ),
+          title: const Text(
+            "Lupa Kata Sandi",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ),
         body: Form(
           key: _formKey,
           child: Padding(
@@ -25,25 +42,6 @@ class LupaPasswordView extends GetView<LupaPasswordController> {
               physics: const AlwaysScrollableScrollPhysics(),
               shrinkWrap: true,
               children: [
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Navigator.pop(Get.context!),
-                      icon: const Icon(
-                        Icons.arrow_back_ios_new_rounded,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const Text(
-                      " Lupa Kata Sandi",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ],
-                ),
                 const SizedBox(height: 55),
                 Container(
                   alignment: Alignment.center,

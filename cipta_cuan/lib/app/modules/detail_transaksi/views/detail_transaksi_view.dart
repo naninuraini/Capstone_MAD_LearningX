@@ -155,59 +155,14 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
                     const SizedBox(height: 20),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20.0),
-                      child: ButtonWidget(
-                        onPressed: () {
-                          // Action for Edit button
-                        },
-                        title: "Edit",
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: ButtonWidget(
+                          onPressed: () {},
+                          title: "Edit",
+                        ),
                       ),
                     ),
-
-                    // SizedBox(
-                    //   // width: double.infinity,
-                    //   child: ElevatedButton(
-                    //     style: ElevatedButton.styleFrom(
-                    //       foregroundColor: Colors.white,
-                    //       backgroundColor: Colors.transparent,
-                    //       shadowColor: Colors.transparent,
-                    //       shape: RoundedRectangleBorder(
-                    //         borderRadius: BorderRadius.circular(15.0),
-                    //       ),
-                    //     ),
-                    //     onPressed: () {
-                    //       // Action for Edit button
-                    //     },
-                    //     child: Ink(
-                    //       decoration: BoxDecoration(
-                    //         gradient: const LinearGradient(
-                    //           colors: [
-                    //             Color(0xFF0DA6C2),
-                    //             Color(0xFF0E39C6),
-                    //           ],
-                    //           begin: Alignment.topLeft,
-                    //           end: Alignment.bottomRight,
-                    //         ),
-                    //         borderRadius: BorderRadius.circular(15.0),
-                    //         border: Border.all(
-                    //           color: const Color(0xFF375DFB),
-                    //           width: 1.0,
-                    //         ),
-                    //       ),
-                    //       child: Container(
-                    //         alignment: Alignment.center,
-                    //         padding: const EdgeInsets.symmetric(vertical: 16),
-                    //         child: const Text(
-                    //           'Edit',
-                    //           style: TextStyle(
-                    //             fontSize: 16,
-                    //             fontWeight: FontWeight.bold,
-                    //             color: Colors.white,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),

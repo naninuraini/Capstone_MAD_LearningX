@@ -18,13 +18,13 @@ class ConfirmationPopup {
             borderRadius: BorderRadius.circular(16.0),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Image.asset(
                   imagePath,
-                  height: 200,
+                  height: 150,
                 ),
                 const SizedBox(height: 10),
                 Text(
