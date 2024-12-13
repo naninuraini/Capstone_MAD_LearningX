@@ -1,3 +1,4 @@
+import 'package:cipta_cuan/app/modules/edit_transaksi/views/edit_transaksi_view.dart';
 import 'package:cipta_cuan/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -157,7 +158,7 @@ class DetailTransaksiView extends GetView<DetailTransaksiController> {
                       padding: const EdgeInsets.symmetric(vertical: 20.0),
                       child: ButtonWidget(
                         onPressed: () {
-                          // Action for Edit button
+                          Get.to(() => EditTransaksiView(post: controller.post));
                         },
                         title: "Edit",
                       ),
