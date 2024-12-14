@@ -1,9 +1,8 @@
-import 'package:cipta_cuan/app/routes/app_pages.dart';
 import 'package:cipta_cuan/widget/button.dart';
-import 'package:cipta_cuan/widget/constant.dart';
 import 'package:cipta_cuan/widget/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../widget/validators.dart';
 import '../controllers/lupa_password_controller.dart';
 
@@ -102,22 +101,6 @@ class LupaPasswordView extends GetView<LupaPasswordController> {
                     },
                     title: "Kirim",
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Belum punya akun?',
-                      style: TextStyle(color: AppColors.white),
-                    ),
-                    TextButton(
-                      onPressed: () => Get.toNamed(Routes.REGISTER),
-                      child: const Text(
-                        'Daftar',
-                        style: TextStyle(color: AppColors.textPurple),
-                      ),
-                    ),
-                  ],
                 ),
               ],
             ),
