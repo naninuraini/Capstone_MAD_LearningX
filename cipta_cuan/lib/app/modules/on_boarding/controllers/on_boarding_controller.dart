@@ -16,7 +16,7 @@ class OnBoardingController extends GetxController {
             const Text(
               'Selamat datang',
               style: TextStyle(
-                fontSize: 22,
+                fontSize: 25,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -27,7 +27,7 @@ class OnBoardingController extends GetxController {
                 const Text(
                   'di',
                   style: TextStyle(
-                    fontSize: 22,
+                    fontSize: 25,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -45,7 +45,7 @@ class OnBoardingController extends GetxController {
                   child: const Text(
                     'CiptaCuan',
                     style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 25,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
@@ -54,7 +54,7 @@ class OnBoardingController extends GetxController {
                 const Text(
                   '!',
                   style: TextStyle(
-                    fontSize: 22,
+                    fontSize: 25,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -71,7 +71,7 @@ class OnBoardingController extends GetxController {
         title: const Text(
           'Kelola Keuangan Anda',
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 25,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -84,7 +84,7 @@ class OnBoardingController extends GetxController {
         title: const Text(
           'Menabung Lebih Praktis',
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 25,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -180,13 +180,13 @@ class OnBoardingController extends GetxController {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(24.0),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(40.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(imagePath, height: 250),
-            const SizedBox(height: 20),
+            Image.asset(imagePath, height: 280),
+            const SizedBox(height: 40),
             title,
             const SizedBox(height: 10),
             Text(
