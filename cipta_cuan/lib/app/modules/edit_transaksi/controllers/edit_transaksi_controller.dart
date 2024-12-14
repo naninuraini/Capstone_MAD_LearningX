@@ -52,12 +52,9 @@ class EditTransaksiController extends GetxController {
 
   void deletePost(Post post) async {
     try {
-      // hapus post firestrore
       await firestore.collection('transaksi').doc(post.myUser.id).set({
         post.myUser.id: FieldValue.arrayRemove([post.toEntity().toDocument()])
       }, SetOptions(merge: true));
-
-      // hapus image
       if (post.gambar.isNotEmpty) {
         Reference firebaseStorageRef =
             FirebaseStorage.instance.refFromURL(post.gambar);

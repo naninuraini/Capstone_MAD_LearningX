@@ -217,11 +217,8 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
                                     height: 200.0,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20.0),
-                                      // border: Border.all(
-                                      // color: AppColors.kpo, width: 5.0),
                                       boxShadow: [
                                         BoxShadow(
-                                          // color: Colors.red.shade400,
                                           spreadRadius: 2,
                                           blurRadius: 4,
                                           offset: const Offset(0, 3),
@@ -242,7 +239,6 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
                           ),
                           SizedBox(height: 30),
                           ButtonWidget(
-                            // textSize: 15.0,
                             title: 'Upload',
                             onPressed: () {
                               if (controller

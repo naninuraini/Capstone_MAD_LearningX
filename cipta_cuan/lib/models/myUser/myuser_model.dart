@@ -1,8 +1,6 @@
 import 'package:cipta_cuan/models/myUser/myuser_entity.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-
-// ignore: must_be_immutable
 class MyUser extends Equatable {
   final String id;
   final String email;

@@ -74,7 +74,6 @@ class CardNotif extends GetView<NotificationController> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              // jadwals.judul,
                               SizedBox(
                                 width: MediaQuery.of(context).size.width / 3 + 10,
                                 child: Text(
@@ -97,7 +96,6 @@ class CardNotif extends GetView<NotificationController> {
                             ],
                           ),
                           SizedBox(height: 5),
-                          // jadwals.deskripsi,
                           Text(
                             "Ada tagihan ${jadwals.judul} yang harus kamu bayar sebelum jatuh tempo!",
                             style: TextStyle(

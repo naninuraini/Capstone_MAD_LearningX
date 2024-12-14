@@ -264,8 +264,6 @@ class _HomeWidgetState extends State<HomeWidget>
                             ),
                           ),
                           const SizedBox(height: 40),
-                          // Flexible(
-                          //   fit: FlexFit.loose,
                           Container(
                             decoration: const BoxDecoration(
                               color: Color(0xFF24325F),

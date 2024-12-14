@@ -12,7 +12,7 @@ class NotificationService {
   NotificationService._internal();
 
   Future<void> initialize() async {
-    tzData.initializeTimeZones(); // Initialize timezones
+    tzData.initializeTimeZones();
     const AndroidInitializationSettings androidSettings =
         AndroidInitializationSettings("@mipmap/launcher_icon");
     const InitializationSettings initSettings =
@@ -24,11 +24,11 @@ class NotificationService {
     required int id,
     required String title,
     required String body,
-    required DateTime scheduledDate, // DateTime parameter
+    required DateTime scheduledDate,
   }) async {
     final tz.TZDateTime tzScheduledDate = tz.TZDateTime.from(
-      scheduledDate, // Convert DateTime to TZDateTime
-      tz.local, // Local timezone
+      scheduledDate,
+      tz.local,
     );
 
     const AndroidNotificationDetails androidDetails =
@@ -46,20 +46,18 @@ class NotificationService {
       id,
       title,
       body,
-      tzScheduledDate, // Use TZDateTime here
+      tzScheduledDate, 
       notificationDetails,
-      androidScheduleMode: AndroidScheduleMode.exact, // Add this line
+      androidScheduleMode: AndroidScheduleMode.exact, 
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
     );
   }
 
-  /// Cancel a specific notification by its ID
   Future<void> cancelNotification(int id) async {
     await _flutterLocalNotificationsPlugin.cancel(id);
   }
 
-  /// Cancel all scheduled notifications
   Future<void> cancelAllNotifications() async {
     await _flutterLocalNotificationsPlugin.cancelAll();
   }

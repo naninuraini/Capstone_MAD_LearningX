@@ -53,7 +53,6 @@ class TambahTransaksiController extends GetxController {
       }, SetOptions(merge: true));
 
       updateSaldo(post.myUser.id, post.jumlah, post);
-      // Get.back();
       Navigator.pop(Get.context!);
       Get.snackbar('Success', 'Data added successfully');
       tanggalController.clear();

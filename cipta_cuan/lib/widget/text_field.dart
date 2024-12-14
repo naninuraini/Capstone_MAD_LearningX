@@ -4,14 +4,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'constant.dart';
 
-// ignore: must_be_immutable
 class TextFieldWidget extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
   final String prefixIcon;
   final TextInputType keyboardType;
-  bool obscurePassword;
-  Widget? suffixIcon;
+  final bool obscurePassword;
+  final Widget? suffixIcon;
   final String? Function(String?)? validator;
   final String? Function(String?)? onChanged;
   final List<TextInputFormatter>? inputFormatters;
@@ -76,7 +75,6 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
   }
 }
 
-// ignore: must_be_immutable
 class SecondTextFieldWidget extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;

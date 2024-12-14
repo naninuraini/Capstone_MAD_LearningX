@@ -71,10 +71,10 @@ class _EditTransaksiState extends State<EditTransaksiView> {
           IconButton(
             icon: const Icon(
               Icons.delete_outline,
-              color: Colors.white, // White color for the trash icon
+              color: Colors.white,
             ),
             onPressed: () {
-              _deletePost(widget.post); // Call the delete function
+              _deletePost(widget.post);
             },
           ),
         ],

@@ -1,12 +1,12 @@
 import 'dart:developer';
 
-import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:cipta_cuan/widget/button.dart';
 import 'package:cipta_cuan/widget/popup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../widget/getuser_controller.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/detail_pengguna_controller.dart';
@@ -22,8 +22,6 @@ class _DetailPenggunaViewState extends State<DetailPenggunaView> {
   final DetailPenggunaController controller =
       Get.find<DetailPenggunaController>();
   final GetUserController getUserController = Get.find<GetUserController>();
-  final myUser = Get.arguments as MyUser;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -162,32 +160,6 @@ class _DetailPenggunaViewState extends State<DetailPenggunaView> {
       ),
     );
   }
-
-  // Future<Map<String, String>> _fetchUserData() async {
-  //   try {
-  //     final uid = FirebaseAuth.instance.currentUser?.uid;
-  //     if (uid == null) {
-  //       throw Exception("Pengguna tidak ditemukan");
-  //     }
-
-  //     final doc =
-  //         await FirebaseFirestore.instance.collection('users').doc(uid).get();
-  //     if (!doc.exists) {
-  //       throw Exception("Data pengguna tidak ditemukan");
-  //     }
-
-  //     final data = doc.data() as Map<String, dynamic>;
-  //     return {
-  //       'name': data['name'] ?? "Nama tidak ditemukan",
-  //       'email': data['email'] ?? "Email tidak ditemukan",
-  //       'saldo': data['saldo'] != null
-  //           ? controller.formatRupiah(data['saldo'], 'Rp')
-  //           : "Saldo tidak ditemukan",
-  //     };
-  //   } catch (e) {
-  //     return Future.error(e);
-  //   }
-  // }
 
   Future<void> _deleteAccount(BuildContext context) async {
     ConfirmationPopup.show(

@@ -60,7 +60,7 @@ class SplashView extends GetView<SplashController> {
                   fontSize: 40,
                   fontWeight: FontWeight.bold,
                   color:
-                      Colors.white, // Warna ini akan diabaikan karena gradient.
+                      Colors.white,
                 ),
               ),
             );

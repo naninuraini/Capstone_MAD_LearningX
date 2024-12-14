@@ -59,7 +59,7 @@ class CategoryListView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 20), // Jarak tambahan di bawah AppBar
+              const SizedBox(height: 20),
               Expanded(
                 child: ListView.builder(
                   itemCount: controller.posts.length,

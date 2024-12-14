@@ -22,15 +22,12 @@ class SplashController extends GetxController {
     if (hasCompletedOnboarding == true) {
       userStream.listen((user) {
         if (user == null) {
-          // Get.offAllNamed(Routes.ON_BOARDING);
           log("onBoarding");
         } else {
-          // Get.offAllNamed('/home');
           log("home");
         }
       });
     } else {
-      // Get.offAllNamed(Routes.ON_BOARDING);
       log("onBoarding");
     }
   }

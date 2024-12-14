@@ -65,8 +65,7 @@ class ProfilView extends GetView<ProfilController> {
                               iconPath: 'assets/icons/icon_detailPengguna.svg',
                               title: "Detail Pengguna",
                               onTap: () {
-                                Get.toNamed(Routes.DETAIL_PENGGUNA,
-                                    arguments: myUser)?.then((result) {
+                                Get.toNamed(Routes.DETAIL_PENGGUNA)?.then((result) {
                                       if (result == true) {
                                         getUserController.fetchUser(user.uid);
                                       }

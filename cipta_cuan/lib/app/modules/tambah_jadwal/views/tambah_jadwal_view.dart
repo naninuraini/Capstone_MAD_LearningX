@@ -199,7 +199,6 @@ class _TambahJadwalState extends State<TambahJadwalView> {
                       ),
                       SizedBox(height: 30),
                       ButtonWidget(
-                        // textSize: 15.0,
                         title: 'Upload',
                         onPressed: () {
                           if (controller

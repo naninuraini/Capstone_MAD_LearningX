@@ -26,7 +26,6 @@ class CardHome extends GetView<HomeController> {
           final post = transaction[index];
           return GestureDetector(
             onTap: () {
-              // Navigasi ke halaman detail transaksi
               Get.toNamed(
                 Routes.DETAIL_TRANSAKSI,
                 arguments: {'post': post},

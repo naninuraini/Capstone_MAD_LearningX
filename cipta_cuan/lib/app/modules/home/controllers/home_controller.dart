@@ -40,7 +40,6 @@ class HomeController extends GetxController {
 
       DateTime today = DateTime.now();
       DateTime startOfWeek = today.subtract(Duration(days: today.weekday - 1));
-      // DateTime startOfMonth = DateTime(today.year, today.month);
 
       dailyTransactions.value = fetchedPosts
           .where((post) =>

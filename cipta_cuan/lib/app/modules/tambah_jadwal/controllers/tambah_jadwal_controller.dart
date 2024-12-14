@@ -3,7 +3,6 @@ import 'package:cipta_cuan/widget/notification_servies.dart';
 import 'package:cipta_cuan/models/jadwal/jadwal_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
@@ -15,7 +14,6 @@ class TambahJadwalController extends GetxController {
   TextEditingController deskripsiController = TextEditingController();
   final formKeyTambahJadwal = GlobalKey<FormState>();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  // DateTime? selectedDateTime;
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
 
@@ -41,17 +39,14 @@ class TambahJadwalController extends GetxController {
         jadwal.myUser.id:
             FieldValue.arrayUnion([jadwal.toEntity().toDocument()])
       }, SetOptions(merge: true));
-      // Jadwalkan notifikasi
-      // if (selectedDateTime != null) {
       log("hashcode notif: ${jadwal.jadwalId.hashCode}");
       final notificationService = NotificationService();
       await notificationService.scheduleNotification(
-        id: jadwal.jadwalId.hashCode, // Bisa diganti menjadi jadwal.jadwalId
+        id: jadwal.jadwalId.hashCode,
         title: judulController.text,
         body: deskripsiController.text,
         scheduledDate: selectedDateTime!,
       );
-      // }
 
       Navigator.pop(Get.context!);
       Get.snackbar('Success', 'Data added successfully');

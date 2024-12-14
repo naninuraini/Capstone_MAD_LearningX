@@ -105,7 +105,7 @@ class _HomeViewState extends State<HomeView> {
             ),
             const SizedBox(height: 5),
             _currentIndex == index
-                ? _buildGradientText(label) // Label dengan gradien
+                ? _buildGradientText(label)
                 : Text(
                     label,
                     style: const TextStyle(
