@@ -18,38 +18,56 @@ class LupaPasswordController extends GetxController {
       log('Password reset email sent to $email');
 
       Get.defaultDialog(
-        backgroundColor: Colors.white.withOpacity(0.8),
+        backgroundColor: Color(0xFFE1E1E1),
         title: 'Reset Password',
-        titlePadding: const EdgeInsets.only(top: 30.0),
-        titleStyle: const TextStyle(
+        titlePadding: const EdgeInsets.only(top: 20),
+        titleStyle: TextStyle(
           fontWeight: FontWeight.bold,
-          color: AppColors.white,
+          color: AppColors.greyPopUp,
         ),
-        contentPadding: const EdgeInsets.all(25.0),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         content: Column(
           children: [
             Image.asset("assets/images/verification_email.png"),
+            const SizedBox(height: 10),
             const Padding(
               padding: EdgeInsets.only(top: 8.0),
               child: Text(
                 'Silahkan cek email Anda untuk melanjutkan. Kami telah mengirimkan tautan reset password.',
                 style: TextStyle(
-                  color: AppColors.white,
+                  color: AppColors.greyPopUp,
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: SecondaryButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    title: "Batal",
+                    colorTitle: AppColors.borderGrey,
+                    width: double.infinity,
+                    height: 46,
+                  ),
+                ),
+                const SizedBox(width: 15.0),
+                Expanded(
+                  child: ButtonWidget(
+                    onPressed: () {
+                      Get.offAllNamed(Routes.LOGIN);
+                    },
+                    title: "Konfirmasi",
+                    width: double.infinity,
+                    height: 46,
+                  ),
+                ),
+              ],
+            ),
           ],
-        ),
-        confirm: Padding(
-          padding: const EdgeInsets.only(left: 10.0, top: 5.5),
-          child: ButtonWidget(
-            height: 40,
-            onPressed: () {
-              Get.offAllNamed(Routes.LOGIN);
-            },
-            title: "Konfirmasi",
-          ),
         ),
       );
     } on FirebaseAuthException catch (e) {
