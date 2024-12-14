@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:cipta_cuan/app/modules/scheduling/widget/calender.dart';
 import 'package:cipta_cuan/app/modules/scheduling/widget/card_jadwal.dart';
-import 'package:cipta_cuan/app/modules/scheduling/widget/no_data.dart';
 import 'package:cipta_cuan/widget/button.dart';
 import 'package:cipta_cuan/widget/constant.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../widget/getuser_controller.dart';
+import '../../../../widget/no_data.dart';
 import '../../tambah_jadwal/bindings/tambah_jadwal_binding.dart';
 import '../../tambah_jadwal/views/tambah_jadwal_view.dart';
 import '../controllers/scheduling_controller.dart';
@@ -24,12 +24,6 @@ class SchedulingView extends StatefulWidget {
 class _SchedulingViewState extends State<SchedulingView> {
   final SchedulingController controller = Get.put(SchedulingController());
   final GetUserController getUserController = Get.find<GetUserController>();
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   controller.getJadwal(widget.myUser!.id, controller.selectedTanggal);
-  // }
 
   @override
   void dispose() {

@@ -43,6 +43,7 @@ class TambahJadwalController extends GetxController {
       }, SetOptions(merge: true));
       // Jadwalkan notifikasi
       // if (selectedDateTime != null) {
+      log("hashcode notif: ${jadwal.jadwalId.hashCode}");
       final notificationService = NotificationService();
       await notificationService.scheduleNotification(
         id: jadwal.jadwalId.hashCode, // Bisa diganti menjadi jadwal.jadwalId

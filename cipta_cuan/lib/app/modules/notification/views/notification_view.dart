@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:cipta_cuan/app/modules/notification/controllers/notification_controller.dart';
 import 'package:cipta_cuan/app/modules/notification/widget/card_notif.dart';
+import 'package:cipta_cuan/widget/no_data.dart';
 import 'package:cipta_cuan/models/myUser/myuser_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,17 +34,22 @@ class NotificationView extends GetView<NotificationController> {
       ),
       body: Obx(
         () {
+          if (controller.isLoading.value) {
+            return Center(child: CircularProgressIndicator());
+          }
           if (controller.allJadwal.isEmpty) {
-            log("Tidak ada notifikasi empty");
-            return Center(child: Text('Tidak ada notifikasi'));
+            return Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: NoDataWidget(
+                  judul: "Belum Ada Notifikasi Apapun",
+                  deskripsi: "Istirahat sejenak kawan,\nkamu belum mendapatkan notifikasi apapun",
+                  assetsString: "assets/images/no_data/notification.png"),
+            );
           }
 
-          return ListView(
-            shrinkWrap: false,
-            physics: AlwaysScrollableScrollPhysics(),
-            children: [
-              CardNotif(jadwal: controller.allJadwal),
-            ],
+          return SizedBox(
+            height: MediaQuery.of(context).size.height - 50,
+            child: CardNotif(jadwal: controller.allJadwal),
           );
         },
       ),

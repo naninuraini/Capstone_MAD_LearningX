@@ -38,12 +38,15 @@ class CategoryListController extends GetxController {
 
       posts.value =
           fetchedPosts.where((post) => post.kategori == categoryLabel).toList();
+      isLoading.value = false;
 
       print(
           'Posts for category "$categoryLabel" loaded: ${posts.length}');
     } catch (e) {
       print('Error fetching posts for category "$categoryLabel": $e');
       Get.snackbar('Error', 'Failed to load category posts.');
+    } finally {
+      isLoading.value = false;
     }
   }
   

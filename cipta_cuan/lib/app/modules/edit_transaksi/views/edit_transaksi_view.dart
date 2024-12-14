@@ -1,10 +1,11 @@
 import 'dart:io';
+
 import 'package:cipta_cuan/app/modules/edit_transaksi/controllers/edit_transaksi_controller.dart';
 import 'package:cipta_cuan/models/post/post_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+
 import '../../../../widget/button.dart';
 import '../../../../widget/text_field.dart';
 
@@ -24,15 +25,6 @@ class _EditTransaksiState extends State<EditTransaksiView> {
   void initState() {
     super.initState();
     controller.initialize(widget.post);
-  }
-
-  Future<void> _pickImage() async {
-    final returnedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (returnedImage != null) {
-      setState(() {
-        _selectedImage = File(returnedImage.path);
-      });
-    }
   }
 
   Future<void> _selectDateTime(BuildContext context) async {
@@ -124,37 +116,6 @@ class _EditTransaksiState extends State<EditTransaksiView> {
                             },
                           ),
                           SizedBox(height: 20),
-                          /*SecondTextFieldWidget(
-                            hintText: controller.selectedItem.value.isNotEmpty ? controller.selectedItem.value : 'Pilih Kategori',
-                            headerText: "Kategori",
-                            suffixIcon: "assets/icons/textfield_kategori.svg",
-                            onPressedSuffix: controller.toggleDropdown,
-                            readOnly: true,
-                            controller: controller.kategoriController,
-                            keyboardType: TextInputType.text,
-                            validator: (val) {
-                              if (val == null || val.isEmpty) {
-                                return 'Kategori tidak boleh kosong';
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(height: 20),*/
-                          SecondTextFieldWidget(
-                            hintText: 'Masukkan Jumlah',
-                            headerText: "Jumlah",
-                            onPressedSuffix: () {},
-                            suffixIcon: "",
-                            controller: controller.jumlahController,
-                            keyboardType: TextInputType.number,
-                            validator: (val) {
-                              if (val == null || val.isEmpty) {
-                                return 'Jumlah tidak boleh kosong';
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(height: 20),
                           SecondTextFieldWidget(
                             hintText: 'Masukkan Judul Transaksi',
                             headerText: "Judul",
@@ -185,38 +146,13 @@ class _EditTransaksiState extends State<EditTransaksiView> {
                               return null;
                             },
                           ),
-                          SizedBox(height: 20),
-                          _selectedImage == null
-                              ? ImageTextFieldWidget(
-                                  headerText: "Gambar",
-                                  onTapField: _pickImage,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Foto Dulu';
-                                    }
-                                    return null;
-                                  },
-                                )
-                              : Center(
-                                  child: Container(
-                                    height: 200.0,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                      child: Image.file(_selectedImage!, fit: BoxFit.cover),
-                                    ),
-                                  ),
-                                ),
                           SizedBox(height: 30),
                           ButtonWidget(
                             title: 'Simpan Perubahan',
                             onPressed: () {
                               if (controller.formKeyEditTransaksi.currentState!.validate()) {
+                                controller.deletePost(widget.post);
                                 widget.post.tanggal = controller.selectedDateTime!;
-                                widget.post.kategori = controller.kategoriController.text;
-                                widget.post.jumlah = int.parse(controller.jumlahController.text);
                                 widget.post.judul = controller.judulController.text;
                                 widget.post.deskripsi = controller.deskripsiController.text;
                                 controller.updatePost(widget.post, _selectedImage?.path ?? '');

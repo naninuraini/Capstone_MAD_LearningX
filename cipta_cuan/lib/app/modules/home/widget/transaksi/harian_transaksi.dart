@@ -12,7 +12,7 @@ class HarianTransaksi extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     controller.getPosts(myUser!.id);
-      return NoDataWidget(
+      return NoDataWidgetHome(
         isLoading: controller.isLoading,
         transaction: controller.dailyTransactions,
         judul: "Tidak Ada Data Hari Ini",
