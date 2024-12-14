@@ -33,8 +33,8 @@ class _HomeViewState extends State<HomeView> {
     myUser = widget.myUser;
     _children = [
       HomeWidget(), 
-      SchedulingView(myUser: myUser), 
-      CategoryView(myUser: myUser), 
+      SchedulingView(), 
+      CategoryView(), 
       ProfilView(), 
     ];
   }
@@ -134,7 +134,7 @@ class _HomeViewState extends State<HomeView> {
         text,
         style: const TextStyle(
           fontWeight: FontWeight.bold,
-          color: Colors.white, 
+          color: Colors.white,
         ),
       ),
     );

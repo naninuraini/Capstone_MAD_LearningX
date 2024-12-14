@@ -1,6 +1,6 @@
 name: cipta_cuan
-description: "A new Flutter project."
-version: 1.0.0+1
+description: "CiptaCuan Version 1"
+version: 1.0.0
 
 environment:
   sdk: ^3.5.3
@@ -26,10 +26,28 @@ dependencies:
   timezone: ^0.10.0
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.14.2
+  flutter_native_splash: ^2.4.3
+
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^4.0.0
+
+# dart run flutter_native_splash:create
+flutter_native_splash:
+  image: assets/ciptacuan.png
+  color: "#141231"
+  android: true
+  ios: true
+
+# dart run flutter_launcher_icons
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/ciptacuan.png"
+  adaptive_icon_foreground: "assets/ciptacuan.png"
+  adaptive_icon_background: "#141231"
+  remove_alpha_ios: true
 
 flutter:
   uses-material-design: true
@@ -39,31 +57,3 @@ flutter:
     - assets/category/
     - assets/images/no_data/
     - assets/onboarding/
-
-  #   - images/a_dot_ham.jpeg
-
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/to/resolution-aware-images
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/to/asset-from-package
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/to/font-from-package

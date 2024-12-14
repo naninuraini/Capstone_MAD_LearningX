@@ -17,6 +17,9 @@ class SchedulingController extends GetxController {
 
   Future<void> getJadwal(String userId, DateTime select) async {
     try {
+      if (userId.isEmpty) {
+      throw Exception('User ID cannot be empty');
+    }
       List<Jadwal> fetchedPosts = [];
       final snapshot = await _firestore.collection('jadwal').doc(userId).get();
       if (snapshot.data() != null) {
