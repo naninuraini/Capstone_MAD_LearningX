@@ -1,4 +1,5 @@
 import 'package:cipta_cuan/models/myUser/myuser_model.dart';
+import 'package:cipta_cuan/widget/no_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -40,12 +41,16 @@ class CategoryListView extends StatelessWidget {
         elevation: 0,
       ),
       body: Obx(() {
+        if (controller.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        }
         if (controller.posts.isEmpty) {
-          return const Center(
-            child: Text(
-              'Tidak ada transaksi untuk kategori ini',
-              style: TextStyle(color: Colors.white),
-            ),
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: NoDataWidget(
+                judul: "Tidak ada Data Kategori $categoryLabel",
+                deskripsi: "Data kategori $categoryLabel gak ada, Mungkin\nkamu belum menambahkan data pada kategori ini",
+                assetsString: "assets/images/no_data/home.png"),
           );
         }
 
@@ -110,14 +115,18 @@ class CategoryListView extends StatelessWidget {
                             const SizedBox(width: 8),
                             Expanded(
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       SizedBox(
                                         width:
-                                            MediaQuery.of(context).size.width / 3 + 10,
+                                            MediaQuery.of(context).size.width /
+                                                    3 +
+                                                10,
                                         child: Text(
                                           post.judul,
                                           style: const TextStyle(
@@ -129,7 +138,9 @@ class CategoryListView extends StatelessWidget {
                                         ),
                                       ),
                                       SizedBox(
-                                        width: MediaQuery.of(context).size.width / 3,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                3,
                                         child: Text(
                                           post.deskripsi,
                                           style: const TextStyle(
@@ -144,12 +155,17 @@ class CategoryListView extends StatelessWidget {
                                   Row(
                                     children: [
                                       Column(
-                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
                                         children: [
                                           Text(
                                             post.kategori == 'Tabungan'
-                                                ? "+ " + controller.formatRupiah(post.jumlah, 'Rp')
-                                                : "- " + controller.formatRupiah(post.jumlah, 'Rp'),
+                                                ? "+ " +
+                                                    controller.formatRupiah(
+                                                        post.jumlah, 'Rp')
+                                                : "- " +
+                                                    controller.formatRupiah(
+                                                        post.jumlah, 'Rp'),
                                             style: TextStyle(
                                               color: post.kategori == 'Tabungan'
                                                   ? const Color(0xFF0FC672)
@@ -169,7 +185,8 @@ class CategoryListView extends StatelessWidget {
                                         ],
                                       ),
                                       const SizedBox(width: 10),
-                                      SvgPicture.asset("assets/icons/arrow.svg"),
+                                      SvgPicture.asset(
+                                          "assets/icons/arrow.svg"),
                                     ],
                                   ),
                                 ],

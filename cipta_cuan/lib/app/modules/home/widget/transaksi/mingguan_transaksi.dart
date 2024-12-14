@@ -11,7 +11,7 @@ class MingguanTransaksi extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     controller.getPosts(myUser!.id);
-      return NoDataWidget(
+      return NoDataWidgetHome(
         isLoading: controller.isLoading,
         transaction: controller.weeklyTransactions,
         judul: "Tidak Ada Data Minggu Ini",

@@ -5,13 +5,13 @@ import 'package:get/get.dart';
 import '../../../../models/post/post_model.dart';
 import 'card_home.dart';
 
-class NoDataWidget extends StatelessWidget {
+class NoDataWidgetHome extends StatelessWidget {
   final RxBool isLoading;
   final RxList<Post> transaction;
   final String judul;
   final String deskripsi;
   final String assetsString;
-  const NoDataWidget({
+  const NoDataWidgetHome({
     super.key,
     required this.isLoading,
     required this.transaction,

@@ -11,7 +11,7 @@ class BulananTransaksi extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     controller.getPosts(myUser!.id);
-      return NoDataWidget(
+      return NoDataWidgetHome(
         isLoading: controller.isLoading,
         transaction: controller.monthlyTransactions,
         judul: "Tidak Ada Data Bulan Ini",
