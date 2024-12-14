@@ -16,6 +16,8 @@ class SplashController extends GetxController {
   Future<void> checkOnboardingStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? hasCompletedOnboarding = prefs.getBool('completedOnboarding');
+    Future.delayed(
+      Duration(seconds: 30));
 
     if (hasCompletedOnboarding == true) {
       userStream.listen((user) {

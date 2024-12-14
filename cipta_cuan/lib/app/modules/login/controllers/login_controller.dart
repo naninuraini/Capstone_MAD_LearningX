@@ -10,8 +10,8 @@ class LoginController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  RxBool obscurePassword = true.obs;
-  Rx<IconData> iconPassword = CupertinoIcons.eye_fill.obs;
+  final RxBool obscurePassword = true.obs;
+  final Rx<IconData> iconPassword = CupertinoIcons.eye_slash_fill.obs;
 
   Stream<User?> get streamAuthStatus =>
       FirebaseAuth.instance.authStateChanges();
@@ -19,8 +19,8 @@ class LoginController extends GetxController {
   void togglePasswordVisibility() {
     obscurePassword.value = !obscurePassword.value;
     iconPassword.value = obscurePassword.value
-        ? CupertinoIcons.eye_fill
-        : CupertinoIcons.eye_slash_fill;
+        ? CupertinoIcons.eye_slash_fill
+        : CupertinoIcons.eye_fill;
   }
 
   void login(String email, String password) async {

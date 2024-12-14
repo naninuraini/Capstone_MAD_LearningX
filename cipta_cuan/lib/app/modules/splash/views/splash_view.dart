@@ -18,42 +18,54 @@ class SplashView extends GetView<SplashController> {
     return Scaffold(
       body: Center(
         child: StreamBuilder<User?>(
-            stream: controller.userStream,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return LoadingView();
-              } else if (snapshot.hasData && snapshot.data != null) {
-                final user = snapshot.data;
-                if (user!.emailVerified) {
-                  controller.fetchUser(user.uid);
-                  return Obx(() {
-                    final myUser = controller.user.value;
-                    if (myUser != null) {
-                      Future.microtask(() => Get.offAll(
-                            () => HomeView(myUser: myUser),
-                            binding: HomeBinding(),
-                          ));
-                    } else {
-                      log("Waiting for user data...");
-                    }
-                    return CircularProgressIndicator();
-                  });
-                }
+          stream: controller.userStream,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return LoadingView();
+            } else if (snapshot.hasData && snapshot.data != null) {
+              final user = snapshot.data;
+              if (user!.emailVerified) {
+                controller.fetchUser(user.uid);
+                return Obx(() {
+                  final myUser = controller.user.value;
+                  if (myUser != null) {
+                    Future.microtask(() => Get.offAll(
+                          () => HomeView(myUser: myUser),
+                          binding: HomeBinding(),
+                        ));
+                  } else {
+                    log("Waiting for user data...");
+                  }
+                  return CircularProgressIndicator();
+                });
               }
-              if (snapshot.hasError) {
-                return Text('Terjadi kesalahan: ${snapshot.error}');
-              } else {
-                Future.microtask(() => Get.offAllNamed(Routes.ON_BOARDING));
-              }
-              return Text(
+            }
+            if (snapshot.hasError) {
+              return Text('Terjadi kesalahan: ${snapshot.error}');
+            } else {
+              Future.microtask(() => Get.offAllNamed(Routes.ON_BOARDING));
+            }
+            return ShaderMask(
+              shaderCallback: (bounds) => LinearGradient(
+                colors: [
+                  Color(0xFF0DA6C2),
+                  Color(0xFF0E39C6),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ).createShader(bounds),
+              child: Text(
                 'CiptaCuan',
-                style: TextStyle(
-                  fontSize: 32,
+                style: const TextStyle(
+                  fontSize: 40,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blueAccent,
+                  color:
+                      Colors.white, // Warna ini akan diabaikan karena gradient.
                 ),
-              );
-            }),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
