@@ -254,7 +254,11 @@ class _TambahTransaksiState extends State<TambahTransaksiView> {
                                   post.deskripsi =
                                       controller.deskripsiController.text;
                                 });
-                                controller.addData(post, _selectedImage!.path);
+                                controller.addData(
+                                    post,
+                                    _selectedImage!.path,
+                                    controller.formKeyTambahTransaksi
+                                        .currentContext!);
                               }
                             },
                           ),

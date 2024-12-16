@@ -33,8 +33,29 @@ class TambahTransaksiController extends GetxController {
   var selectedItem = ''.obs;
   var isDropdownVisible = false.obs;
 
-  void addData(Post post, String file) async {
+  void addData(Post post, String file, BuildContext context) async {
     try {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Dialog(
+              backgroundColor: const Color(0xFFE1E1E1),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 80),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CircularProgressIndicator(),
+                  ],
+                ),
+              ));
+        },
+      );
       post.postId = const Uuid().v1();
       post.tanggalDitambahkan = DateTime.now();
       String potoId = const Uuid().v1();
@@ -53,14 +74,15 @@ class TambahTransaksiController extends GetxController {
       }, SetOptions(merge: true));
 
       updateSaldo(post.myUser.id, post.jumlah, post);
-      Navigator.pop(Get.context!);
-      Get.snackbar('Success', 'Data added successfully');
       tanggalController.clear();
       kategoriController.clear();
       jumlahController.clear();
       judulController.clear();
       deskripsiController.clear();
       gambarController.clear();
+      Navigator.pop(Get.context!);
+      Navigator.pop(Get.context!);
+      Get.snackbar('Success', 'Data added successfully');
     } catch (e) {
       log("post error: $e");
       if (e is FirebaseException) {

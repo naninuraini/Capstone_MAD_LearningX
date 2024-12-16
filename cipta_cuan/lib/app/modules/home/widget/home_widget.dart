@@ -10,6 +10,7 @@ import 'package:cipta_cuan/app/modules/tambah_transaksi/views/tambah_transaksi_v
 import 'package:cipta_cuan/widget/constant.dart';
 import 'package:cipta_cuan/widget/getuser_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../notification/views/notification_view.dart';
@@ -135,11 +136,18 @@ class _HomeWidgetState extends State<HomeWidget>
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        "Total Saldo",
-                                        style: TextStyle(
-                                          color: AppColors.textPurple,
-                                        ),
+                                      Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                              "assets/icons/income.svg"),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            "Total Saldo",
+                                            style: TextStyle(
+                                              color: AppColors.textPurple,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                       Text(
                                         controller.formatRupiah(
@@ -160,11 +168,18 @@ class _HomeWidgetState extends State<HomeWidget>
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        "Total Pengeluaran",
-                                        style: TextStyle(
-                                          color: AppColors.textPurple,
-                                        ),
+                                      Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                              "assets/icons/outcome.svg"),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            "Total Pengeluaran",
+                                            style: TextStyle(
+                                              color: AppColors.textPurple,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                       Text(
                                         controller.formatRupiah(
@@ -253,6 +268,8 @@ class _HomeWidgetState extends State<HomeWidget>
                                 const EdgeInsets.symmetric(horizontal: 30.0),
                             child: Row(
                               children: [
+                                SvgPicture.asset("assets/icons/check.svg"),
+                                SizedBox(width: 5),
                                 Text(
                                   "Pengeluaran Anda ${(controller.calculateExpensePercentage(myUser.saldo, myUser.pengeluaran) * 100).toStringAsFixed(0)}% Dari Total Saldo",
                                   style: TextStyle(
@@ -323,8 +340,9 @@ class _HomeWidgetState extends State<HomeWidget>
                                 ),
                                 SizedBox(
                                   height:
-                                      MediaQuery.of(context).size.height * 0.5,
-                                  child: TabBarView(
+                                      MediaQuery.of(context).size.height * 0.42,
+                                  child: 
+                                  TabBarView(
                                     controller: controller.tabController,
                                     children: [
                                       HarianTransaksi(myUser: myUser),

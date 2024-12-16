@@ -41,6 +41,7 @@ class EditTransaksiController extends GetxController {
       }
       Get.snackbar('Success', 'Transaksi updated successfully');
       Navigator.pop(Get.context!);
+      Navigator.pop(Get.context!);
     } catch (e) {
       log("update post error: $e");
       if (e is FirebaseException) {
@@ -61,8 +62,26 @@ class EditTransaksiController extends GetxController {
         await firebaseStorageRef.delete();
       }
 
-      Get.snackbar('Success', 'Transaksi Deleted successfully');
-      Navigator.pop(Get.context!);
+      final docRef = firestore.collection('users').doc(post.myUser.id);
+      firestore.runTransaction((transaction) async {
+        final snapshot = await transaction.get(docRef);
+
+        if (snapshot.exists) {
+          final saldoValue = snapshot.get('saldo') as int? ?? 0;
+          final pengeluaranValue = snapshot.get('pengeluaran') as int? ?? 0;
+          if (post.kategori == 'Tabungan') {
+            final newSaldoValue = saldoValue - post.jumlah;
+            transaction.update(docRef, {'saldo': newSaldoValue});
+          } else {
+            final newSaldoValue = saldoValue - post.jumlah;
+            transaction.update(docRef, {'saldo': newSaldoValue});
+            final newPengeluaranValue = pengeluaranValue - post.jumlah;
+            transaction.update(docRef, {'pengeluaran': newPengeluaranValue});
+          }
+        }
+      }).catchError((error) {
+        print("Error updating Firestore value: $error");
+      });
     } catch (e) {
       log("delete post error: $e");
       if (e is FirebaseException) {

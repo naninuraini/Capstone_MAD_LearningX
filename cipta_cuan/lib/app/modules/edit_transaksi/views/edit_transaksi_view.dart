@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../widget/button.dart';
+import '../../../../widget/getuser_controller.dart';
 import '../../../../widget/text_field.dart';
 
 class EditTransaksiView extends StatefulWidget {
@@ -20,6 +21,7 @@ class EditTransaksiView extends StatefulWidget {
 class _EditTransaksiState extends State<EditTransaksiView> {
   final EditTransaksiController controller = Get.put(EditTransaksiController());
   File? _selectedImage;
+  final GetUserController getUserController = Get.find<GetUserController>();
 
   @override
   void initState() {
@@ -45,6 +47,7 @@ class _EditTransaksiState extends State<EditTransaksiView> {
   void _deletePost(Post post) {
     controller.deletePost(post);
     Get.snackbar('Success', 'Transaksi deleted successfully');
+    Navigator.pop(Get.context!);
     Navigator.pop(Get.context!);
   }
 
