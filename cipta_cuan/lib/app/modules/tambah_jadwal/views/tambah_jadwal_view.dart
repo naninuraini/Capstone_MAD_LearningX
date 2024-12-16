@@ -55,6 +55,12 @@ class _TambahJadwalState extends State<TambahJadwalView> {
     }
   }
 
+  String _convertTo24HourFormat(TimeOfDay time) {
+  final hour = time.hour.toString().padLeft(2, '0'); // Jam dalam format 24 jam
+  final minute = time.minute.toString().padLeft(2, '0'); // Menit
+  return '$hour:$minute';
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -173,7 +179,7 @@ class _TambahJadwalState extends State<TambahJadwalView> {
                       SizedBox(height: 20),
                       SecondTextFieldWidget(
                         hintText: controller.selectedTime != null
-                            ? controller.selectedTime!.format(context)
+                            ? _convertTo24HourFormat(controller.selectedTime!)
                             : 'Atur Waktu',
                         hintStyle: TextStyle(
                           color: controller.selectedTime != null
@@ -190,7 +196,7 @@ class _TambahJadwalState extends State<TambahJadwalView> {
                           if (controller.selectedTime == null) {
                             return 'Waktu tidak boleh kosong';
                           }
-                          val = controller.selectedTime!.format(context);
+                          val = _convertTo24HourFormat(controller.selectedTime!);
                           if (!timeRegExp24Hour.hasMatch(val)) {
                             return 'Waktu tidak valid';
                           }

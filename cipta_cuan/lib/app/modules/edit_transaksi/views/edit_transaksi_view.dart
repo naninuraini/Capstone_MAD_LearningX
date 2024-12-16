@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cipta_cuan/app/modules/edit_transaksi/controllers/edit_transaksi_controller.dart';
 import 'package:cipta_cuan/models/post/post_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -39,7 +40,8 @@ class _EditTransaksiState extends State<EditTransaksiView> {
     if (pickedDate != null) {
       setState(() {
         controller.selectedDateTime = pickedDate;
-        controller.tanggalController.text = DateFormat("d MMMM yyyy", "id_ID").format(pickedDate);
+        controller.tanggalController.text =
+            DateFormat("d MMMM yyyy", "id_ID").format(pickedDate);
       });
     }
   }
@@ -71,15 +73,30 @@ class _EditTransaksiState extends State<EditTransaksiView> {
           ),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.delete_outline,
-              color: Colors.white,
+          Padding(
+            padding: const EdgeInsets.only(right: 20.0),
+            child: Container(
+              width: 35,
+              height: 35,
+              decoration: BoxDecoration(
+                  color: Color(0xFFE1E1E1),
+                  borderRadius: BorderRadius.circular(20)),
+              child: IconButton(
+                  onPressed: () {
+                    _deletePost(widget.post);
+                  },
+                  icon: SvgPicture.asset("assets/icons/trash.svg")),
             ),
-            onPressed: () {
-              _deletePost(widget.post);
-            },
           ),
+          // IconButton(
+          //   icon: const Icon(
+          //     Icons.delete_outline,
+          //     color: Colors.white,
+          //   ),
+          //   onPressed: () {
+          //     _deletePost(widget.post);
+          //   },
+          // ),
         ],
       ),
       body: Stack(
@@ -90,7 +107,8 @@ class _EditTransaksiState extends State<EditTransaksiView> {
                 child: Container(
                   decoration: const BoxDecoration(
                     color: Color(0xFF24325F),
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(50)),
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(50)),
                   ),
                   child: Form(
                     key: controller.formKeyEditTransaksi,
@@ -100,10 +118,13 @@ class _EditTransaksiState extends State<EditTransaksiView> {
                         children: [
                           SecondTextFieldWidget(
                             hintText: controller.selectedDateTime != null
-                                ? DateFormat("d MMMM yyyy", "id_ID").format(controller.selectedDateTime!)
+                                ? DateFormat("d MMMM yyyy", "id_ID")
+                                    .format(controller.selectedDateTime!)
                                 : 'Pilih Tanggal',
                             hintStyle: TextStyle(
-                              color: controller.selectedDateTime != null ? Colors.black : Colors.grey,
+                              color: controller.selectedDateTime != null
+                                  ? Colors.black
+                                  : Colors.grey,
                             ),
                             readOnly: true,
                             headerText: "Tanggal",
@@ -153,12 +174,17 @@ class _EditTransaksiState extends State<EditTransaksiView> {
                           ButtonWidget(
                             title: 'Simpan Perubahan',
                             onPressed: () {
-                              if (controller.formKeyEditTransaksi.currentState!.validate()) {
+                              if (controller.formKeyEditTransaksi.currentState!
+                                  .validate()) {
                                 controller.deletePost(widget.post);
-                                widget.post.tanggal = controller.selectedDateTime!;
-                                widget.post.judul = controller.judulController.text;
-                                widget.post.deskripsi = controller.deskripsiController.text;
-                                controller.updatePost(widget.post, _selectedImage?.path ?? '');
+                                widget.post.tanggal =
+                                    controller.selectedDateTime!;
+                                widget.post.judul =
+                                    controller.judulController.text;
+                                widget.post.deskripsi =
+                                    controller.deskripsiController.text;
+                                controller.updatePost(
+                                    widget.post, _selectedImage?.path ?? '');
                               }
                             },
                           ),
