@@ -1,6 +1,5 @@
-import 'dart:developer';
-import 'package:cipta_cuan/widget/notification_servies.dart';
 import 'package:cipta_cuan/models/jadwal/jadwal_model.dart';
+import 'package:cipta_cuan/widget/notification_servies.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,7 +38,6 @@ class TambahJadwalController extends GetxController {
         jadwal.myUser.id:
             FieldValue.arrayUnion([jadwal.toEntity().toDocument()])
       }, SetOptions(merge: true));
-      log("hashcode notif: ${jadwal.jadwalId.hashCode}");
       final notificationService = NotificationService();
       await notificationService.scheduleNotification(
         id: jadwal.jadwalId.hashCode,
@@ -55,9 +53,9 @@ class TambahJadwalController extends GetxController {
       judulController.clear();
       deskripsiController.clear();
     } catch (e) {
-      log("post error: $e");
+      Get.snackbar('Error', 'Error: $e');
       if (e is FirebaseException) {
-        log("Error code: ${e.code}, message: ${e.message}");
+        Get.snackbar('Error', 'Error code: ${e.code}, message: ${e.message}');
       }
       rethrow;
     }
