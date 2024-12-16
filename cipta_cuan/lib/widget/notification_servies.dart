@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tzData;
 
@@ -26,6 +27,12 @@ class NotificationService {
     required String body,
     required DateTime scheduledDate,
   }) async {
+    if (scheduledDate.isBefore(DateTime.now())) {
+      Get.snackbar('Error', 'waktu dan tanggal harus waktu di masa depan');
+      throw ArgumentError(
+        'scheduledDate harus waktu di masa depan, tetapi nilai yang diberikan adalah: $scheduledDate',
+      );
+    }
     final tz.TZDateTime tzScheduledDate = tz.TZDateTime.from(
       scheduledDate,
       tz.local,
@@ -46,9 +53,9 @@ class NotificationService {
       id,
       title,
       body,
-      tzScheduledDate, 
+      tzScheduledDate,
       notificationDetails,
-      androidScheduleMode: AndroidScheduleMode.exact, 
+      androidScheduleMode: AndroidScheduleMode.exact,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
     );
